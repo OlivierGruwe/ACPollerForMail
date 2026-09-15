@@ -44,7 +44,11 @@
 #>
 [CmdletBinding()]
 param(
-    [string] $InstallPath = "$env:ProgramFiles\ACPoller",
+    [string] $InstallPath = "$env:ProgramFiles\ACPollerForMail",
+    # Le repertoire de DONNEES garde son nom d'origine, contrairement au reste.
+    # Le renommer perdrait le journal des messages traites, donc provoquerait
+    # le retraitement de tout ce qui reste dans les boites, donc des doublons
+    # en GED. Une incoherence de nom coute moins cher qu'une reconciliation.
     [string] $DataPath = "$env:ProgramData\ACPoller",
     [string] $ServiceAccount = "",
     [string] $ServicePassword = "",
@@ -52,7 +56,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$serviceName = 'ACPoller'
+$serviceName = 'ACPollerForMail'
 $exePath = Join-Path $InstallPath 'ACPoller.Service.exe'
 $settingsPath = Join-Path $InstallPath 'appsettings.json'
 $uiDefaultsPath = Join-Path $DataPath 'ui-settings.default.json'
@@ -274,7 +278,7 @@ if ($existing) {
         'create', $serviceName,
         'binPath=', "`"$exePath`"",
         'start=', 'auto',
-        'DisplayName=', 'ACPoller - Capture de messagerie'
+        'DisplayName=', 'ACPollerForMail - Capture de messagerie'
     )
 
     if ($account -ne 'LocalSystem') {

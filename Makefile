@@ -24,7 +24,7 @@
 
 include version.mk
 
-# Une version vide produit un installeur nomme ACPoller--setup.exe, sans
+# Une version vide produit un installeur nomme ACPollerForMail--setup.exe, sans
 # numero, et personne ne le remarque avant la livraison. Autant s'arreter ici.
 ifeq ($(strip $(VERSION)),)
 $(error VERSION non definie. Verifier version.mk)
@@ -37,7 +37,7 @@ CONFIG       := Release
 INSTALLER    := installer
 BIN_OUT      := $(INSTALLER)/bin
 DOCS         := docs
-SETUP        := $(INSTALLER)/ACPoller-$(VERSION)-setup.exe
+SETUP        := $(INSTALLER)/ACPollerForMail-$(VERSION)-setup.exe
 
 # Conversion des separateurs pour les commandes cmd, qui refusent les barres
 # obliques dans un chemin passe a del, rmdir ou copy.
@@ -116,7 +116,7 @@ check-docs:
 # La version est passee au script NSIS plutot que codee dedans : une seule
 # source de verite pour les assemblages et l'installeur.
 installer: publish check
-	$(MAKENSIS) /DVERSION=$(VERSION) "$(INST_WIN)\ACPoller.nsi"
+	$(MAKENSIS) /DVERSION=$(VERSION) "$(INST_WIN)\ACPollerForMail.nsi"
 	@echo Installeur genere : $(SETUP)
 
 # Cible de LIVRAISON : repart de zero, regenere la documentation, puis

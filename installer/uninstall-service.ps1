@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Desinstalle le service ACPollerForMail.
+    Desinstalle le service ACPoller.
 
 .DESCRIPTION
     Les DONNEES sont conservees par defaut : repertoire de travail, journal des
@@ -18,12 +18,31 @@
 #>
 [CmdletBinding()]
 param(
-    [string] $DataPath = "$env:ProgramData\ACPollerForMail",
+    # Nom d'origine conserve : voir install-service.ps1.
+    [string] $DataPath = "$env:ProgramData\ACPoller",
     [switch] $RemoveData
 )
 
 $ErrorActionPreference = 'Stop'
 $serviceName = 'ACPollerForMail'
+
+# L'ancien nom est traite aussi : une desinstallation apres une migration
+# incomplete laisserait sinon un service orphelin, impossible a supprimer
+# depuis Programmes et fonctionnalites.
+foreach ($nom in @($serviceName, 'ACPoller')) {
+    $ancien = Get-Service -Name $nom -ErrorAction SilentlyContinue
+
+    if ($ancien -and $nom -ne $serviceName) {
+        Write-Host "  Suppression de l'ancien service $nom" -ForegroundColor Cyan
+
+        if ($ancien.Status -ne 'Stopped') {
+            Stop-Service -Name $nom -Force
+            $ancien.WaitForStatus('Stopped', '00:01:00')
+        }
+
+        & sc.exe delete $nom | Out-Null
+    }
+}
 
 $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
 
