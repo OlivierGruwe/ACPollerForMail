@@ -33,26 +33,12 @@
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
           <TextBlock Style="{StaticResource P}"
-                     Text="Les jetons servent au nommage des fichiers de sortie et aux champs personnalises de type Token. Un format peut suivre deux points, par exemple {received:yyyyMMdd}." />
+                     Text="{DynamicResource S_Help_JetonsIntro}" />
 
-          <TextBlock Style="{StaticResource Code}" xml:space="preserve">{date}        Date de TRAITEMENT, en heure locale. Change si le message est rejoue le lendemain.
-{time}        Heure de traitement.
-{datetime}    Date et heure de traitement.
-{received}    Date de RECEPTION du message. Stable entre deux tentatives : a preferer
-              pour un nommage qui doit rester reproductible apres incident.
-{guid}        Identifiant aleatoire, garantit l'unicite.
-{mailbox}     Partie locale de l'adresse de la boite.
-{config}      Nom de la configuration.
-{subject}     Sujet du message, tronque et assaini.
-{from}        Partie locale de l'adresse de l'expediteur.
-{index}       Numero de la piece. OBLIGATOIRE en mode PerAttachment.
-{name}        Nom du fichier sans extension.
-{ext}         Extension de la piece.
-{node}        Chemin logique complet, exemple transfert.eml_bl.pdf</TextBlock>
+          <TextBlock Style="{StaticResource Code}" Text="{DynamicResource S_Help_TokenList}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_Assainissement}" />
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_TousLesCaracteresInterdits}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_TousLesCaracteresInterdits}" />
         </StackPanel>
       </ScrollViewer>
     </TabItem>
@@ -60,35 +46,12 @@
     <TabItem Header="{DynamicResource S_Help_StatutsDesPieces}">
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_LeFichierDInformation}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_LeFichierDInformation}" />
 
-          <TextBlock Style="{StaticResource Code}" xml:space="preserve">Converted           PDF fidele produit. Present dans le PDF unifie.
-
-PassThrough         Deja au format PDF, repris tel quel ou repare par qpdf.
-                    Present dans le PDF unifie.
-
-PassThroughUnverified
-                    PDF livre TEL QUEL car le moteur de lecture n'a pas su
-                    l'ouvrir, meme apres reparation. Le document est bien
-                    livre, mais il est ABSENT du PDF unifie.
-
-Substituted         Piece NON convertie. Une page portant le nom du fichier et
-                    le motif est produite a sa place. Le contenu d'origine
-                    reste manquant.
-
-Failed              Piece non convertie, aucun PDF produit. Rien n'arrive en
-                    GED pour cette piece.
-
-Excluded            Ecartee volontairement : filtre d'extension, image de
-                    signature sous le seuil, ou borne d'extraction atteinte.
-
-Container           Archive ou message imbrique. Ne produit pas de document,
-                    seuls ses enfants comptent.</TextBlock>
+          <TextBlock Style="{StaticResource Code}" Text="{DynamicResource S_Help_StatusList}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_EnPratique}" />
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_UnLotOuFailedcount}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_UnLotOuFailedcount}" />
         </StackPanel>
       </ScrollViewer>
     </TabItem>
@@ -96,25 +59,15 @@ Container           Archive ou message imbrique. Ne produit pas de document,
     <TabItem Header="{DynamicResource S_Help_ChampsPersonnalises}">
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_LesChampsAjoutesAu}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_LesChampsAjoutesAu}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_Sources}" />
-          <TextBlock Style="{StaticResource Code}" xml:space="preserve">Fixed         Valeur litterale, identique pour tous les messages.
-Token         Gabarit a jetons, resolu comme le nommage des fichiers.
-Header        En-tete MIME du message, nom insensible a la casse.
-Property      Valeur deposee par un traitement metier, par exemple un code
-              fournisseur extrait du sujet par un plugin.
-Environment   Variable d'environnement du serveur, par exemple COMPUTERNAME.</TextBlock>
+          <TextBlock Style="{StaticResource Code}" Text="{DynamicResource S_Help_SourceList}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_SortieSelonLeFormat}" />
-          <TextBlock Style="{StaticResource Code}" xml:space="preserve">json   objet "fields", noms en cles
-xml    bloc &lt;Fields&gt; avec &lt;Field name="..."&gt;valeur&lt;/Field&gt;
-csv    colonnes ajoutees APRES les colonnes fixes, repetees sur chaque ligne
-xslt   a la disposition de la feuille de transformation</TextBlock>
+          <TextBlock Style="{StaticResource Code}" Text="{DynamicResource S_Help_FormatList}" />
 
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_UnChampNonResolu}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_UnChampNonResolu}" />
         </StackPanel>
       </ScrollViewer>
     </TabItem>
@@ -124,26 +77,20 @@ xslt   a la disposition de la feuille de transformation</TextBlock>
         <StackPanel Margin="20">
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_UnMessageRevientA}" />
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_LeMarquageNA}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_LeMarquageNA}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_LePdfUnifieEst}" />
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_RegarderLeStatutDe}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_RegarderLeStatutDe}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_LeDisqueSeRemplit}" />
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_LeRepertoireDeTravail}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_LeRepertoireDeTravail}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_RejouerUnMessageLitigieux}" />
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_LeMimeBrutEst}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_LeMimeBrutEst}" />
 
           <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_OuSontLesJournaux}" />
-          <TextBlock Style="{StaticResource Code}" xml:space="preserve">logs\acpoller-AAAA-MM-JJ.log          journal complet
-logs\acpoller-errors-AAAA-MM-JJ.log   avertissements et erreurs seuls</TextBlock>
-          <TextBlock Style="{StaticResource P}"
-                     Text="{DynamicResource S_Help_LeNiveauSeChange}" />
+          <TextBlock Style="{StaticResource Code}" Text="{DynamicResource S_Help_LogList}" />
+          <TextBlock Style="{StaticResource P}" Text="{DynamicResource S_Help_LeNiveauSeChange}" />
 
         </StackPanel>
       </ScrollViewer>

@@ -3,7 +3,6 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:vm="clr-namespace:ACPoller.Ui.ViewModels"
-                 xmlns:ui="clr-namespace:ACPoller.Ui"
                  Title="Configuration"
                  Height="820"
                  Width="960"
@@ -61,18 +60,18 @@
           <StackPanel Margin="16">
             <TextBlock Text="{DynamicResource S_Edit_Nom}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="14"
-                       ToolTip="{x:Static ui:Help.Name}" />
+                       ToolTip="{DynamicResource H_Name}" />
 
             <CheckBox Content="{DynamicResource S_Edit_ConfigurationActive}"
                       IsChecked="{Binding Enabled}" Margin="0,14,0,0"
-                       ToolTip="{x:Static ui:Help.Enabled}" />
+                       ToolTip="{DynamicResource H_Enabled}" />
 
             <StackPanel Visibility="{Binding IsConfiguration, Converter={StaticResource BoolToVisibility}}">
               <TextBlock Text="{DynamicResource S_Edit_GabaritDontHeriter}" Style="{StaticResource Label}" />
               <ComboBox ItemsSource="{Binding AvailableTemplates}"
                         SelectedItem="{Binding Template}"
                         Width="280" HorizontalAlignment="Left"
-                        ToolTip="{x:Static ui:Help.Template}" />
+                        ToolTip="{DynamicResource H_Template}" />
               <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                          Text="{DynamicResource S_Edit_LaisserVidePourUne}" />
             </StackPanel>
@@ -95,7 +94,7 @@
               <StackPanel Grid.Column="0">
                 <TextBlock Text="{DynamicResource S_Edit_PeriodeEntreDeuxCycles}" Style="{StaticResource Label}" />
                 <mah:NumericUpDown Value="{Binding IntervalSeconds}"
-                       ToolTip="{x:Static ui:Help.Interval}" Minimum="5" Maximum="86400" />
+                       ToolTip="{DynamicResource H_Interval}" Minimum="5" Maximum="86400" />
               </StackPanel>
 
               <StackPanel Grid.Column="2">
@@ -103,34 +102,34 @@
                      meme seconde au demarrage du service. -->
                 <TextBlock Text="{DynamicResource S_Edit_DecalageAleatoireAuDemarrage}" Style="{StaticResource Label}" />
                 <mah:NumericUpDown Value="{Binding StartupJitterSeconds}"
-                       ToolTip="{x:Static ui:Help.Jitter}" Minimum="0" Maximum="600" />
+                       ToolTip="{DynamicResource H_Jitter}" Minimum="0" Maximum="600" />
               </StackPanel>
             </Grid>
 
             <CheckBox Content="{DynamicResource S_Edit_NePrendreQueLes}"
                       IsChecked="{Binding UnreadOnly}"
-                       ToolTip="{x:Static ui:Help.UnreadOnly}" Margin="0,14,0,0" />
+                       ToolTip="{DynamicResource H_UnreadOnly}" Margin="0,14,0,0" />
 
             <TextBlock Text="{DynamicResource S_Edit_NombreMaximalDeMessages}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding MaxCount}"
-                       ToolTip="{x:Static ui:Help.MaxCount}" Minimum="1" Maximum="5000" />
+                       ToolTip="{DynamicResource H_MaxCount}" Minimum="1" Maximum="5000" />
 
             <!-- Plancher absolu : sans lui, une premiere mise en service
                  traite tout l'historique dormant dans la boite. -->
             <CheckBox Content="{DynamicResource S_Edit_NePrendreQueLes2}"
                       IsChecked="{Binding RequireAttachments}" Margin="0,14,0,0"
-                      ToolTip="{x:Static ui:Help.RequireAttachments}" />
+                      ToolTip="{DynamicResource H_RequireAttachments}" />
 
             <TextBlock Text="{DynamicResource S_Edit_RattrapageAuPremierCycle}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding InitialLookbackDays}" Minimum="0" Maximum="3650"
                                Width="120" HorizontalAlignment="Left"
-                               ToolTip="{x:Static ui:Help.InitialLookback}" />
+                               ToolTip="{DynamicResource H_InitialLookback}" />
             <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                        Text="{DynamicResource S_Edit_AuToutPremierCycle}" />
 
             <TextBlock Text="{DynamicResource S_Edit_NeJamaisTraiterLes}" Style="{StaticResource Label}" />
             <DatePicker SelectedDate="{Binding NotBefore}"
-                       ToolTip="{x:Static ui:Help.NotBefore}" />
+                       ToolTip="{DynamicResource H_NotBefore}" />
             <TextBlock Text="{DynamicResource S_Edit_ARenseignerALa}"
                        FontSize="10" Opacity="0.6" TextWrapping="Wrap" Margin="0,4,0,0" />
           </StackPanel>
@@ -144,11 +143,11 @@
             <TextBlock Text="{DynamicResource S_Edit_Protocole}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.Protocols}}"
                       SelectedItem="{Binding Protocol}"
-                       ToolTip="{x:Static ui:Help.Protocol}" Width="220" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_Protocol}" Width="220" HorizontalAlignment="Left" />
 
             <TextBlock Text="{DynamicResource S_Edit_BoiteIdentifiantDuJournal}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding Mailbox, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.Mailbox}" />
+                       ToolTip="{DynamicResource H_Mailbox}" />
 
             <!-- Graph -->
             <StackPanel Visibility="{Binding IsGraph, Converter={StaticResource BoolToVisibility}}">
@@ -162,11 +161,11 @@
 
               <TextBlock Text="{DynamicResource S_Edit_SecretClientVideInchange}" Style="{StaticResource Label}" />
               <TextBox Text="{Binding ClientSecret, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.ClientSecret}" FontFamily="Consolas" />
+                       ToolTip="{DynamicResource H_ClientSecret}" FontFamily="Consolas" />
 
               <TextBlock Text="{DynamicResource S_Edit_EmpreinteDeCertificatPreferable}" Style="{StaticResource Label}" />
               <TextBox Text="{Binding CertificateThumbprint, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.Certificate}"
+                       ToolTip="{DynamicResource H_Certificate}"
                        FontFamily="Consolas" />
               <TextBlock Text="{DynamicResource S_Edit_UnCertificatNExpire}"
                          FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
@@ -196,7 +195,7 @@
 
               <CheckBox Content="{DynamicResource S_Edit_RespecterLeDelaiDemande}"
                         IsChecked="{Binding HonorRetryAfter}" Margin="0,12,0,0"
-                        ToolTip="{x:Static ui:Help.HonorRetryAfter}" />
+                        ToolTip="{DynamicResource H_HonorRetryAfter}" />
             </StackPanel>
 
             <!-- IMAP -->
@@ -246,14 +245,14 @@
             <TextBlock Text="{DynamicResource S_Edit_DossierSurveille}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.WellKnownFolders}}"
                       SelectedItem="{Binding Folder}"
-                       ToolTip="{x:Static ui:Help.Folder}" Width="220" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_Folder}" Width="220" HorizontalAlignment="Left" />
             <TextBlock Text="{DynamicResource S_Edit_NomCanoniqueEtNon}"
                        FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
 
             <TextBlock Text="{DynamicResource S_Edit_ApresTraitement}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.Dispositions}}"
                       SelectedItem="{Binding Disposition}"
-                       ToolTip="{x:Static ui:Help.Disposition}" Width="220" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_Disposition}" Width="220" HorizontalAlignment="Left" />
 
             <TextBlock Text="{DynamicResource S_Edit_DossierDeDestinationSi}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.WellKnownFolders}}"
@@ -268,7 +267,7 @@
           <StackPanel Margin="16">
             <TextBlock Text="{DynamicResource S_Edit_DelaiMaximalParPiece}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding TimeoutMinutes}"
-                       ToolTip="{x:Static ui:Help.Timeout}" Minimum="1" Maximum="60"
+                       ToolTip="{DynamicResource H_Timeout}" Minimum="1" Maximum="60"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Text="{DynamicResource S_Edit_DepasseLeConvertisseurEst}"
                        FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
@@ -276,7 +275,7 @@
             <TextBlock Text="{DynamicResource S_Edit_PieceNonConvertible}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.FailurePolicies}}"
                       SelectedItem="{Binding OnFailure}"
-                       ToolTip="{x:Static ui:Help.OnFailure}" Width="220" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_OnFailure}" Width="220" HorizontalAlignment="Left" />
             <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                        Text="{DynamicResource S_Edit_SubstituteProduitUnePage}" />
 
@@ -288,7 +287,7 @@
 
             <TextBlock Text="{DynamicResource S_Edit_TailleMinimaleDUne}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding MinInlineImageKilobytes}"
-                       ToolTip="{x:Static ui:Help.MinInlineImage}" Minimum="0" Maximum="10240"
+                       ToolTip="{DynamicResource H_MinInlineImage}" Minimum="0" Maximum="10240"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Text="{DynamicResource S_Edit_EnDessousLImage}"
                        FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
@@ -297,7 +296,7 @@
 
             <TextBlock Text="{DynamicResource S_Edit_ProfondeurMaximale}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding MaxDepth}"
-                       ToolTip="{x:Static ui:Help.ExtractionLimits}" Minimum="1" Maximum="20"
+                       ToolTip="{DynamicResource H_ExtractionLimits}" Minimum="1" Maximum="20"
                                Width="120" HorizontalAlignment="Left" />
 
             <TextBlock Text="{DynamicResource S_Edit_NombreMaximalDePieces}" Style="{StaticResource Label}" />
@@ -327,7 +326,7 @@
             <TextBlock Text="{DynamicResource S_Edit_ExtensionsEcartees}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding ExcludedExtensions, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="Consolas"
-                     ToolTip="{x:Static ui:Help.ExcludedExtensions}" />
+                     ToolTip="{DynamicResource H_ExcludedExtensions}" />
             <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                        Text="{DynamicResource S_Edit_SepareesParDesVirgules}" />
           </StackPanel>
@@ -341,12 +340,12 @@
             <TextBlock Text="{DynamicResource S_Edit_ModeDeProductionDes}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.PdfModes}}"
                       SelectedItem="{Binding PdfMode}"
-                       ToolTip="{x:Static ui:Help.PdfMode}" Width="220" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_PdfMode}" Width="220" HorizontalAlignment="Left" />
 
             <TextBlock Text="{DynamicResource S_Edit_FormatDuFichierD}" Style="{StaticResource Label}" />
             <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.MetadataFormats}}"
                       SelectedItem="{Binding MetadataFormat}"
-                       ToolTip="{x:Static ui:Help.MetadataFormat}" Width="220" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_MetadataFormat}" Width="220" HorizontalAlignment="Left" />
             <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                        Text="{DynamicResource S_Edit_XsltAppliqueUneFeuille}" />
 
@@ -383,27 +382,27 @@
 
             <TextBlock Text="{DynamicResource S_Edit_GabaritDeNommage}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding Naming, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.Naming}" FontFamily="Consolas" />
+                       ToolTip="{DynamicResource H_Naming}" FontFamily="Consolas" />
             <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
-                       Text="Jetons : {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. En mode PerAttachment, {index} est obligatoire sous peine d'ecrasement." />
+                       Text="{DynamicResource S_Edit_JetonsDisponibles}" />
 
             <TextBlock Text="{DynamicResource S_Edit_PolitiqueDeDepot}" Style="{StaticResource Section}" />
 
             <CheckBox Content="{DynamicResource S_Edit_EcritureAtomiqueFichierTemporaire}"
                       IsChecked="{Binding AtomicWrite}"
-                       ToolTip="{x:Static ui:Help.AtomicWrite}" />
+                       ToolTip="{DynamicResource H_AtomicWrite}" />
             <TextBlock Text="{DynamicResource S_Edit_SansElleLaGed}"
                        FontSize="10" Opacity="0.6" Margin="22,2,0,0" />
 
             <CheckBox Content="{DynamicResource S_Edit_ToutOuRienEntre}"
                       IsChecked="{Binding AllOrNothing}"
-                       ToolTip="{x:Static ui:Help.AllOrNothing}" Margin="0,12,0,0" />
+                       ToolTip="{DynamicResource H_AllOrNothing}" Margin="0,12,0,0" />
             <TextBlock Text="{DynamicResource S_Edit_UnEchecSurUne}"
                        FontSize="10" Opacity="0.6" Margin="22,2,0,0" />
 
             <TextBlock Text="{DynamicResource S_Edit_FichierTemoinEcritEn}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding SentinelFileName, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.Sentinel}"
+                       ToolTip="{DynamicResource H_Sentinel}"
                      FontFamily="Consolas" />
 
             <TextBlock Text="{DynamicResource S_Edit_TentativesSurEchecTransitoire}" Style="{StaticResource Label}" />
@@ -535,7 +534,7 @@
               <TextBlock Text="{DynamicResource S_Edit_TypeDeTransport}" Style="{StaticResource Label}" />
               <ComboBox ItemsSource="{Binding Source={x:Static vm:TargetViewModel.Types}}"
                         SelectedItem="{Binding Type}"
-                       ToolTip="{x:Static ui:Help.TargetType}" Width="180" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_TargetType}" Width="180" HorizontalAlignment="Left" />
 
               <TextBlock Text="{DynamicResource S_Edit_NomDeLaCible}" Style="{StaticResource Label}" />
               <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
@@ -588,7 +587,7 @@
 
                 <CheckBox Content="{DynamicResource S_Edit_AccepterToutCertificatServeur}"
                           IsChecked="{Binding AcceptAnyCertificate}"
-                       ToolTip="{x:Static ui:Help.AcceptAnyCertificate}" Margin="0,12,0,0" />
+                       ToolTip="{DynamicResource H_AcceptAnyCertificate}" Margin="0,12,0,0" />
                 <TextBlock TextWrapping="Wrap" FontSize="10" Foreground="#C9942B" Margin="22,2,0,0"
                            Text="{DynamicResource S_Edit_SupprimeTouteProtectionContre}" />
               </StackPanel>
@@ -607,7 +606,7 @@
 
                 <TextBlock Text="{DynamicResource S_Edit_PointDAccesPersonnalise}" Style="{StaticResource Label}" />
                 <TextBox Text="{Binding ServiceUrl, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.S3ServiceUrl}" />
+                       ToolTip="{DynamicResource H_S3ServiceUrl}" />
                 <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                            Text="{DynamicResource S_Edit_RenseigneLeStyleChemin}" />
 
@@ -619,7 +618,7 @@
 
                 <TextBlock Text="{DynamicResource S_Edit_ChiffrementAuRepos}" Style="{StaticResource Label}" />
                 <TextBox Text="{Binding ServerSideEncryption, UpdateSourceTrigger=PropertyChanged}"
-                       ToolTip="{x:Static ui:Help.S3Encryption}" />
+                       ToolTip="{DynamicResource H_S3Encryption}" />
                 <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
                            Text="{DynamicResource S_Edit_Aes256SurAwsLaisser}" />
               </StackPanel>
@@ -708,7 +707,7 @@
               <TextBlock Text="{DynamicResource S_Edit_OrigineDeLaValeur}" Style="{StaticResource Label}" />
               <ComboBox ItemsSource="{Binding Source={x:Static vm:MetadataFieldViewModel.Sources}}"
                         SelectedItem="{Binding Source}"
-                       ToolTip="{x:Static ui:Help.FieldSource}" Width="180" HorizontalAlignment="Left" />
+                       ToolTip="{DynamicResource H_FieldSource}" Width="180" HorizontalAlignment="Left" />
 
               <TextBlock Text="{DynamicResource S_Edit_Valeur}" Style="{StaticResource Label}" />
               <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
@@ -731,7 +730,7 @@
                   <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <mah:NumericUpDown Grid.Column="0" Value="{Binding FixedLength}"
-                       ToolTip="{x:Static ui:Help.FieldFixedLength}" Minimum="0" Maximum="500" />
+                       ToolTip="{DynamicResource H_FieldFixedLength}" Minimum="0" Maximum="500" />
                 <CheckBox Grid.Column="2" Content="{DynamicResource S_Edit_RemplirAGauche}"
                           IsChecked="{Binding PadLeft}" VerticalAlignment="Center" />
               </Grid>
@@ -743,7 +742,7 @@
                          Text="{DynamicResource S_Edit_AppliqueesApresResolutionConvertit}" />
 
               <DataGrid ItemsSource="{Binding Values}"
-                       ToolTip="{x:Static ui:Help.FieldValues}"
+                       ToolTip="{DynamicResource H_FieldValues}"
                         AutoGenerateColumns="False"
                         CanUserAddRows="True"
                         HeadersVisibility="Column"

@@ -60,7 +60,7 @@
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
-            <TextBlock >
+            <TextBlock>
               <TextBlock.Style>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource Figure}">
                   <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}" />
@@ -130,7 +130,7 @@
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
-            <TextBlock >
+            <TextBlock>
               <TextBlock.Style>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource Figure}">
                   <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}" />
@@ -150,7 +150,7 @@
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
-            <TextBlock >
+            <TextBlock>
               <TextBlock.Style>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource Figure}">
                   <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}" />

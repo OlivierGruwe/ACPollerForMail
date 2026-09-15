@@ -4,12 +4,15 @@
 
   <!-- Interface strings, English.
 
-       Consumed through DynamicResource rather than StaticResource: that is what
-       makes the language switch immediate, with no restart and no need to
+       Consumed through DynamicResource rather than StaticResource: that is
+       what makes the language switch immediate, with no restart and no need to
        reopen windows.
 
        EVERY key declared here must exist in Strings.fr.xaml. A missing key
-       yields an EMPTY label, with no error and no clue about the cause. -->
+       yields an EMPTY label, with no error and no clue about the cause.
+
+       H_ keys are the tooltips, formerly in Help.cs. Writing rule: say what
+       happens when the setting is wrong, do not repeat the field label. -->
 
 
   <!-- Main window -->
@@ -41,6 +44,10 @@
   <s:String x:Key="S_Main_DernierCycle">Last cycle</s:String>
   <s:String x:Key="S_Main_DerniereErreur">Last error</s:String>
   <s:String x:Key="S_Main_TableauDeBord">Dashboard</s:String>
+  <s:String x:Key="S_Main_ServiceSettings">Service</s:String>
+  <s:String x:Key="S_Main_VoirLeDetail">Show details</s:String>
+  <s:String x:Key="S_Main_RedemarrageRequis">ACPoller needs a restart:</s:String>
+  <s:String x:Key="S_Main_ReglagesEnAttente">changed setting(s) have not taken effect yet.</s:String>
 
   <!-- Configuration editor -->
   <s:String x:Key="S_Edit_General">General</s:String>
@@ -276,4 +283,95 @@
   <s:String x:Key="S_Help_LeMimeBrutEst">The raw MIME is kept in the message working directory, under the name message.eml. Drop it into a folder, create a configuration using the folder protocol pointing at it, and the message is replayed identically.</s:String>
   <s:String x:Key="S_Help_OuSontLesJournaux">Where the logs are</s:String>
   <s:String x:Key="S_Help_LeNiveauSeChange">The level is changed without a restart through the ACPOLLER_LOGLEVEL environment variable.</s:String>
+
+  <!-- Configuration editor -->
+  <s:String x:Key="S_Edit_JetonsDisponibles">Tokens: {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. A format may follow a colon, for example {received:yyyyMMdd}. In PerAttachment mode, {index} is mandatory or files overwrite each other.</s:String>
+
+  <!-- Help -->
+  <s:String x:Key="S_Help_JetonsIntro">Tokens are used for naming output files and in custom fields of source Token. A format may follow a colon, for example {received:yyyyMMdd}.</s:String>
+  <s:String x:Key="S_Help_TokenList" xml:space="preserve">{date}        PROCESSING date, in local time. Changes if the message is replayed the next day.
+{time}        Processing time.
+{datetime}    Processing date and time.
+{received}    Message RECEPTION date. Stable between two attempts: prefer it
+              for naming that must stay reproducible after an incident.
+{guid}        Random identifier, guarantees uniqueness.
+{mailbox}     Local part of the mailbox address.
+{config}      Configuration name.
+{subject}     Message subject, truncated and sanitised.
+{from}        Local part of the sender address.
+{index}       Part number. MANDATORY in PerAttachment mode.
+{name}        File name without extension.
+{ext}         Part extension.
+{node}        Full logical path, for example forwarded.eml_delivery.pdf</s:String>
+  <s:String x:Key="S_Help_StatusList" xml:space="preserve">Converted           Faithful PDF produced. Present in the merged PDF.
+
+PassThrough         Already a PDF, taken as is or repaired by qpdf.
+                    Present in the merged PDF.
+
+PassThroughUnverified
+                    PDF delivered AS IS because the reader engine could not
+                    open it, even after repair. The document is delivered,
+                    but it is ABSENT from the merged PDF.
+
+Substituted         Part NOT converted. A page carrying the file name and the
+                    reason is produced instead. The original content is still
+                    missing.
+
+Failed              Part not converted, no PDF produced. Nothing reaches the
+                    ECM for this part.
+
+Excluded            Deliberately dropped: extension filter, signature image
+                    below the threshold, or extraction bound reached.
+
+Container           Archive or embedded message. Produces no document, only
+                    its children count.</s:String>
+  <s:String x:Key="S_Help_SourceList" xml:space="preserve">Fixed         Literal value, identical for every message.
+Token         Token template, resolved like file naming.
+Header        MIME header of the message, name case-insensitive.
+Property      Value left by a business processor, for example a supplier code
+              extracted from the subject by a plugin.
+Environment   Server environment variable, for example COMPUTERNAME.</s:String>
+  <s:String x:Key="S_Help_FormatList" xml:space="preserve">json   a "fields" object, names as keys
+xml    a &amp;lt;Fields&amp;gt; block with &amp;lt;Field name="..."&amp;gt;value&amp;lt;/Field&amp;gt;
+csv    columns appended AFTER the fixed ones, repeated on every row
+xslt   available to the transformation sheet</s:String>
+  <s:String x:Key="S_Help_LogList" xml:space="preserve">logs\acpoller-YYYY-MM-DD.log          full log
+logs\acpoller-errors-YYYY-MM-DD.log   warnings and errors only</s:String>
+
+  <!-- Tooltips -->
+  <s:String x:Key="H_Name">Unique identifier, used as the correlation key in logs and as the working directory name. Changing it amounts to creating a new configuration: the previous one remains until deleted.</s:String>
+  <s:String x:Key="H_Enabled">An inactive configuration has no worker: no message is collected, but the settings are kept. This is the clean way to suspend a flow.</s:String>
+  <s:String x:Key="H_Template">Name of a template declared under Poller:Templates. The configuration inherits every value from it and only overrides its own differences. Across dozens of mailboxes sharing one tenant, a configuration comes down to three lines.</s:String>
+  <s:String x:Key="H_Interval">Delay between the end of one cycle and the start of the next. Too short a value across many mailboxes multiplies calls without gaining anything: collection is already bounded by the service's global concurrency.</s:String>
+  <s:String x:Key="H_Jitter">Random wait before the first cycle. Without it, every mailbox hits the server on the same second when the service starts, triggering throttling before the first message.</s:String>
+  <s:String x:Key="H_UnreadOnly">Filter applied server-side. Careful: if the disposition does not mark messages as read, this filter alone does not prevent reprocessing. It is the processed-message log that guarantees idempotence.</s:String>
+  <s:String x:Key="H_MaxCount">Bounds the work of one cycle. A mailbox left unprocessed for weeks must not produce a cycle lasting hours while the other mailboxes wait.</s:String>
+  <s:String x:Key="H_RequireAttachments">Filter applied server-side. Careful: a message whose only part is a signature image counts as having an attachment.</s:String>
+  <s:String x:Key="H_InitialLookback">Applies to the very first cycle only, when nothing has been processed yet for this mailbox. Too low a value makes it look like nothing is arriving while the service works fine, and it is the most tedious diagnosis because nothing reports it.</s:String>
+  <s:String x:Key="H_NotBefore">No message older than this date will ever be processed. Set it at go-live when history is not being imported: without it, the first run processes everything sitting in the mailbox. Unlike a relative lookback, this date does not slide on restart.</s:String>
+  <s:String x:Key="H_Protocol">graph for Microsoft 365, imap for a classic mail server, folder to read .eml files from disk. Folder mode serves to replay a problematic message and to run acceptance tests, without a mailbox or a network.</s:String>
+  <s:String x:Key="H_Mailbox">Also used as the key of the processed-message log. Changing it starts from an empty log, and therefore reprocesses whatever sits in the mailbox.</s:String>
+  <s:String x:Key="H_ClientSecret">Leaving it empty keeps the current value: the secret is never sent back to the interface. Entering a value replaces it, and it is encrypted on the server as soon as it is saved.</s:String>
+  <s:String x:Key="H_Certificate">Thumbprint of a certificate in the machine store, whose private key the service account must be able to read. Preferable to a client secret, which always expires on a Friday evening.</s:String>
+  <s:String x:Key="H_HonorRetryAfter">Graph states how long to wait after throttling. Ignoring it makes things worse: the service resumes at once, gets throttled again, and the quota recovers more and more slowly. Disable only while diagnosing.</s:String>
+  <s:String x:Key="H_Folder">Designated by its canonical name rather than its label: on a French mailbox the label is 'Boite de reception', and any lookup by label fails.</s:String>
+  <s:String x:Key="H_Disposition">Applied AFTER delivery is confirmed. None leaves the message untouched, which allows unlimited replays during acceptance testing. In production, MarkAsRead or Move avoid listing the same messages forever.</s:String>
+  <s:String x:Key="H_Timeout">Once exceeded, the converter is KILLED rather than waited for. A LibreOffice instance stuck on a corrupt document never recovers: without this timeout, one document freezes a conversion slot for good.</s:String>
+  <s:String x:Key="H_OnFailure">Substitute produces a page carrying the file name and the reason, so the ECM sees something is missing. Skip drops the part silently. RejectMessage rejects the whole message, with no partial output.</s:String>
+  <s:String x:Key="H_MinInlineImage">Below this threshold, an image referenced by the HTML body is dropped. Without this filter, every message produces three pages of signature logos.</s:String>
+  <s:String x:Key="H_ExtractionLimits">These bounds protect against a crafted archive: a recursive archive of a few kilobytes can fill a disk. Raising them without reason exposes the service, since processed files arrive by mail, therefore from anyone.</s:String>
+  <s:String x:Key="H_ExcludedExtensions">Compared against the file extension, dot included. A dropped part does not appear in the PDF, but remains listed in the information file with the Excluded status.</s:String>
+  <s:String x:Key="H_PdfMode">Merged produces one PDF per message, body then parts, with one bookmark per part. PerAttachment produces one PDF per part. Both produces the two, for ECMs that index the merged file and archive the detail.</s:String>
+  <s:String x:Key="H_MetadataFormat">xslt applies a transformation sheet to the canonical XML: this is what produces the exact structure an ECM expects, including flat text, without shipping code.</s:String>
+  <s:String x:Key="H_Naming">Available tokens: {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. A format may follow a colon, for example {received:yyyyMMdd}. In PerAttachment mode, {index} is mandatory or parts overwrite each other.</s:String>
+  <s:String x:Key="H_AtomicWrite">The file is written under a temporary extension, then renamed. Without it, an ECM watching the folder can pick up a PDF mid-write, and the error is undetectable on its side.</s:String>
+  <s:String x:Key="H_AllOrNothing">If one target fails, deliveries already made to the others are rolled back. An ECM holding a message that another one never received creates a reconciliation gap nobody notices before the audit.</s:String>
+  <s:String x:Key="H_Sentinel">Written last, once every other file is delivered. It tells the ECM the batch is complete. Without it, the ECM may take the PDF without its information file, or the other way round.</s:String>
+  <s:String x:Key="H_TargetType">fs for a local or UNC folder, ftp for an FTP or FTPS server, s3 for object storage, plugin for a customer export DLL.</s:String>
+  <s:String x:Key="H_AcceptAnyCertificate">Removes every protection against interception: a third party can sit between the service and the server undetected. Enable only against a known self-signed certificate, and document it. The service repeats the warning in its log on every session.</s:String>
+  <s:String x:Key="H_S3ServiceUrl">For MinIO, Garage, Ceph or any compatible store. When filled in, path style and the compatible checksum mode are enabled automatically: without them, those implementations reject deliveries with an error that does not name the cause.</s:String>
+  <s:String x:Key="H_S3Encryption">AES256 on AWS. Leave EMPTY on MinIO or Garage when server-side encryption is not configured there, otherwise every delivery is refused.</s:String>
+  <s:String x:Key="H_FieldSource">Fixed for a constant, Token for a token template, Header for a MIME header, Property for a value left by a business processor, Environment for a server variable.</s:String>
+  <s:String x:Key="H_FieldFixedLength">For ECMs reading positional formats. A value that is too long is truncated: overflowing would shift every following column, which is worse than losing the end of a label.</s:String>
+  <s:String x:Key="H_FieldValues">Applied after resolution: turns a label into the code the ECM expects. A value missing from the table passes through unchanged.</s:String>
 </ResourceDictionary>

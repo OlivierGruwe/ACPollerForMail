@@ -9,8 +9,12 @@
        fenetres.
 
        CHAQUE cle declaree ici doit exister dans Strings.en.xaml. Une cle
-       manquante donne un libelle VIDE, sans erreur et sans indice sur l'origine
-       du probleme. -->
+       manquante donne un libelle VIDE, sans erreur et sans indice sur
+       l'origine du probleme.
+
+       Les cles H_ sont les infobulles, anciennement dans Help.cs. Regle
+       d'ecriture : dire ce qui se passe si le reglage est mal renseigne, pas
+       repeter le libelle du champ. -->
 
 
   <!-- Fenetre principale -->
@@ -42,6 +46,10 @@
   <s:String x:Key="S_Main_DernierCycle">Dernier cycle</s:String>
   <s:String x:Key="S_Main_DerniereErreur">Derniere erreur</s:String>
   <s:String x:Key="S_Main_TableauDeBord">Tableau de bord</s:String>
+  <s:String x:Key="S_Main_ServiceSettings">Service</s:String>
+  <s:String x:Key="S_Main_VoirLeDetail">Voir le detail</s:String>
+  <s:String x:Key="S_Main_RedemarrageRequis">ACPoller demande un redemarrage :</s:String>
+  <s:String x:Key="S_Main_ReglagesEnAttente">reglage(s) modifie(s) n'ont pas encore pris effet.</s:String>
 
   <!-- Editeur de configuration -->
   <s:String x:Key="S_Edit_General">General</s:String>
@@ -277,4 +285,95 @@
   <s:String x:Key="S_Help_LeMimeBrutEst">Le MIME brut est conserve dans le repertoire de travail du message, sous le nom message.eml. Le deposer dans un dossier, creer une configuration en protocole folder pointant dessus, et le message est rejoue a l'identique.</s:String>
   <s:String x:Key="S_Help_OuSontLesJournaux">Ou sont les journaux</s:String>
   <s:String x:Key="S_Help_LeNiveauSeChange">Le niveau se change sans redemarrer par la variable d'environnement ACPOLLER_LOGLEVEL.</s:String>
+
+  <!-- Editeur de configuration -->
+  <s:String x:Key="S_Edit_JetonsDisponibles">Jetons : {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. En mode PerAttachment, {index} est obligatoire sous peine d'ecrasement.</s:String>
+
+  <!-- Aide -->
+  <s:String x:Key="S_Help_JetonsIntro">Les jetons servent au nommage des fichiers de sortie et aux champs personnalises de type Token. Un format peut suivre deux points, par exemple {received:yyyyMMdd}.</s:String>
+  <s:String x:Key="S_Help_TokenList" xml:space="preserve">{date}        Date de TRAITEMENT, en heure locale. Change si le message est rejoue le lendemain.
+{time}        Heure de traitement.
+{datetime}    Date et heure de traitement.
+{received}    Date de RECEPTION du message. Stable entre deux tentatives : a preferer
+              pour un nommage qui doit rester reproductible apres incident.
+{guid}        Identifiant aleatoire, garantit l'unicite.
+{mailbox}     Partie locale de l'adresse de la boite.
+{config}      Nom de la configuration.
+{subject}     Sujet du message, tronque et assaini.
+{from}        Partie locale de l'adresse de l'expediteur.
+{index}       Numero de la piece. OBLIGATOIRE en mode PerAttachment.
+{name}        Nom du fichier sans extension.
+{ext}         Extension de la piece.
+{node}        Chemin logique complet, exemple transfert.eml_bl.pdf</s:String>
+  <s:String x:Key="S_Help_StatusList" xml:space="preserve">Converted           PDF fidele produit. Present dans le PDF unifie.
+
+PassThrough         Deja au format PDF, repris tel quel ou repare par qpdf.
+                    Present dans le PDF unifie.
+
+PassThroughUnverified
+                    PDF livre TEL QUEL car le moteur de lecture n'a pas su
+                    l'ouvrir, meme apres reparation. Le document est bien
+                    livre, mais il est ABSENT du PDF unifie.
+
+Substituted         Piece NON convertie. Une page portant le nom du fichier et
+                    le motif est produite a sa place. Le contenu d'origine
+                    reste manquant.
+
+Failed              Piece non convertie, aucun PDF produit. Rien n'arrive en
+                    GED pour cette piece.
+
+Excluded            Ecartee volontairement : filtre d'extension, image de
+                    signature sous le seuil, ou borne d'extraction atteinte.
+
+Container           Archive ou message imbrique. Ne produit pas de document,
+                    seuls ses enfants comptent.</s:String>
+  <s:String x:Key="S_Help_SourceList" xml:space="preserve">Fixed         Valeur litterale, identique pour tous les messages.
+Token         Gabarit a jetons, resolu comme le nommage des fichiers.
+Header        En-tete MIME du message, nom insensible a la casse.
+Property      Valeur deposee par un traitement metier, par exemple un code
+              fournisseur extrait du sujet par un plugin.
+Environment   Variable d'environnement du serveur, par exemple COMPUTERNAME.</s:String>
+  <s:String x:Key="S_Help_FormatList" xml:space="preserve">json   objet "fields", noms en cles
+xml    bloc &amp;lt;Fields&amp;gt; avec &amp;lt;Field name="..."&amp;gt;valeur&amp;lt;/Field&amp;gt;
+csv    colonnes ajoutees APRES les colonnes fixes, repetees sur chaque ligne
+xslt   a la disposition de la feuille de transformation</s:String>
+  <s:String x:Key="S_Help_LogList" xml:space="preserve">logs\acpoller-AAAA-MM-JJ.log          journal complet
+logs\acpoller-errors-AAAA-MM-JJ.log   avertissements et erreurs seuls</s:String>
+
+  <!-- Infobulles -->
+  <s:String x:Key="H_Name">Identifiant unique, utilise comme cle de correlation dans les journaux et comme nom du repertoire de travail. Le changer revient a creer une nouvelle configuration : l'ancienne subsistera tant qu'elle n'est pas supprimee.</s:String>
+  <s:String x:Key="H_Enabled">Une configuration inactive n'a pas de worker : aucun message n'est collecte, mais le parametrage est conserve. C'est la facon propre de suspendre un flux.</s:String>
+  <s:String x:Key="H_Template">Nom d'un gabarit declare dans Poller:Templates. La configuration en herite toutes les valeurs et ne surcharge que ses ecarts. Sur un parc de dizaines de boites partageant le meme tenant, une configuration se resume alors a trois lignes.</s:String>
+  <s:String x:Key="H_Interval">Delai entre la fin d'un cycle et le debut du suivant. Une valeur trop courte sur un grand nombre de boites multiplie les appels sans rien gagner : la collecte est deja bornee par la concurrence globale du service.</s:String>
+  <s:String x:Key="H_Jitter">Attente aleatoire avant le premier cycle. Sans elle, toutes les boites frappent le serveur a la meme seconde au demarrage du service, ce qui declenche le throttling avant meme le premier message.</s:String>
+  <s:String x:Key="H_UnreadOnly">Filtre applique cote serveur. Attention : si la disposition ne marque pas les messages comme lus, ce filtre ne suffit pas a eviter le retraitement. C'est le journal des messages traites qui garantit l'idempotence.</s:String>
+  <s:String x:Key="H_MaxCount">Borne le travail d'un cycle. Une boite laissee sans traitement pendant des semaines ne doit pas produire un cycle de plusieurs heures pendant lequel les autres boites attendent.</s:String>
+  <s:String x:Key="H_RequireAttachments">Filtre applique cote serveur. Attention : un message dont la seule piece est une image de signature compte comme ayant une piece jointe.</s:String>
+  <s:String x:Key="H_InitialLookback">Ne s'applique qu'au tout premier cycle, quand le service n'a encore rien traite pour cette boite. Une valeur trop faible fait croire que rien n'arrive alors que le service fonctionne, et c'est le diagnostic le plus penible parce que rien ne le signale.</s:String>
+  <s:String x:Key="H_NotBefore">Aucun message anterieur a cette date ne sera jamais traite. A renseigner a la mise en production quand l'historique n'est pas repris : sans elle, le premier demarrage traite tout ce qui dort dans la boite. Contrairement a un rattrapage relatif, cette date ne glisse pas au redemarrage.</s:String>
+  <s:String x:Key="H_Protocol">graph pour Microsoft 365, imap pour une messagerie classique, folder pour lire des fichiers .eml sur disque. Le mode folder sert au rejeu d'un message litigieux et a la recette, sans boite ni reseau.</s:String>
+  <s:String x:Key="H_Mailbox">Sert aussi de cle au journal des messages traites. La modifier repart d'un journal vide, donc retraite ce qui est present dans la boite.</s:String>
+  <s:String x:Key="H_ClientSecret">Laisser vide conserve la valeur actuelle : le secret n'est jamais renvoye a l'interface. Saisir une valeur la remplace, et elle est chiffree sur le serveur des l'enregistrement.</s:String>
+  <s:String x:Key="H_Certificate">Empreinte d'un certificat present dans le magasin machine, dont le compte de service doit pouvoir lire la cle privee. A preferer au secret client, qui expire toujours un vendredi soir.</s:String>
+  <s:String x:Key="H_HonorRetryAfter">Graph indique combien de temps attendre apres une limitation. L'ignorer aggrave la situation : le service repart aussitot, reprend une limitation, et le quota se reconstitue de plus en plus lentement. A ne desactiver qu'en diagnostic.</s:String>
+  <s:String x:Key="H_Folder">Designe par son nom canonique et non par son libelle : sur une boite en francais, le libelle est 'Boite de reception' et toute recherche par nom echoue.</s:String>
+  <s:String x:Key="H_Disposition">Applique APRES export confirme. None laisse le message intact, ce qui permet de rejouer autant qu'on veut pendant une recette. En production, MarkAsRead ou Move evitent de relister indefiniment les memes messages.</s:String>
+  <s:String x:Key="H_Timeout">Depasse, le convertisseur est TUE et non attendu. Un LibreOffice bloque sur un document corrompu ne se debloque jamais : sans ce delai, un seul document fige un slot de conversion definitivement.</s:String>
+  <s:String x:Key="H_OnFailure">Substitute produit une page portant le nom du fichier et le motif : la GED voit qu'il manque quelque chose. Skip omet la piece silencieusement. RejectMessage rejette tout le message, aucune sortie partielle.</s:String>
+  <s:String x:Key="H_MinInlineImage">En dessous de ce seuil, une image referencee par le corps HTML est ecartee. Sans ce filtre, chaque mail produit trois pages de logos de signature.</s:String>
+  <s:String x:Key="H_ExtractionLimits">Ces bornes protegent d'une archive forgee : une archive recursive de quelques kilo-octets peut saturer un disque. Les augmenter sans raison expose le service, puisque les fichiers traites arrivent par mail, donc de n'importe qui.</s:String>
+  <s:String x:Key="H_ExcludedExtensions">Comparees a l'extension du fichier, point compris. Une piece ecartee n'apparait pas dans le PDF, mais reste mentionnee dans le fichier d'information avec le statut Excluded.</s:String>
+  <s:String x:Key="H_PdfMode">Merged produit un seul PDF par message, corps puis pieces, avec un signet par piece. PerAttachment produit un PDF par piece. Both produit les deux, pour les GED qui indexent l'unifie et archivent le detail.</s:String>
+  <s:String x:Key="H_MetadataFormat">xslt applique une feuille de transformation au XML canonique : c'est ce qui permet de produire la structure exacte attendue par une GED, y compris du texte plat, sans livraison de code.</s:String>
+  <s:String x:Key="H_Naming">Jetons disponibles : {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. Un format peut suivre deux points, par exemple {received:yyyyMMdd}. En mode PerAttachment, {index} est obligatoire sous peine d'ecrasement entre pieces.</s:String>
+  <s:String x:Key="H_AtomicWrite">Le fichier est ecrit sous une extension temporaire puis renomme. Sans cela, une GED qui scrute le repertoire peut ramasser un PDF en cours d'ecriture, et l'erreur est indetectable de son cote.</s:String>
+  <s:String x:Key="H_AllOrNothing">Si une cible echoue, les depots deja faits sur les autres sont annules. Une GED qui recoit un message qu'une seconde n'a pas recu produit un ecart de reconciliation que personne ne detecte avant l'audit.</s:String>
+  <s:String x:Key="H_Sentinel">Ecrit en dernier, une fois tous les autres fichiers deposes. Il indique a la GED que le lot est complet. Sans lui, elle peut prendre le PDF sans son fichier d'information, ou l'inverse.</s:String>
+  <s:String x:Key="H_TargetType">fs pour un repertoire local ou UNC, ftp pour un serveur FTP ou FTPS, s3 pour un stockage objet, plugin pour une DLL d'export cliente.</s:String>
+  <s:String x:Key="H_AcceptAnyCertificate">Supprime toute protection contre l'interception : un tiers peut se placer entre le service et le serveur sans etre detecte. A n'activer que sur un certificat auto-signe connu, et a documenter. Le service le rappelle a chaque session dans son journal.</s:String>
+  <s:String x:Key="H_S3ServiceUrl">Pour MinIO, Garage, Ceph ou tout stockage compatible. Renseigne, le style chemin et le mode de somme de controle compatible sont actives automatiquement : sans eux, ces implementations refusent les depots avec une erreur qui ne designe pas la cause.</s:String>
+  <s:String x:Key="H_S3Encryption">AES256 sur AWS. Laisser VIDE sur MinIO ou Garage si le chiffrement serveur n'y est pas configure, sinon chaque depot est refuse.</s:String>
+  <s:String x:Key="H_FieldSource">Fixed pour une constante, Token pour un gabarit a jetons, Header pour un en-tete MIME, Property pour une valeur deposee par un traitement metier, Environment pour une variable du serveur.</s:String>
+  <s:String x:Key="H_FieldFixedLength">Pour les GED qui lisent du positionnel. Une valeur trop longue est tronquee : deborder decalerait toutes les colonnes suivantes, ce qui est pire que perdre la fin d'un libelle.</s:String>
+  <s:String x:Key="H_FieldValues">Appliquees apres resolution : convertit un libelle en code attendu par la GED. Si la valeur lue n'est pas dans la table, elle passe inchangee.</s:String>
 </ResourceDictionary>

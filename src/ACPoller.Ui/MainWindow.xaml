@@ -62,15 +62,23 @@
             BorderThickness="0,1,0,1"
             Padding="16,8">
       <DockPanel>
-        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-          <Button Content="{DynamicResource S_Main_Aide}" Command="{Binding OpenHelpCommand}"
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Content="{DynamicResource S_Main_Aide}"
+                  Command="{Binding OpenHelpCommand}"
                   Style="{StaticResource MahApps.Styles.Button.Square}" Padding="14,4" />
-          <Button Content="{DynamicResource S_Main_Reglages}" Command="{Binding OpenSettingsCommand}"
+
+                    <Button Content="{DynamicResource S_Main_ServiceSettings}"
+                  Command="{Binding OpenServiceSettingsCommand}"
                   Style="{StaticResource MahApps.Styles.Button.Square}"
                   Padding="14,4" Margin="8,0,0,0" />
-        </StackPanel>
 
-        <StackPanel Orientation="Horizontal">
+                    <Button Content="{DynamicResource S_Main_Reglages}"
+                  Command="{Binding OpenSettingsCommand}"
+                  Style="{StaticResource MahApps.Styles.Button.Square}"
+                  Padding="14,4" Margin="8,0,0,0" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
           <Button Content="{DynamicResource S_Main_Nouvelle}" Command="{Binding NewConfigurationCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Padding="14,4" />
@@ -109,7 +117,30 @@
       </DockPanel>
     </Border>
 
-    <!-- Bandeau d'etat : la premiere chose que regarde un exploitant. -->
+    <!-- Bandeau de redemarrage. Il n'apparait que lorsqu'un reglage de
+             service a ete modifie : ces reglages ne sont pas rechargeables, et
+             sans cette alerte l'exploitant croit sa modification active. -->
+        <Border DockPanel.Dock="Top"
+                Background="#33C9942B"
+                BorderBrush="#C9942B"
+                BorderThickness="0,0,0,1"
+                Padding="16,10"
+                Visibility="{Binding RestartRequired, Converter={StaticResource BoolToVisibility}}">
+          <DockPanel>
+            <Button DockPanel.Dock="Right"
+                    Content="{DynamicResource S_Main_VoirLeDetail}"
+                    Command="{Binding ShowRestartDetailCommand}"
+                    Style="{StaticResource MahApps.Styles.Button.Square}" Padding="12,4" />
+
+            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="SemiBold">
+              <Run Text="{DynamicResource S_Main_RedemarrageRequis}" />
+              <Run Text="{Binding PendingRestart.Count, Mode=OneWay}" />
+              <Run Text="{DynamicResource S_Main_ReglagesEnAttente}" />
+            </TextBlock>
+          </DockPanel>
+        </Border>
+
+        <!-- Bandeau d'etat : la premiere chose que regarde un exploitant. -->
     <Border DockPanel.Dock="Top"
             Background="{DynamicResource MahApps.Brushes.Accent4}"
             BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"
