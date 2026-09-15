@@ -1,0 +1,48 @@
+Subject: 04 eml imbrique
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937431.473.14162991149968900389@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============4883758177639787890=="
+
+--===============4883758177639787890==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Message transfere ci-dessous.
+
+--===============4883758177639787890==
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+Subject: Message d'origine
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937431.473.12182114812768792537@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============0274345041714700803=="
+
+--===============0274345041714700803==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Corps du message transfere.
+
+--===============0274345041714700803==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="bl.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBv
+Ymo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlw
+ZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgMjAwIDIwMF0+PmVuZG9iagp0cmFpbGVy
+PDwvUm9vdCAxIDAgUj4+CiUlRU9GCg==
+
+--===============0274345041714700803==--
+
+--===============4883758177639787890==--

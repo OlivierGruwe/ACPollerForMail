@@ -1,0 +1,26 @@
+Subject: 14 caracteres interdits
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937451.473.9928034732788361723@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============4357993131072669149=="
+
+--===============4357993131072669149==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Nom de fichier hostile.
+
+--===============4357993131072669149==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="..\\..\\fac:ture<1>|\"?.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBv
+Ymo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlw
+ZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgMjAwIDIwMF0+PmVuZG9iagp0cmFpbGVy
+PDwvUm9vdCAxIDAgUj4+CiUlRU9GCg==
+
+--===============4357993131072669149==--

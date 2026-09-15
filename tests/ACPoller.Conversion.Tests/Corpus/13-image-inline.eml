@@ -1,0 +1,55 @@
+Subject: 13 image inline
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937450.473.9700548600545802534@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5084396471093877587=="
+
+--===============5084396471093877587==
+Content-Type: multipart/alternative;
+ boundary="===============1860696639846673634=="
+
+--===============1860696639846673634==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Version texte.
+
+--===============1860696639846673634==
+MIME-Version: 1.0
+Content-Type: multipart/related;
+ boundary="===============6990009020120732143=="
+
+--===============6990009020120732143==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Bonjour</p><img src="cid:logo123"></body></html>
+
+--===============6990009020120732143==
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-ID: <logo123>
+MIME-Version: 1.0
+Content-Disposition: inline
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAA
+AABJRU5ErkJggg==
+
+--===============6990009020120732143==--
+
+--===============1860696639846673634==--
+
+--===============5084396471093877587==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="reel.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBv
+Ymo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlw
+ZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgMjAwIDIwMF0+PmVuZG9iagp0cmFpbGVy
+PDwvUm9vdCAxIDAgUj4+CiUlRU9GCg==
+
+--===============5084396471093877587==--

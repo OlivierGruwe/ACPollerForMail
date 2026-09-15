@@ -1,0 +1,819 @@
+<mah:MetroWindow x:Class="ACPoller.Ui.Views.ConfigurationEditorWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:vm="clr-namespace:ACPoller.Ui.ViewModels"
+                 xmlns:ui="clr-namespace:ACPoller.Ui"
+                 Title="Configuration"
+                 Height="820"
+                 Width="960"
+                 WindowStartupLocation="CenterOwner"
+                 TitleCharacterCasing="Normal">
+
+  <Window.Resources>
+    <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+
+    <!-- Infobulles larges et multilignes : les explications utiles ne tiennent
+         pas sur une ligne, et une infobulle tronquee ne sert a rien. -->
+    <Style TargetType="ToolTip">
+      <Setter Property="MaxWidth" Value="420" />
+      <Setter Property="Padding" Value="10,8" />
+      <Setter Property="ContentTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style TargetType="FrameworkElement">
+      <Setter Property="ToolTipService.ShowDuration" Value="30000" />
+      <Setter Property="ToolTipService.InitialShowDelay" Value="400" />
+    </Style>
+
+    <Style x:Key="Label" TargetType="TextBlock">
+      <Setter Property="Margin" Value="0,10,0,3" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="Opacity" Value="0.75" />
+    </Style>
+
+    <Style x:Key="Section" TargetType="TextBlock">
+      <Setter Property="Margin" Value="0,18,0,8" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+  </Window.Resources>
+
+  <Grid Margin="16">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TabControl Grid.Row="0">
+
+      <!-- GENERAL -->
+      <TabItem Header="General">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="16">
+            <TextBlock Text="Nom" Style="{StaticResource Label}" />
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" FontSize="14"
+                       ToolTip="{x:Static ui:Help.Name}" />
+
+            <CheckBox Content="Configuration active"
+                      IsChecked="{Binding Enabled}" Margin="0,14,0,0"
+                       ToolTip="{x:Static ui:Help.Enabled}" />
+
+            <StackPanel Visibility="{Binding IsConfiguration, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="Gabarit dont heriter" Style="{StaticResource Label}" />
+              <ComboBox ItemsSource="{Binding AvailableTemplates}"
+                        SelectedItem="{Binding Template}"
+                        Width="280" HorizontalAlignment="Left"
+                        ToolTip="{x:Static ui:Help.Template}" />
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                         Text="Laisser vide pour une configuration autonome. Les valeurs du gabarit s'appliquent, et seuls les ecarts declares ici les remplacent." />
+            </StackPanel>
+
+            <Border Visibility="{Binding IsTemplate, Converter={StaticResource BoolToVisibility}}"
+                    Background="#33C9942B" Padding="12,8" Margin="0,10,0,0" CornerRadius="3">
+              <TextBlock TextWrapping="Wrap" FontSize="11"
+                         Text="Ce gabarit est un modele : toute modification s'applique immediatement a l'ensemble des configurations qui en heritent, et leurs workers sont redemarres." />
+            </Border>
+
+            <TextBlock Text="Collecte" Style="{StaticResource Section}" />
+
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <StackPanel Grid.Column="0">
+                <TextBlock Text="Periode entre deux cycles (secondes)" Style="{StaticResource Label}" />
+                <mah:NumericUpDown Value="{Binding IntervalSeconds}"
+                       ToolTip="{x:Static ui:Help.Interval}" Minimum="5" Maximum="86400" />
+              </StackPanel>
+
+              <StackPanel Grid.Column="2">
+                <!-- Le decalage evite que cent workers frappent le serveur a la
+                     meme seconde au demarrage du service. -->
+                <TextBlock Text="Decalage aleatoire au demarrage (secondes)" Style="{StaticResource Label}" />
+                <mah:NumericUpDown Value="{Binding StartupJitterSeconds}"
+                       ToolTip="{x:Static ui:Help.Jitter}" Minimum="0" Maximum="600" />
+              </StackPanel>
+            </Grid>
+
+            <CheckBox Content="Ne prendre que les messages non lus"
+                      IsChecked="{Binding UnreadOnly}"
+                       ToolTip="{x:Static ui:Help.UnreadOnly}" Margin="0,14,0,0" />
+
+            <TextBlock Text="Nombre maximal de messages par cycle" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding MaxCount}"
+                       ToolTip="{x:Static ui:Help.MaxCount}" Minimum="1" Maximum="5000" />
+
+            <!-- Plancher absolu : sans lui, une premiere mise en service
+                 traite tout l'historique dormant dans la boite. -->
+            <CheckBox Content="Ne prendre que les messages porteurs de pieces jointes"
+                      IsChecked="{Binding RequireAttachments}" Margin="0,14,0,0"
+                      ToolTip="{x:Static ui:Help.RequireAttachments}" />
+
+            <TextBlock Text="Rattrapage au premier cycle (jours)" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding InitialLookbackDays}" Minimum="0" Maximum="3650"
+                               Width="120" HorizontalAlignment="Left"
+                               ToolTip="{x:Static ui:Help.InitialLookback}" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="Au tout premier cycle seulement. Zero prend tout ce que le dossier contient. Contrairement a la date plancher ci-dessous, cette valeur GLISSE : un redemarrage dans six mois rattrapera les N derniers jours a ce moment-la." />
+
+            <TextBlock Text="Ne jamais traiter les messages anterieurs a" Style="{StaticResource Label}" />
+            <DatePicker SelectedDate="{Binding NotBefore}"
+                       ToolTip="{x:Static ui:Help.NotBefore}" />
+            <TextBlock Text="A renseigner a la mise en production quand l'historique n'est pas repris."
+                       FontSize="10" Opacity="0.6" TextWrapping="Wrap" Margin="0,4,0,0" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- PROTOCOLE -->
+      <TabItem Header="Protocole">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="16">
+            <TextBlock Text="Protocole" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.Protocols}}"
+                      SelectedItem="{Binding Protocol}"
+                       ToolTip="{x:Static ui:Help.Protocol}" Width="220" HorizontalAlignment="Left" />
+
+            <TextBlock Text="Boite (identifiant du journal des traitements)" Style="{StaticResource Label}" />
+            <TextBox Text="{Binding Mailbox, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.Mailbox}" />
+
+            <!-- Graph -->
+            <StackPanel Visibility="{Binding IsGraph, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="Microsoft Graph" Style="{StaticResource Section}" />
+
+              <TextBlock Text="TenantId" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding TenantId, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+
+              <TextBlock Text="ClientId" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding ClientId, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+
+              <TextBlock Text="Secret client (vide = inchange)" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding ClientSecret, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.ClientSecret}" FontFamily="Consolas" />
+
+              <TextBlock Text="Empreinte de certificat (preferable au secret)" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding CertificateThumbprint, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.Certificate}"
+                       FontFamily="Consolas" />
+              <TextBlock Text="Un certificat n'expire pas un vendredi soir sans prevenir."
+                         FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
+
+              <TextBlock Text="Limitation de debit" Style="{StaticResource Section}" />
+
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="16" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                  <TextBlock Text="Requetes simultanees" Style="{StaticResource Label}" />
+                  <mah:NumericUpDown Value="{Binding ThrottleMaxConcurrent}" Minimum="1" Maximum="64" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                  <TextBlock Text="Espacement minimal (ms)" Style="{StaticResource Label}" />
+                  <mah:NumericUpDown Value="{Binding ThrottleMinSpacingMs}" Minimum="0" Maximum="10000" />
+                </StackPanel>
+              </Grid>
+
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,6,0,0"
+                         Text="Ces bornes sont PARTAGEES par toutes les boites du meme locataire. L'espacement compte autant que la concurrence : sans lui, huit appels partent a la meme milliseconde et declenchent la limitation avant meme d'atteindre la limite." />
+
+              <CheckBox Content="Respecter le delai demande par Graph apres une limitation"
+                        IsChecked="{Binding HonorRetryAfter}" Margin="0,12,0,0"
+                        ToolTip="{x:Static ui:Help.HonorRetryAfter}" />
+            </StackPanel>
+
+            <!-- IMAP -->
+            <StackPanel Visibility="{Binding IsImap, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="IMAP" Style="{StaticResource Section}" />
+
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="16" />
+                  <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                  <TextBlock Text="Hote" Style="{StaticResource Label}" />
+                  <TextBox Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                  <TextBlock Text="Port" Style="{StaticResource Label}" />
+                  <mah:NumericUpDown Value="{Binding Port}" Minimum="1" Maximum="65535" />
+                </StackPanel>
+              </Grid>
+
+              <CheckBox Content="SSL implicite (decocher pour STARTTLS)"
+                        IsChecked="{Binding UseSsl}" Margin="0,12,0,0" />
+
+              <TextBlock Text="Utilisateur" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
+
+              <TextBlock Text="Mot de passe (vide = inchange)" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+            </StackPanel>
+
+            <!-- Repertoire -->
+            <StackPanel Visibility="{Binding IsFolder, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="Repertoire local" Style="{StaticResource Section}" />
+
+              <TextBlock Text="Chemin des fichiers .eml" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding FolderPath, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBlock Text="Sert au rejeu d'un message litigieux et a la recette, sans boite ni reseau."
+                         FontSize="10" Opacity="0.6" TextWrapping="Wrap" Margin="0,4,0,0" />
+            </StackPanel>
+
+            <TextBlock Text="Dossier et disposition" Style="{StaticResource Section}" />
+
+            <TextBlock Text="Dossier surveille" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.WellKnownFolders}}"
+                      SelectedItem="{Binding Folder}"
+                       ToolTip="{x:Static ui:Help.Folder}" Width="220" HorizontalAlignment="Left" />
+            <TextBlock Text="Nom canonique et non libelle : un libelle casse sur une boite localisee."
+                       FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
+
+            <TextBlock Text="Apres traitement" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.Dispositions}}"
+                      SelectedItem="{Binding Disposition}"
+                       ToolTip="{x:Static ui:Help.Disposition}" Width="220" HorizontalAlignment="Left" />
+
+            <TextBlock Text="Dossier de destination (si deplacement)" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.WellKnownFolders}}"
+                      SelectedItem="{Binding TargetFolder}" Width="220" HorizontalAlignment="Left" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- CONVERSION -->
+      <TabItem Header="Conversion">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="16">
+            <TextBlock Text="Delai maximal par piece (minutes)" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding TimeoutMinutes}"
+                       ToolTip="{x:Static ui:Help.Timeout}" Minimum="1" Maximum="60"
+                               Width="120" HorizontalAlignment="Left" />
+            <TextBlock Text="Depasse, le convertisseur est tue et non attendu."
+                       FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
+
+            <TextBlock Text="Piece non convertible" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.FailurePolicies}}"
+                      SelectedItem="{Binding OnFailure}"
+                       ToolTip="{x:Static ui:Help.OnFailure}" Width="220" HorizontalAlignment="Left" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="Substitute produit une page portant le motif, Skip omet la piece, RejectMessage rejette tout le message." />
+
+            <CheckBox Content="Convertir le corps du message"
+                      IsChecked="{Binding IncludeBody}" Margin="0,16,0,0" />
+
+            <CheckBox Content="Joindre aussi les pieces d'origine"
+                      IsChecked="{Binding KeepOriginals}" Margin="0,8,0,0" />
+
+            <TextBlock Text="Taille minimale d'une image incorporee (Ko)" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding MinInlineImageKilobytes}"
+                       ToolTip="{x:Static ui:Help.MinInlineImage}" Minimum="0" Maximum="10240"
+                               Width="120" HorizontalAlignment="Left" />
+            <TextBlock Text="En dessous, l'image est ecartee : c'est un logo de signature."
+                       FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
+
+            <TextBlock Text="Extraction recursive" Style="{StaticResource Section}" />
+
+            <TextBlock Text="Profondeur maximale" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding MaxDepth}"
+                       ToolTip="{x:Static ui:Help.ExtractionLimits}" Minimum="1" Maximum="20"
+                               Width="120" HorizontalAlignment="Left" />
+
+            <TextBlock Text="Nombre maximal de pieces" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding MaxNodes}" Minimum="1" Maximum="10000"
+                               Width="120" HorizontalAlignment="Left" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="Ces bornes protegent d'une archive forgee. Les augmenter sans raison expose le service." />
+
+            <Grid Margin="0,10,0,0">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+
+              <StackPanel Grid.Column="0">
+                <TextBlock Text="Volume decompresse maximal (Mo)" Style="{StaticResource Label}" />
+                <mah:NumericUpDown Value="{Binding MaxExpandedMegabytes}" Minimum="1" Maximum="10240" />
+              </StackPanel>
+
+              <StackPanel Grid.Column="2">
+                <TextBlock Text="Taille maximale d'une entree (Mo)" Style="{StaticResource Label}" />
+                <mah:NumericUpDown Value="{Binding MaxSingleEntryMegabytes}" Minimum="1" Maximum="10240" />
+              </StackPanel>
+            </Grid>
+
+            <TextBlock Text="Extensions ecartees" Style="{StaticResource Label}" />
+            <TextBox Text="{Binding ExcludedExtensions, UpdateSourceTrigger=PropertyChanged}"
+                     FontFamily="Consolas"
+                     ToolTip="{x:Static ui:Help.ExcludedExtensions}" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="Separees par des virgules. Exemple : p7s, ics, vcf. Sert a ecarter les signatures electroniques et les invitations, qui n'ont pas vocation a partir en GED." />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- SORTIE -->
+      <TabItem Header="Format de sortie">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="16">
+            <TextBlock Text="Mode de production des PDF" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.PdfModes}}"
+                      SelectedItem="{Binding PdfMode}"
+                       ToolTip="{x:Static ui:Help.PdfMode}" Width="220" HorizontalAlignment="Left" />
+
+            <TextBlock Text="Format du fichier d'information" Style="{StaticResource Label}" />
+            <ComboBox ItemsSource="{Binding Source={x:Static vm:ConfigurationFormViewModel.MetadataFormats}}"
+                      SelectedItem="{Binding MetadataFormat}"
+                       ToolTip="{x:Static ui:Help.MetadataFormat}" Width="220" HorizontalAlignment="Left" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="xslt applique une feuille de transformation au XML canonique : c'est ce qui permet de produire la structure exacte attendue par une GED, sans livraison de code." />
+
+            <StackPanel Visibility="{Binding IsXslt, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="Feuille de transformation" Style="{StaticResource Label}" />
+
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="8" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox Grid.Column="0"
+                         Text="{Binding MetadataTemplate, UpdateSourceTrigger=PropertyChanged}"
+                         FontFamily="Consolas" />
+
+                <Button Grid.Column="2" Content="Parcourir"
+                        Command="{Binding BrowseStylesheetCommand}" Padding="12,3" />
+              </Grid>
+
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                         Text="Chemin sur le SERVEUR. Le bouton n'est qu'une aide a la saisie et ne vaut que si l'UI tourne sur le serveur." />
+
+              <TextBlock Text="Extension du fichier produit (sans point)" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding MetadataExtension, UpdateSourceTrigger=PropertyChanged}"
+                       Width="140" HorizontalAlignment="Left" FontFamily="Consolas" />
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                         Text="Vide donne .xml. Une feuille declarant method=text produit du plat : mettre alors txt, idx ou csv selon ce qu'attend la GED." />
+
+              <TextBlock TextWrapping="Wrap" FontSize="10" Foreground="#C9942B" Margin="0,10,0,0"
+                         Text="Mise au point : passer le format en xml, regarder la sortie, ecrire la feuille dessus, puis revenir en xslt. Les deux formats produisent le meme XML d'entree." />
+            </StackPanel>
+
+            <TextBlock Text="Gabarit de nommage" Style="{StaticResource Label}" />
+            <TextBox Text="{Binding Naming, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.Naming}" FontFamily="Consolas" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="Jetons : {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. En mode PerAttachment, {index} est obligatoire sous peine d'ecrasement." />
+
+            <TextBlock Text="Politique de depot" Style="{StaticResource Section}" />
+
+            <CheckBox Content="Ecriture atomique (fichier temporaire puis renommage)"
+                      IsChecked="{Binding AtomicWrite}"
+                       ToolTip="{x:Static ui:Help.AtomicWrite}" />
+            <TextBlock Text="Sans elle, la GED peut lire un PDF en cours d'ecriture."
+                       FontSize="10" Opacity="0.6" Margin="22,2,0,0" />
+
+            <CheckBox Content="Tout ou rien entre les cibles"
+                      IsChecked="{Binding AllOrNothing}"
+                       ToolTip="{x:Static ui:Help.AllOrNothing}" Margin="0,12,0,0" />
+            <TextBlock Text="Un echec sur une cible annule les depots deja faits sur les autres."
+                       FontSize="10" Opacity="0.6" Margin="22,2,0,0" />
+
+            <TextBlock Text="Fichier temoin ecrit en dernier (vide = aucun)" Style="{StaticResource Label}" />
+            <TextBox Text="{Binding SentinelFileName, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.Sentinel}"
+                     FontFamily="Consolas" />
+
+            <TextBlock Text="Tentatives sur echec transitoire" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding MaxAttempts}" Minimum="1" Maximum="20"
+                               Width="120" HorizontalAlignment="Left" />
+
+            <TextBlock Text="Delai avant la seconde tentative (secondes)" Style="{StaticResource Label}" />
+            <mah:NumericUpDown Value="{Binding InitialBackoffSeconds}" Minimum="1" Maximum="600"
+                               Width="120" HorizontalAlignment="Left" />
+            <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                       Text="Double a chaque nouvel essai. Trop court sur une GED qui redemarre, les trois tentatives sont consommees avant qu'elle ne reponde." />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <!-- CIBLES -->
+      <TabItem Header="Traitements">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="16">
+
+            <TextBlock TextWrapping="Wrap" FontSize="11" Opacity="0.7" Margin="0,0,0,12"
+                       Text="Traitements metier apportes par les plugins installes. Ils s'executent dans l'ordre affiche, aux etapes indiquees." />
+
+            <ItemsControl ItemsSource="{Binding AvailableProcessors}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Border Padding="10,8" Margin="0,0,0,6" CornerRadius="3"
+                          BorderThickness="1"
+                          BorderBrush="{DynamicResource MahApps.Brushes.Gray8}">
+                    <Border.Style>
+                      <Style TargetType="Border">
+                        <Style.Triggers>
+                          <!-- Un processeur declare mais dont le plugin n'est
+                               plus charge doit se voir : il ne s'executera
+                               pas, et le service ecartera la configuration au
+                               prochain demarrage. -->
+                          <DataTrigger Binding="{Binding IsMissing}" Value="True">
+                            <Setter Property="BorderBrush" Value="#E04A4A" />
+                            <Setter Property="Background" Value="#22E04A4A" />
+                          </DataTrigger>
+                        </Style.Triggers>
+                      </Style>
+                    </Border.Style>
+
+                    <DockPanel>
+                      <CheckBox DockPanel.Dock="Left" IsChecked="{Binding IsSelected}"
+                                VerticalAlignment="Center" Margin="0,0,10,0" />
+
+                      <StackPanel>
+                        <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                        <TextBlock Text="{Binding Stages}" FontSize="10" Opacity="0.7" />
+                      </StackPanel>
+                    </DockPanel>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock TextWrapping="Wrap" FontSize="11" Opacity="0.6" Margin="0,8,0,0"
+                       Text="Aucun traitement metier disponible. Deposer les DLL dans le repertoire de plugins et redemarrer le service.">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Visibility" Value="Collapsed" />
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding AvailableProcessors.Count}" Value="0">
+                      <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+
+            <StackPanel Visibility="{Binding HasRejectedPlugins, Converter={StaticResource BoolToVisibility}}">
+              <TextBlock Text="Plugins refuses" Style="{StaticResource Section}" />
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.7" Margin="0,0,0,8"
+                         Text="Ces assemblages sont presents mais n'ont pas ete charges : leurs traitements ne sont pas proposes." />
+
+              <ItemsControl ItemsSource="{Binding RejectedPlugins}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock TextWrapping="Wrap" Margin="0,3" Foreground="#C9942B">
+                      <Run Text="{Binding Name, Mode=OneWay}" FontWeight="SemiBold" />
+                      <Run Text=" " />
+                      <Run Text="{Binding Reason, Mode=OneWay}" />
+                    </TextBlock>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <TabItem Header="Cibles">
+        <Grid Margin="16">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" MinWidth="200" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" MinWidth="320" />
+          </Grid.ColumnDefinitions>
+
+          <GridSplitter Grid.Column="1" Width="6"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent" />
+
+          <DockPanel Grid.Column="0" Margin="0,0,10,0">
+            <UniformGrid DockPanel.Dock="Bottom" Columns="2" Margin="0,8,0,0">
+              <Button Content="Ajouter" Command="{Binding AddTargetCommand}" Margin="0,0,3,0" />
+              <Button Content="Retirer" Command="{Binding RemoveTargetCommand}" Margin="3,0,0,0" />
+            </UniformGrid>
+
+            <ListBox ItemsSource="{Binding Targets}" SelectedItem="{Binding SelectedTarget}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Margin="0,3">
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding Type}" FontSize="10" Opacity="0.7" />
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </DockPanel>
+
+          <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto"
+                        DataContext="{Binding SelectedTarget}">
+            <StackPanel>
+              <TextBlock Text="Type de transport" Style="{StaticResource Label}" />
+              <ComboBox ItemsSource="{Binding Source={x:Static vm:TargetViewModel.Types}}"
+                        SelectedItem="{Binding Type}"
+                       ToolTip="{x:Static ui:Help.TargetType}" Width="180" HorizontalAlignment="Left" />
+
+              <TextBlock Text="Nom de la cible" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+              <TextBlock Text="Repris dans les journaux : sans nom, les erreurs sont illisibles."
+                         FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
+
+              <StackPanel Visibility="{Binding IsFileSystem, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="Systeme de fichiers" Style="{StaticResource Section}" />
+
+                <TextBlock Text="Repertoire de depot (local ou UNC)" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" />
+
+                <CheckBox Content="Creer le repertoire s'il n'existe pas"
+                          IsChecked="{Binding CreateDirectory}" Margin="0,12,0,0" />
+              </StackPanel>
+
+              <StackPanel Visibility="{Binding IsFtp, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="FTP / FTPS" Style="{StaticResource Section}" />
+
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="110" />
+                  </Grid.ColumnDefinitions>
+
+                  <StackPanel Grid.Column="0">
+                    <TextBlock Text="Hote" Style="{StaticResource Label}" />
+                    <TextBox Text="{Binding Host, UpdateSourceTrigger=PropertyChanged}" />
+                  </StackPanel>
+
+                  <StackPanel Grid.Column="2">
+                    <TextBlock Text="Port" Style="{StaticResource Label}" />
+                    <TextBox Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}" />
+                  </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Utilisateur" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="Mot de passe (vide = inchange)" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+
+                <TextBlock Text="Repertoire distant" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding RemoteDirectory, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="Chiffrement" Style="{StaticResource Label}" />
+                <ComboBox ItemsSource="{Binding Source={x:Static vm:TargetViewModel.EncryptionModes}}"
+                          SelectedItem="{Binding EncryptionMode}" Width="180" HorizontalAlignment="Left" />
+
+                <CheckBox Content="Accepter tout certificat serveur"
+                          IsChecked="{Binding AcceptAnyCertificate}"
+                       ToolTip="{x:Static ui:Help.AcceptAnyCertificate}" Margin="0,12,0,0" />
+                <TextBlock TextWrapping="Wrap" FontSize="10" Foreground="#C9942B" Margin="22,2,0,0"
+                           Text="Supprime toute protection contre l'interception. A n'activer que sur un certificat auto-signe connu, et a documenter." />
+              </StackPanel>
+
+              <StackPanel Visibility="{Binding IsS3, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="S3 ou compatible" Style="{StaticResource Section}" />
+
+                <TextBlock Text="Bucket" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding Bucket, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="Prefixe des cles" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding Prefix, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+
+                <TextBlock Text="Region" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="Point d'acces personnalise (MinIO, Garage, Ceph)" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding ServiceUrl, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.S3ServiceUrl}" />
+                <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                           Text="Renseigne, le style chemin et le mode de somme de controle compatible sont actives automatiquement." />
+
+                <TextBlock Text="Cle d'acces (vide = chaine de resolution AWS)" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding AccessKey, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+
+                <TextBlock Text="Cle secrete (vide = inchange)" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding SecretKey, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+
+                <TextBlock Text="Chiffrement au repos" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding ServerSideEncryption, UpdateSourceTrigger=PropertyChanged}"
+                       ToolTip="{x:Static ui:Help.S3Encryption}" />
+                <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                           Text="AES256 sur AWS. Laisser vide sur MinIO ou Garage sans chiffrement serveur configure, sinon le depot est refuse." />
+              </StackPanel>
+
+              <StackPanel Visibility="{Binding IsPlugin, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="DLL d'export cliente" Style="{StaticResource Section}" />
+
+                <TextBlock Text="Assemblage" Style="{StaticResource Label}" />
+                <TextBox Text="{Binding Assembly, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+                <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                           Text="Les reglages propres au plugin se saisissent dans le tableau ci-dessous." />
+              </StackPanel>
+
+              <TextBlock Text="Tous les reglages" Style="{StaticResource Section}" />
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,0,0,8"
+                         Text="Les champs ci-dessus ecrivent dans ce meme tableau. Ajouter une ligne ici permet de renseigner un reglage qu'aucun champ dedie ne couvre." />
+
+              <DataGrid ItemsSource="{Binding Settings}"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="True"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        MinHeight="160">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="Reglage" Binding="{Binding Key}" Width="200" />
+                  <DataGridTextColumn Header="Valeur" Binding="{Binding Value}" Width="*" />
+                </DataGrid.Columns>
+              </DataGrid>
+            </StackPanel>
+          </ScrollViewer>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="Champs">
+        <Grid Margin="16">
+          <Grid.ColumnDefinitions>
+            <!-- Largeur ajustable : la longueur des noms de champs varie
+                 beaucoup d'un client a l'autre, une largeur figee ne convient
+                 a personne. MinWidth evite de faire disparaitre la liste. -->
+            <ColumnDefinition Width="320" MinWidth="220" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="*" MinWidth="320" />
+          </Grid.ColumnDefinitions>
+
+          <GridSplitter Grid.Column="1" Width="6"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent" />
+
+          <DockPanel Grid.Column="0" Margin="0,0,10,0">
+            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" FontSize="10" Opacity="0.6"
+                       Margin="0,0,0,8"
+                       Text="L'ordre fait foi : c'est celui des colonnes du CSV. Les deplacer change le format de sortie." />
+
+            <!-- Deux rangees de deux : quatre boutons cote a cote debordent des
+                 que la colonne est reduite. -->
+            <UniformGrid DockPanel.Dock="Bottom" Columns="2" Rows="2" Margin="0,8,0,0">
+              <Button Content="Ajouter" Command="{Binding AddFieldCommand}" Margin="0,0,3,3" />
+              <Button Content="Retirer" Command="{Binding RemoveFieldCommand}" Margin="3,0,0,3" />
+              <Button Content="Monter" Command="{Binding MoveFieldUpCommand}" Margin="0,3,3,0" />
+              <Button Content="Descendre" Command="{Binding MoveFieldDownCommand}" Margin="3,3,0,0" />
+            </UniformGrid>
+
+            <ListBox ItemsSource="{Binding Fields}" SelectedItem="{Binding SelectedField}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Margin="0,3">
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                    <TextBlock FontSize="10" Opacity="0.7">
+                      <Run Text="{Binding Source, Mode=OneWay}" />
+                      <Run Text=" " />
+                      <Run Text="{Binding Value, Mode=OneWay}" />
+                    </TextBlock>
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </DockPanel>
+
+          <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto"
+                        DataContext="{Binding SelectedField}">
+            <StackPanel>
+              <TextBlock Text="Nom du champ en sortie" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+              <TextBlock Text="Origine de la valeur" Style="{StaticResource Label}" />
+              <ComboBox ItemsSource="{Binding Source={x:Static vm:MetadataFieldViewModel.Sources}}"
+                        SelectedItem="{Binding Source}"
+                       ToolTip="{x:Static ui:Help.FieldSource}" Width="180" HorizontalAlignment="Left" />
+
+              <TextBlock Text="Valeur" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas" />
+              <TextBlock Text="{Binding ValueHint}" TextWrapping="Wrap"
+                         FontSize="10" Opacity="0.6" Margin="0,4,0,0" />
+
+              <TextBlock Text="Format de date (ignore si la valeur n'en est pas une)" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding Format, UpdateSourceTrigger=PropertyChanged}" FontFamily="Consolas"
+                       Width="200" HorizontalAlignment="Left" />
+
+              <TextBlock Text="Valeur par defaut si le resultat est vide" Style="{StaticResource Label}" />
+              <TextBox Text="{Binding Default, UpdateSourceTrigger=PropertyChanged}"
+                       Width="200" HorizontalAlignment="Left" />
+
+              <TextBlock Text="Longueur fixe (0 = libre)" Style="{StaticResource Label}" />
+              <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="110" />
+                  <ColumnDefinition Width="16" />
+                  <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <mah:NumericUpDown Grid.Column="0" Value="{Binding FixedLength}"
+                       ToolTip="{x:Static ui:Help.FieldFixedLength}" Minimum="0" Maximum="500" />
+                <CheckBox Grid.Column="2" Content="Remplir a gauche"
+                          IsChecked="{Binding PadLeft}" VerticalAlignment="Center" />
+              </Grid>
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,4,0,0"
+                         Text="Pour les GED qui lisent du positionnel. Une valeur trop longue est tronquee : deborder decalerait toutes les colonnes suivantes." />
+
+              <TextBlock Text="Traductions de valeur" Style="{StaticResource Section}" />
+              <TextBlock TextWrapping="Wrap" FontSize="10" Opacity="0.6" Margin="0,0,0,8"
+                         Text="Appliquees apres resolution : convertit un libelle en code attendu par la GED." />
+
+              <DataGrid ItemsSource="{Binding Values}"
+                       ToolTip="{x:Static ui:Help.FieldValues}"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="True"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        MinHeight="140">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="Valeur lue" Binding="{Binding From}" Width="*" />
+                  <DataGridTextColumn Header="Valeur ecrite" Binding="{Binding To}" Width="*" />
+                </DataGrid.Columns>
+              </DataGrid>
+            </StackPanel>
+          </ScrollViewer>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="JSON">
+        <DockPanel Margin="16">
+          <Button DockPanel.Dock="Top" Content="Rafraichir l'apercu"
+                  Command="{Binding RefreshPreviewCommand}"
+                  HorizontalAlignment="Left" Padding="12,4" Margin="0,0,0,10" />
+
+          <!-- Lecture seule : le formulaire est la source, et un JSON edite en
+               parallele produirait deux verites contradictoires. Les reglages
+               exotiques passent par le tableau de l'onglet Cibles. -->
+          <TextBox Text="{Binding JsonPreview, Mode=OneWay}"
+                   IsReadOnly="True"
+                   FontFamily="Consolas"
+                   FontSize="12"
+                   AcceptsReturn="True"
+                   TextWrapping="NoWrap"
+                   VerticalScrollBarVisibility="Auto"
+                   HorizontalScrollBarVisibility="Auto" />
+        </DockPanel>
+      </TabItem>
+    </TabControl>
+
+    <TextBlock Grid.Row="1" Text="{Binding StatusMessage}" TextWrapping="Wrap" Margin="4,12,0,0">
+      <TextBlock.Style>
+        <Style TargetType="TextBlock">
+          <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}" />
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding StatusIsError}" Value="True">
+              <Setter Property="Foreground" Value="#E04A4A" />
+              <Setter Property="FontWeight" Value="SemiBold" />
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </TextBlock.Style>
+    </TextBlock>
+
+    <ItemsControl Grid.Row="2" ItemsSource="{Binding Issues}" Margin="4,6,0,0">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock TextWrapping="Wrap" Margin="0,2" Foreground="#E04A4A">
+            <Run Text="{Binding Path, Mode=OneWay}" FontFamily="Consolas" FontSize="11" />
+            <Run Text=" " />
+            <Run Text="{Binding Message, Mode=OneWay}" />
+          </TextBlock>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+      <mah:ProgressRing Width="18" Height="18" Margin="0,0,12,0" IsActive="{Binding IsBusy}" />
+      <Button Content="Fermer" IsCancel="True"
+              Style="{StaticResource MahApps.Styles.Button.Square}" Padding="20,6" />
+      <Button Content="Enregistrer" Click="OnSave"
+              IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
+              Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+              Padding="20,6" Margin="8,0,0,0" />
+    </StackPanel>
+  </Grid>
+</mah:MetroWindow>

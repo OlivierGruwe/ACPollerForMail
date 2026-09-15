@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# Sorties de compilation
+# ---------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+.vs/
+
+# ---------------------------------------------------------------------------
+# SECRETS — le point le plus important de ce fichier
+#
+# appsettings.json porte les identifiants de boites, les secrets clients et le
+# jeton de pilotage. Une fois pousse, il reste dans l'historique meme apres
+# suppression : la seule sortie est une reecriture d'historique, avec tous les
+# clones a refaire.
+#
+# Seul le modele neutre est versionne.
+# ---------------------------------------------------------------------------
+appsettings.json
+appsettings.*.json
+!appsettings.sample.json
+!appsettings.Development.sample.json
+
+# Sauvegardes de configuration. Les .clear.*.bak portent les secrets EN CLAIR.
+*.bak
+*.clear.*.bak
+
+# Reglages d'interface : ils contiennent le jeton de pilotage.
+ui-settings.json
+ui-settings.default.json
+
+# Certificats et cles
+*.pfx
+*.p12
+*.key
+*.pem
+
+# ---------------------------------------------------------------------------
+# Binaires tiers
+#
+# LibreOffice.msi fait 366 Mo, au-dela de la limite de 100 Mo par fichier de
+# GitHub. qpdf depasse aussi le raisonnable pour un depot de code.
+#
+# Ils se telechargent depuis leur site officiel : installer/prereq/LISEZMOI.txt
+# dit lesquels et ou les mettre.
+# ---------------------------------------------------------------------------
+installer/prereq/
+installer/bin/
+installer/service/
+installer/ui/
+installer/*.exe
+
+# ---------------------------------------------------------------------------
+# Donnees de travail et journaux
+# ---------------------------------------------------------------------------
+logs/
+work/
+*.log
+*.db
+*.db-wal
+*.db-shm
+
+# ---------------------------------------------------------------------------
+# Documentation generee
+#
+# Les PDF sont VERSIONNES : ils sont livres avec le produit et doivent etre
+# disponibles sans chaine de production installee. Seuls les intermediaires
+# sont ignores.
+# ---------------------------------------------------------------------------
+docs/_*.html
+docs/_*.pdf
+docs/__pycache__/
+
+# ---------------------------------------------------------------------------
+# Corpus de tests : les messages reels portent des donnees clientes
+#
+# Les fichiers du corpus forge sont versionnes, ceux issus de la production
+# ne doivent pas l'etre.
+# ---------------------------------------------------------------------------
+tests/**/Corpus/production/
+
+# Divers
+*.tmp
+Thumbs.db
+desktop.ini

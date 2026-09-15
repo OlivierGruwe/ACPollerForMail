@@ -1,0 +1,115 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_adecd06806bcde2f",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "CAM18e05=r7=G4gMFzXpZJzgsQN27-OFHLvwY=ZOApqYfKQmJiw@mail.gmail.com",
+  "Subject": "test aaa",
+  "From": "olivier.gruwe@gmail.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-05-16T17:36:03+02:00",
+  "ProcessedUtc": "2026-09-09T14:41:49.4182157+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_adecd06806bcde2f\\out\\test aaa.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 5218,
+      "Sha256": "23cf47df2570f431ee127468fe60c038a48c03bbe1ad657c9ddbfb2ec579f934",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "123.zip/123.tar/123.txt",
+      "FileName": "123.txt",
+      "Kind": "Attachment",
+      "SizeBytes": 3965,
+      "Sha256": "24a65ae3f26d7aa651f1d54afa503a20155aed03bf98410b94516fc73a2e24e2",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 3,
+      "PdfFileName": "123.zip_123.tar_123.txt.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "123.zip/123.tar/6442fb84-4334-4b7b-8994-7d4379822187@001_atts_000.jpg",
+      "FileName": "6442fb84-4334-4b7b-8994-7d4379822187@001_atts_000.jpg",
+      "Kind": "Attachment",
+      "SizeBytes": 524507,
+      "Sha256": "82934edf176d8a36f202b0d1c9c19196d1fe38b62185e41f8dfaf818be65ed1f",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "123.zip_123.tar_6442fb84-4334-4b7b-8994-7d4379822187@001_atts_000.jpg.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "123.zip/123.tar/0f3e631c-855b-46ea-be26-3a5ed688e95d@001_atts.pdf",
+      "FileName": "0f3e631c-855b-46ea-be26-3a5ed688e95d@001_atts.pdf",
+      "Kind": "Attachment",
+      "SizeBytes": 4532,
+      "Sha256": "fe5125d91ae70651433427c127142124fcf38fdc59754f797c8eae3e50e4ebc6",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 3,
+      "PdfFileName": "123.zip_123.tar_0f3e631c-855b-46ea-be26-3a5ed688e95d@001_atts.pdf.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "123.zip/084cf984-cd6b-427e-a2e2-caf02bc1670f@001_atts.pdf",
+      "FileName": "084cf984-cd6b-427e-a2e2-caf02bc1670f@001_atts.pdf",
+      "Kind": "Attachment",
+      "SizeBytes": 943,
+      "Sha256": "fea0bbd2695eb430d24b185e30a2e4cbee3000863631620175a0f2a1c49860a2",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "123.zip_084cf984-cd6b-427e-a2e2-caf02bc1670f@001_atts.pdf.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "123.zip/d37e09dd-7ea8-4e69-afd4-815561728e08@001_atts.pdf",
+      "FileName": "d37e09dd-7ea8-4e69-afd4-815561728e08@001_atts.pdf",
+      "Kind": "Attachment",
+      "SizeBytes": 943,
+      "Sha256": "92f42731dcd230c3a15e0549c233fa6c243017ebc85c1693317da2bf9b45e00c",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "123.zip_d37e09dd-7ea8-4e69-afd4-815561728e08@001_atts.pdf.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "123.zip/a6ad6cda-5d9a-4dc5-9b26-db23b62a55b7@001_atts.pdf",
+      "FileName": "a6ad6cda-5d9a-4dc5-9b26-db23b62a55b7@001_atts.pdf",
+      "Kind": "Attachment",
+      "SizeBytes": 943,
+      "Sha256": "05488a72a8823d7a753c70a62e560fba466bd7a852d9eede6843541369828051",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "123.zip_a6ad6cda-5d9a-4dc5-9b26-db23b62a55b7@001_atts.pdf.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

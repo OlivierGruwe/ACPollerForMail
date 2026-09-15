@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_40bc1e424feaf111",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "cmu-lmtpd-187960-1787740333-5@mlpnb0309",
+  "Subject": "Protégez votre boîte mail contre le phishing",
+  "From": "noreply@information.laposte.net",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2026-08-26T12:32:13+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:54.4401987+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_40bc1e424feaf111\\out\\Protégez votre boîte mail contre le phishing.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 14829,
+      "Sha256": "aa2c4504fa9790d26f805677fca9a8260d6d85529ca4d856ffb5157d078fb0d1",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

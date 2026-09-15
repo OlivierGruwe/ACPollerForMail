@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_114e1a26bfcfdf0a",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "CADmFFNpRW_41stmU=9N4gKD=V+J+XEKdde93HWEzt3MXd=aipg@mail.gmail.com",
+  "Subject": "test Capca",
+  "From": "olivier.gruwe@arondor.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2026-01-21T16:01:30+01:00",
+  "ProcessedUtc": "2026-09-09T14:42:53.1802052+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_114e1a26bfcfdf0a\\out\\test Capca.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 4609,
+      "Sha256": "16c12321819b14458b879e029b4ddd6a58b1c61858f5a82694e32ad0fabfc707",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "image005.png",
+      "FileName": "image005.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1582,
+      "Sha256": "e4cfe9b7c08c9a0c20fbb13b4db433c407dabeb8247489fc53c890c1ae2b3428",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "image003.png",
+      "FileName": "image003.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1512,
+      "Sha256": "e9eed7d68a4fb2f3c53c111bbc0b527560a6c997fd524607a5eff6b62325f3b2",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "image004.png",
+      "FileName": "image004.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1518,
+      "Sha256": "57c5c0d570d4d078ced447ce6b960433058a6b0f454b350fcae4d1235ddd36cf",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "image006.png",
+      "FileName": "image006.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1561,
+      "Sha256": "fb421270f7281d7a31769ac2619d3813790cfc792628d1971fe11088ef110c77",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "capca 10.PDF",
+      "FileName": "capca 10.PDF",
+      "Kind": "Attachment",
+      "ContentType": "application/pdf",
+      "SizeBytes": 442775,
+      "Sha256": "01cda1347920bac50d05959a4363f67c2b0fe02567770a358758b18a823864e4",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 10,
+      "PdfFileName": "capca 10.PDF.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 4,
+  "Fields": {}
+}

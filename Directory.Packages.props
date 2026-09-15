@@ -1,0 +1,120 @@
+<Project>
+  <!-- Central Package Management : une seule version par paquet pour toute la
+       solution. Fin des conflits de binding redirect qui ont coute cher en v1.
+       CentralPackageTransitivePinningEnabled autorise l'epinglage des transitives
+       (section "Transitives epinglees" en bas de ce fichier). -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup Label="Framework">
+    <PackageVersion Include="MahApps.Metro" Version="2.4.11" />
+    <PackageVersion Include="Microsoft.AspNetCore.Http" Version="2.3.12" />
+    <PackageVersion Include="Microsoft.AspNetCore.Routing" Version="2.3.12" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.0" />
+    <PackageVersion Include="System.Reflection.MetadataLoadContext" Version="10.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="10.0.0" />
+  </ItemGroup>
+  <ItemGroup Label="Mail">
+    <!-- MailKit : IMAP. MimeKit : parsing MIME, y compris eml imbriques. -->
+    <PackageVersion Include="MailKit" Version="4.17.0" />
+    <PackageVersion Include="MimeKit" Version="4.17.0" />
+    <!-- Graph v5 + Azure.Identity (client secret aujourd'hui, certificat a terme). -->
+    <PackageVersion Include="Microsoft.Graph" Version="5.98.0" />
+    <PackageVersion Include="Azure.Identity" Version="1.17.0" />
+    <!-- Pieces jointes Outlook .msg, tres frequentes en entreprise. -->
+    <PackageVersion Include="MsgReader" Version="6.0.1" />
+  </ItemGroup>
+  <ItemGroup Label="Pdf">
+    <!-- PDFsharp 6 : MIT. Ne PAS utiliser iText7 (AGPL) dans un produit livre client. -->
+    <PackageVersion Include="PDFsharp" Version="6.2.1" />
+    <PackageVersion Include="SixLabors.ImageSharp" Version="3.1.12" />
+  </ItemGroup>
+  <ItemGroup Label="Export">
+    <PackageVersion Include="FluentFTP" Version="52.1.0" />
+    <PackageVersion Include="AWSSDK.S3" Version="4.0.9" />
+  </ItemGroup>
+  <ItemGroup Label="Infrastructure">
+    <PackageVersion Include="NLog" Version="6.0.5" />
+    <PackageVersion Include="NLog.Extensions.Logging" Version="6.0.5" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.2" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <PackageVersion Include="Npgsql" Version="9.0.4" />
+  </ItemGroup>
+  <ItemGroup Label="Ui">
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+  </ItemGroup>
+  <ItemGroup Label="Tests">
+    <!-- Pas de FluentAssertions : sa v8 est sous licence commerciale payante
+         pour un usage professionnel. Shouldly est BSD. -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageVersion Include="xunit.v3" Version="3.1.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+  </ItemGroup>
+  <!-- ==================================================================
+       TRANSITIVES EPINGLEES (audit NuGet)
+
+       Chaque entree est une DETTE : elle existe parce qu'un paquet parent
+       n'a pas encore remonte sa dependance. A relire a chaque montee de
+       version des parents, et a retirer des que possible.
+       Verification : dotnet list package, options vulnerable et include-transitive
+       ================================================================== -->
+  <ItemGroup Label="Transitives epinglees - Kiota">
+    <!-- GHSA-7j59-v9qr-6fq9 (CVE-2026-44503, high) : le RedirectHandler ne
+         retire pas Cookie / Proxy-Authorization lors d'une redirection vers
+         un autre hote. Corrige en 1.22.0.
+         Microsoft.Graph 5.98 tire encore 1.17.1.
+         On reste en 1.x : la 2.0.0 porte des ruptures pour un SDK genere.
+         Toute la famille est alignee pour eviter un graphe heterogene ;
+         les entrees non presentes dans le graphe sont simplement ignorees.
+         Parent a surveiller : Microsoft.Graph / Microsoft.Graph.Core. -->
+    <PackageVersion Include="Microsoft.Kiota.Abstractions" Version="1.22.2" />
+    <PackageVersion Include="Microsoft.Kiota.Authentication.Azure" Version="1.22.2" />
+    <PackageVersion Include="Microsoft.Kiota.Http.HttpClientLibrary" Version="1.22.2" />
+    <PackageVersion Include="Microsoft.Kiota.Serialization.Json" Version="1.22.2" />
+    <PackageVersion Include="Microsoft.Kiota.Serialization.Text" Version="1.22.2" />
+    <PackageVersion Include="Microsoft.Kiota.Serialization.Form" Version="1.22.2" />
+    <PackageVersion Include="Microsoft.Kiota.Serialization.Multipart" Version="1.22.2" />
+  </ItemGroup>
+  <ItemGroup Label="Transitives epinglees - OpenMcdf">
+    <!-- GHSA-jxpf-xq2m-q525 (corrige en 3.1.3) et GHSA-5qwm-7pvp-w988
+         (CVE-2026-45785, corrige en 3.1.4) : boucles infinies NON
+         INTERCEPTABLES sur un fichier CFB forge. try/catch ne rattrape rien,
+         le thread part a 100 % de CPU definitivement.
+         Atteignable a distance par une simple PJ .msg envoyee a une boite
+         surveillee. Epinglage non negociable.
+         Parent a surveiller : MsgReader. -->
+    <PackageVersion Include="OpenMcdf" Version="3.2.0" />
+  </ItemGroup>
+  <ItemGroup Label="Transitives epinglees - SQLitePCLRaw">
+    <!-- GHSA-2m69-gcr7-jv3q (CVE-2025-6965, high) : SQLite < 3.50.2,
+         corruption memoire. Toutes les versions <= 2.1.11 sont touchees.
+         Microsoft.Data.Sqlite 10.0.x embarque encore 2.1.11, la correction
+         est dans la branche 3.x de SQLitePCLRaw.
+         ATTENTION : changement de branche majeure sous Microsoft.Data.Sqlite,
+         ce n'est pas une combinaison supportee officiellement. A VALIDER par
+         un test qui ouvre reellement une base, pas par un build vert.
+         Si la restauration ou l'execution casse, retirer ces trois lignes et
+         basculer sur la suppression documentee ci-dessous. -->
+    <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
+    <PackageVersion Include="SQLitePCLRaw.core" Version="3.0.3" />
+    <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.0.3" />
+  </ItemGroup>
+  <!-- Repli si l'epinglage SQLitePCLRaw 3.x s'avere incompatible.
+       Portee acceptable : base locale du ProcessedStore, fichier non expose,
+       aucun contenu externe injecte dedans. A relever a chaque montee du SDK.
+  <ItemGroup Label="Suppressions d'audit justifiees">
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-2m69-gcr7-jv3q" />
+  </ItemGroup>
+  -->
+</Project>

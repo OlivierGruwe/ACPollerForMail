@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_41dd5dc01256ed4a",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "AC700000000F3B82B191999F483mscom_mkt_prod79@emailnotifications.microsoft.com",
+  "Subject": "Bienvenue\u00A0! Votre compte Microsoft est accessible ici.",
+  "From": "MicrosoftAccount@emailnotifications.microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-05-22T17:16:27+02:00",
+  "ProcessedUtc": "2026-09-09T14:41:58.4733771+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_41dd5dc01256ed4a\\out\\Bienvenue\u00A0! Votre compte Microsoft est accessible ici.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 78605,
+      "Sha256": "06d5fbccd4d2b2116ac0dd9cb81704f7bbf7b14dca1d4cc07247428aaaab4859",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

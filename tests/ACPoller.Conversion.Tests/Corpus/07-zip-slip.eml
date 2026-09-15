@@ -1,0 +1,27 @@
+Subject: 07 zip slip
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937432.473.834390095689811395@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============2865834237146491160=="
+
+--===============2865834237146491160==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Archive malveillante.
+
+--===============2865834237146491160==
+Content-Type: application/zip
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="slip.zip"
+MIME-Version: 1.0
+
+UEsDBBQAAAAAAFuFJ13J7/tcIAAAACAAAAARAAAALi4vLi4vLi4vZXZpbC50eHRqZSBuZSBkb2lz
+IGphbWFpcyBldHJlIGVjcml0IGljaVBLAwQUAAAAAABbhSddDCmQEw4AAAAOAAAADAAAAGxlZ2l0
+aW1lLnR4dGZpY2hpZXIgbm9ybWFsUEsBAhQDFAAAAAAAW4UnXcnv+1wgAAAAIAAAABEAAAAAAAAA
+AAAAAIABAAAAAC4uLy4uLy4uL2V2aWwudHh0UEsBAhQDFAAAAAAAW4UnXQwpkBMOAAAADgAAAAwA
+AAAAAAAAAAAAAIABTwAAAGxlZ2l0aW1lLnR4dFBLBQYAAAAAAgACAHkAAACHAAAAAAA=
+
+--===============2865834237146491160==--

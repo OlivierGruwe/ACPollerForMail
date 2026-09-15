@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Genere par 'make version'. Ne pas modifier a la main : le fichier
+         VERSION est la source, celui-ci en est la traduction pour MSBuild. -->
+    <VersionPrefix>2.0.0</VersionPrefix>
+  </PropertyGroup>
+</Project>

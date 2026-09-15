@@ -1,0 +1,73 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+
+  <!-- Chaines de l'interface, version francaise.
+       Consommees par DynamicResource pour que le basculement de langue soit
+       immediat, sans redemarrage. -->
+
+  <s:String x:Key="S_Subtitle">Capture de messagerie, conversion PDF et depot en GED</s:String>
+
+  <!-- Barre d'actions -->
+  <s:String x:Key="S_New">Nouvelle</s:String>
+  <s:String x:Key="S_Edit">Modifier</s:String>
+  <s:String x:Key="S_Delete">Supprimer</s:String>
+  <s:String x:Key="S_Test">Tester</s:String>
+  <s:String x:Key="S_Restart">Redemarrer</s:String>
+  <s:String x:Key="S_Refresh">Rafraichir</s:String>
+  <s:String x:Key="S_Maintenance">Maintenance</s:String>
+  <s:String x:Key="S_ServiceSettings">Service</s:String>
+  <s:String x:Key="S_Connection">Connexion</s:String>
+  <s:String x:Key="S_Help">Aide</s:String>
+  <s:String x:Key="S_Save">Enregistrer</s:String>
+  <s:String x:Key="S_Close">Fermer</s:String>
+  <s:String x:Key="S_Cancel">Annuler</s:String>
+  <s:String x:Key="S_Browse">Parcourir</s:String>
+  <s:String x:Key="S_Add">Ajouter</s:String>
+  <s:String x:Key="S_Remove">Retirer</s:String>
+  <s:String x:Key="S_MoveUp">Monter</s:String>
+  <s:String x:Key="S_MoveDown">Descendre</s:String>
+
+  <!-- Listes et onglets -->
+  <s:String x:Key="S_Configurations">Configurations</s:String>
+  <s:String x:Key="S_Templates">Gabarits</s:String>
+  <s:String x:Key="S_Supervision">Supervision</s:String>
+  <s:String x:Key="S_Dashboard">Tableau de bord</s:String>
+  <s:String x:Key="S_TabGeneral">General</s:String>
+  <s:String x:Key="S_TabProtocol">Protocole</s:String>
+  <s:String x:Key="S_TabConversion">Conversion</s:String>
+  <s:String x:Key="S_TabOutput">Format de sortie</s:String>
+  <s:String x:Key="S_TabProcessors">Traitements</s:String>
+  <s:String x:Key="S_TabTargets">Cibles</s:String>
+  <s:String x:Key="S_TabFields">Champs</s:String>
+
+  <!-- Supervision -->
+  <s:String x:Key="S_Issues">Anomalies</s:String>
+  <s:String x:Key="S_TestResults">Tests de connexion</s:String>
+  <s:String x:Key="S_Workers">Workers</s:String>
+  <s:String x:Key="S_Connecting">Connexion...</s:String>
+  <s:String x:Key="S_RestartRequired">ACPoller demande un redemarrage</s:String>
+  <s:String x:Key="S_ShowDetail">Voir le detail</s:String>
+
+  <!-- Reglages de connexion -->
+  <s:String x:Key="S_ServiceAddress">Adresse du service</s:String>
+  <s:String x:Key="S_Token">Jeton de pilotage</s:String>
+  <s:String x:Key="S_Theme">Theme</s:String>
+  <s:String x:Key="S_Language">Langue</s:String>
+  <s:String x:Key="S_TestConnection">Tester la connexion</s:String>
+
+  <!-- Aide contextuelle. Le vocabulaire des infobulles vit ici aussi : une
+       aide restee en francais dans une interface anglaise serait pire que pas
+       d'aide du tout. -->
+  <s:String x:Key="H_Name">Identifiant unique, utilise comme cle de correlation dans les journaux et comme nom du repertoire de travail. Le changer revient a creer une nouvelle configuration : l'ancienne subsistera tant qu'elle n'est pas supprimee.</s:String>
+  <s:String x:Key="H_Template">Nom d'un gabarit declare. La configuration en herite toutes les valeurs et ne surcharge que ses ecarts. Sur un parc de dizaines de boites partageant le meme locataire, une configuration se resume alors a trois lignes.</s:String>
+  <s:String x:Key="H_InitialLookback">Ne s'applique qu'au tout premier cycle, quand le service n'a encore rien traite pour cette boite. Une valeur trop faible fait croire que rien n'arrive alors que le service fonctionne, et c'est le diagnostic le plus penible parce que rien ne le signale.</s:String>
+  <s:String x:Key="H_NotBefore">Aucun message anterieur a cette date ne sera jamais traite. A renseigner a la mise en production quand l'historique n'est pas repris : sans elle, le premier demarrage traite tout ce qui dort dans la boite.</s:String>
+  <s:String x:Key="H_Timeout">Depasse, le convertisseur est TUE et non attendu. Un LibreOffice bloque sur un document corrompu ne se debloque jamais : sans ce delai, un seul document fige un slot de conversion definitivement.</s:String>
+  <s:String x:Key="H_OnFailure">Substitute produit une page portant le nom du fichier et le motif : la GED voit qu'il manque quelque chose. Skip omet la piece silencieusement. RejectMessage rejette tout le message.</s:String>
+  <s:String x:Key="H_Naming">Jetons : {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. Un format peut suivre deux points. En mode PerAttachment, {index} est obligatoire sous peine d'ecrasement.</s:String>
+  <s:String x:Key="H_AtomicWrite">Le fichier est ecrit sous une extension temporaire puis renomme. Sans cela, une GED qui scrute le repertoire peut ramasser un PDF en cours d'ecriture, et l'erreur est indetectable de son cote.</s:String>
+  <s:String x:Key="H_AllOrNothing">Si une cible echoue, les depots deja faits sur les autres sont annules. Une GED qui recoit un message qu'une seconde n'a pas recu produit un ecart de reconciliation que personne ne detecte avant l'audit.</s:String>
+  <s:String x:Key="H_AcceptAnyCertificate">Supprime toute protection contre l'interception : un tiers peut se placer entre le service et le serveur sans etre detecte. A n'activer que sur un certificat auto-signe connu, et a documenter.</s:String>
+  <s:String x:Key="H_HonorRetryAfter">Graph indique combien de temps attendre apres une limitation. L'ignorer aggrave la situation : le service repart aussitot, reprend une limitation, et le quota se reconstitue de plus en plus lentement.</s:String>
+</ResourceDictionary>

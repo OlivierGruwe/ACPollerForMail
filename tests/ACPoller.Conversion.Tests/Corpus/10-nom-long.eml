@@ -1,0 +1,31 @@
+Subject: 10 nom tres long
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937450.473.17282366017710002403@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============3733944882771380734=="
+
+--===============3733944882771380734==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Nom de fichier de 300 caracteres.
+
+--===============3733944882771380734==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename*0*=us-ascii''facture-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+ filename*1*=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+ filename*2*=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+ filename*3*=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
+ filename*4*=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.pdf
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBv
+Ymo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlw
+ZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgMjAwIDIwMF0+PmVuZG9iagp0cmFpbGVy
+PDwvUm9vdCAxIDAgUj4+CiUlRU9GCg==
+
+--===============3733944882771380734==--

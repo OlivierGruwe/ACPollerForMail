@@ -1,0 +1,128 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_d17bc6c17168002e",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "CAM18e07WcC3tWReJP6FL=ZtAYtLa6qBe7XvyNPHJ8391HzdH=A@mail.gmail.com",
+  "Subject": "test zip",
+  "From": "olivier.gruwe@gmail.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-05-16T17:04:22+02:00",
+  "ProcessedUtc": "2026-09-09T14:41:46.996023+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_d17bc6c17168002e\\out\\test zip.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 30,
+      "Sha256": "d40baaadf30fb1d9c58ccb7ccb57d96e7096e1143e4d6b6f6550640a4e185b5e",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/debc9a9ec73a41439a9183319490c6b1.jpg",
+      "FileName": "debc9a9ec73a41439a9183319490c6b1.jpg",
+      "Kind": "Attachment",
+      "SizeBytes": 181213,
+      "Sha256": "83b603258798d7b4ab4aeb76bf903d69d6649fe903bcbbab499a11816a523257",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "1.zip_debc9a9ec73a41439a9183319490c6b1.jpg.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/Bouyguestelecom_Facture_20250206.pdf",
+      "FileName": "Bouyguestelecom_Facture_20250206.pdf",
+      "Kind": "Attachment",
+      "SizeBytes": 77589,
+      "Sha256": "eca059d0009b38c38392135cb50e20056e18b1a47185c15eed2fc0a183b9e1b8",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 4,
+      "PdfFileName": "1.zip_Bouyguestelecom_Facture_20250206.pdf.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/test.eml/corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 4613,
+      "Sha256": "76e0f9cdd372886086bdfb775c721858cb7027497bd5f3ad9fdff6a42a0e2e89",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "1.zip_test.eml_corps.html.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/test.eml/image004.png",
+      "FileName": "image004.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1518,
+      "Sha256": "57c5c0d570d4d078ced447ce6b960433058a6b0f454b350fcae4d1235ddd36cf",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/test.eml/image006.png",
+      "FileName": "image006.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1561,
+      "Sha256": "fb421270f7281d7a31769ac2619d3813790cfc792628d1971fe11088ef110c77",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/test.eml/image005.png",
+      "FileName": "image005.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1582,
+      "Sha256": "e4cfe9b7c08c9a0c20fbb13b4db433c407dabeb8247489fc53c890c1ae2b3428",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "1.zip/test.eml/image003.png",
+      "FileName": "image003.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1512,
+      "Sha256": "e9eed7d68a4fb2f3c53c111bbc0b527560a6c997fd524607a5eff6b62325f3b2",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 4,
+  "Fields": {}
+}

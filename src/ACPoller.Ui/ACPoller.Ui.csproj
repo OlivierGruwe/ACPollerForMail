@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained><ApplicationIcon>Resources\acpoller.ico</ApplicationIcon>
+		    <!-- CA1507 : les litteraux de ce projet sont des CLES JSON, pas des noms
+         de symboles. Leur coincidence avec des noms de proprietes est
+         fortuite, et un nameof ferait qu'un renommage C# changerait
+         silencieusement le format du fichier de configuration. -->
+    <NoWarn>$(NoWarn);CA1507</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="MahApps.Metro" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml" />
+
+  </ItemGroup>
+    <ItemGroup>
+    <Resource Include="Resources\arondor-logo.png" />
+    <Resource Include="Resources\acpoller.ico" />
+  </ItemGroup>
+    <ItemGroup>
+      <None Update="EXPLOITATION.pdf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="INSTALLATION.pdf">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="ui-settings.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+	
+
+</Project>

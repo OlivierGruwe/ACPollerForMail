@@ -1,0 +1,22 @@
+<Application x:Class="ACPoller.Ui.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ACPoller.Ui"
+             StartupUri="MainWindow.xaml">
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <!-- MahApps : les styles de controles et les polices. Le theme lui-meme
+             est applique a l'execution par ThemeService, pour pouvoir generer
+             l'accent Arondor et suivre le reglage Windows. -->
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+            <local:CountToVisibilityConverter x:Key="CountToVisibility" />
+      <local:InverseBoolConverter x:Key="InverseBool" />
+      <local:BoolToBrushConverter x:Key="BoolToBrush" />
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

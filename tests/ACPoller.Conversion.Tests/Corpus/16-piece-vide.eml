@@ -1,0 +1,22 @@
+Subject: 16 piece vide
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937451.473.16000354836525936931@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============2509801608124549292=="
+
+--===============2509801608124549292==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+La piece jointe fait zero octet.
+
+--===============2509801608124549292==
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="vide.bin"
+MIME-Version: 1.0
+
+
+--===============2509801608124549292==--

@@ -1,0 +1,51 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_1ab3c5fba8f23e85",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "CAM18e06QpSHBtg-pysPHxZBngHdMMaL=ojd-vtT4Uu4ihYXaCQ@mail.gmail.com",
+  "Subject": "retretrtretetre",
+  "From": "olivier.gruwe@gmail.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2024-11-21T11:21:44+01:00",
+  "ProcessedUtc": "2026-09-09T14:41:31.2604815+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_1ab3c5fba8f23e85\\out\\retretrtretetre.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 35,
+      "Sha256": "73f5426d1cb9ebddf7e848287277ccffd959b4014550cc9f6171b66f8a9f6191",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "Capture d'écran 2024-06-02 191041.png",
+      "FileName": "Capture d'écran 2024-06-02 191041.png",
+      "Kind": "Attachment",
+      "ContentType": "image/png",
+      "SizeBytes": 41942,
+      "Sha256": "17bbfe658608e4a4af7a202fc1b73123fc173dbe6281b43c555d996706869f90",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "Capture d'écran 2024-06-02 191041.png.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

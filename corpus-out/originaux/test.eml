@@ -1,0 +1,313 @@
+Delivered-To: olivier.gruwe+test@gmail.com
+Received: by 2002:a05:6020:f141:b0:31d:972c:8a9f with SMTP id u1csp878989wdz;
+        Wed, 12 Feb 2025 01:41:07 -0800 (PST)
+X-Received: by 2002:a05:6512:108a:b0:545:646:f83f with SMTP id 2adb3069b0e04-545181aa0ddmr565666e87.53.1739353266985;
+        Wed, 12 Feb 2025 01:41:06 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1739353266; cv=none;
+        d=google.com; s=arc-20240605;
+        b=jG7iH52488dLC6vyuJMfcQYGU+mTmxIN+byINVmBN/la6vZ2ECdkMF2hqPG2OKCVc1
+         zz6QRJlggTNIxTzxzOX2iml61ur23MVID8wCSlJJ2cDp7cZNub+m/wPi6JF1/yygZitR
+         wCtXKI4chw/7zUtEotD9FIWFFJ7+YnICyfTBUm/lSeRENx1Us+w7mVilHOapJXnLY0nV
+         u5Q5fApZIjVlgeDDCZXvOKDDuCC1MxOfOylRlKc0Q4oL+dVB26VcqzrEipF0/ZHqBlbG
+         AxbNZFjA3LO3DVGhAueyaqDcLyKP777AVn1dIRic3JC5v5ucFcn317PhI9Uo2I0aPB6L
+         N9rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=rRhClu7zLlsQ2JY96I+qwn+wtvfN14MtE0dW2hW6obA=;
+        fh=tC8K5uK+MjZMvItK99Tyl4kpDpxBA/T7T8xS1SJ8oV0=;
+        b=e+ggzzxvXECdr1iXSjhkMqyOEQIIh2F/cb/PE3VuDwu1+5GwvLAEJHvSvPbhkViewR
+         HfDT8aFI0l+piCM089ifk+wJ4kygCEusNdig1x7gj1EU7F8a8KUyCU+clyPm6aO+q90Y
+         F3KCjSHimfw5Z3NW9CXVMMTaTM4avfpD/6NvrPu9Q1tnbzGBRNvunQc77RQgsqJ3fytv
+         Vmx5B59LJLHEBnM4+ZVWL9jW9W51WS9oyc4jdwuFEdQuxz1gShzobv/aquHNnoPLeCew
+         qVtJUu/va0CXQYdVA2Qxc5Ty10FwDTC+Xdwgr22LNEEY9m8Kxe8q5dziqjyKlk4IdNQn
+         /0Mg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@arondor.com header.s=google header.b=k5hcOkHE;
+       spf=pass (google.com: domain of olivier.gruwe@arondor.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=olivier.gruwe@arondor.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=arondor.com;
+       dara=pass header.i=@gmail.com
+Return-Path: <olivier.gruwe@arondor.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 2adb3069b0e04-54504581535sor2010901e87.1.2025.02.12.01.41.06
+        for <olivier.gruwe+test@gmail.com>
+        (Google Transport Security);
+        Wed, 12 Feb 2025 01:41:06 -0800 (PST)
+Received-SPF: pass (google.com: domain of olivier.gruwe@arondor.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@arondor.com header.s=google header.b=k5hcOkHE;
+       spf=pass (google.com: domain of olivier.gruwe@arondor.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=olivier.gruwe@arondor.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=arondor.com;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=arondor.com; s=google; t=1739353266; x=1739958066; dara=google.com;
+        h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=rRhClu7zLlsQ2JY96I+qwn+wtvfN14MtE0dW2hW6obA=;
+        b=k5hcOkHEu6JiNG8gBtEQ00fGFU5lhdF38VXI14PluL5C2gPerQacqmsv8LwpL8XbJE
+         tbc8BKdgFD5oQqnivRNt/tV2wyl0tB/xcyDrNTPQW3ATewqtjMz39z1zFBNGJlxvdgUD
+         pPI4z4zRdOtiXpv6KvfjQC54GuqBHsK1Y+11XjmkKcwsh0CtKn6RC4aaq26Ypl3IEkX+
+         rFGcLOtYVdfHoQn66OgI4OI2T56MZMO1KmUL2CthpcIL74UAfnPU1G/ONrC8Ul/+oW8N
+         kfLVQqtPjaXQ6BGdo9wCy5rNCwL9lhj+tKVLfBLEFcZNNOENncHWPwfN9bI+aZUyTr9m
+         e2Ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1739353266; x=1739958066;
+        h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=rRhClu7zLlsQ2JY96I+qwn+wtvfN14MtE0dW2hW6obA=;
+        b=CcxHQDZowc+VnCxM2fGmHROSEghSpxy+zd/QkjnS2NXFd6qG0OsZIO0l0ugKp9k9TD
+         azE5GhudZLUwfXNyaTHT+Xi8jNfm6XZkkDuKTVCc4E3AywxfOl6I3oPd7tmhuSEqeEIT
+         vspyzjgOz9VhdqyNqXSBCpKTigudnffmCsOT5Naix6bsoiqzDD5bZtSizWtdmqtVmRro
+         UmMS1KXqunr3YkK3iyD1X/n1EkE5DdZEQyxxMsteW5u2zDwEQrQOEG2IiAhtc0zdiP6R
+         NGsb0I8iYeCwz9HkGN8NTe/UNfvgc1BqERYJqkKduz0XCpNJqY6NQgc5IPbUBlaWMhBP
+         tFFQ==
+X-Gm-Message-State: AOJu0YxWzUvov6PTHRFdymNcZ5O2X2NnU3qIFTI7OEiwo2wx273wHGxC
+	s4Q03QwfYDGB9qIZ2VF4HAgCbQIWJrYy30f+Qq671rLu2jkX9nmY1CR1sbN5mW+EnlFMhYtDzJU
+	wgnKz1QgjbJtXfqlsc/Cu9bWUChOPUuK3o3PF/ma0JINSt6ak
+X-Gm-Gg: ASbGnctEWw+mBrPHXHKMGsyRZPg4WvG9Y08Ac96b1dc0iicfGB1Ocz6o6CwfCoGUYYr
+	D7Px/nuKsAgEqjmGa+R0PiIHWfgL6Kk/RzKhsOmiVE7U5koHg157E/weVgjDy0L06HSfrM1fIKq
+	6TS0ZmYe2gUr9PhkuLi/usTpXB+qcw
+X-Google-Smtp-Source: AGHT+IFJfs0MQ1+l4YAUa0XjZ4TIqxScPQb7GFqAo4uzhIzl3rzUqbn4xy0s5Yrj5/7V4CWnw8SVPMSB6NjWypUFXm8=
+X-Received: by 2002:a2e:a80f:0:b0:300:38ff:f8de with SMTP id
+ 38308e7fff4ca-3090366663cmr10123861fa.16.1739353266181; Wed, 12 Feb 2025
+ 01:41:06 -0800 (PST)
+MIME-Version: 1.0
+From: Olivier Gruwe <olivier.gruwe@arondor.com>
+Date: Wed, 12 Feb 2025 10:40:54 +0100
+X-Gm-Features: AWEUYZm-A2uODEsIrCG1G1DWk-rdMKbuEkIilHC9vZeLHwNtAzpfb3dfdYBNQSQ
+Message-ID: <CADmFFNr-02G7gVnqhiOx+GQE8YwUYVc5Dn1TaYsNZLfeGTvGHA@mail.gmail.com>
+Subject: test
+To: olivier.gruwe+test@gmail.com
+Content-Type: multipart/related; boundary="000000000000922556062deebd3e"
+
+--000000000000922556062deebd3e
+Content-Type: multipart/alternative; boundary="000000000000922554062deebd3d"
+
+--000000000000922554062deebd3d
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Olivier GRUWE
+*Responsable produit =E2=80=93 Architecte *
+e: olivier.gruwe@arondor.com
+24 - 26 rue de la P=C3=A9pini=C3=A8re, 75008 Paris
+France
+05.64.31.15.34
+www.arondor.com
+[image: facebook icon] <https://www.facebook.com/Arondor/> [image: twitter
+icon] <https://twitter.com/ARONDOR_COM> [image: youtube icon]
+<https://www.youtube.com/channel/UCABFiFKNsT35Yf_eZ0qA1oA?view_as=3Dsubscri=
+ber>
+ [image: linkedin icon] <https://www.linkedin.com/company/arondor/>
+
+--000000000000922554062deebd3d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div><br clear=3D"all"></div><div><div dir=3D"ltr" class=
+=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><d=
+iv dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=
+=3D"ltr"><p><br></p><p><br></p><div><br clear=3D"all"><div><div dir=3D"ltr"=
+><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div d=
+ir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"l=
+tr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><ta=
+ble cellpadding=3D"0" cellspacing=3D"0" style=3D"border-spacing:0px;border-=
+collapse:collapse;color:rgb(68,68,68);width:410px;font-size:10pt;font-famil=
+y:Arial,sans-serif"><tbody><tr><td valign=3D"top" rowspan=3D"6" align=3D"ce=
+nter" style=3D"font-family:Arial,sans-serif;padding:0px 10px 0px 0px;font-s=
+ize:10pt;border-right:1px solid rgb(0,155,218);width:105px;vertical-align:t=
+op;text-align:center"><img src=3D"https://docs.google.com/uc?export=3Ddownl=
+oad&amp;id=3D1lfLWMORsSRNf5Y588WeX7FTbwf_OEZRH&amp;revid=3D0B_Pzf1y1I7eiUTc=
+1ZFdiSE9zRi9TL0txN2Jabm16ZnF5NDR3PQ"><br></td><td style=3D"padding:0px"><ta=
+ble cellpadding=3D"0" cellspacing=3D"0" style=3D"border-spacing:0px;border-=
+collapse:collapse;background-color:transparent"><tbody><tr><td valign=3D"to=
+p" style=3D"padding:0px 0px 5px 10px;width:305px;vertical-align:top;line-he=
+ight:25px"><font color=3D"#0b5394"><span style=3D"font-family:Arial,sans-se=
+rif;font-weight:700"><font size=3D"2">Olivier GRUWE</font><br></span></font=
+><i style=3D"color:rgb(34,34,34);font-family:Arial,Helvetica,sans-serif;fon=
+t-size:small;text-align:center"><span style=3D"color:rgb(34,117,191)">Respo=
+nsable produit =E2=80=93 Architecte=C2=A0</span></i></td></tr><tr><td valig=
+n=3D"top" style=3D"font-family:Arial,sans-serif;padding:5px 0px 5px 10px;ve=
+rtical-align:top"><font size=3D"2" color=3D"#0b5394"><span style=3D"font-we=
+ight:700">e:</span>=C2=A0<a href=3D"mailto:olivier.gruwe@arondor.com" targe=
+t=3D"_blank">olivier.gruwe@arondor.com</a></font></td></tr><tr><td valign=
+=3D"top" style=3D"font-family:Arial,sans-serif;padding:5px 0px 5px 10px;ver=
+tical-align:top"><font size=3D"2" color=3D"#0b5394">24 - 26 rue de la P=C3=
+=A9pini=C3=A8re, 75008 Paris<br>France<br></font><span><font size=3D"2" col=
+or=3D"#0b5394">05.64.31.15.34</font></span><font size=3D"2" color=3D"#0b539=
+4"></font></td></tr><tr><td valign=3D"top" style=3D"font-family:Arial,sans-=
+serif;padding:5px 0px 5px 10px;vertical-align:top"><a href=3D"http://www.ar=
+ondor.com/" rel=3D"noopener" style=3D"background-color:transparent" target=
+=3D"_blank"><font size=3D"2" color=3D"#0b5394">www.arondor.com</font></a><b=
+r><a href=3D"https://www.facebook.com/Arondor/" style=3D"color:rgb(17,85,20=
+4);font-family:&quot;Times New Roman&quot;,serif;font-size:16px" target=3D"=
+_blank"><span style=3D"font-size:10pt;line-height:14px;font-family:Arial,sa=
+ns-serif;color:rgb(51,122,183)"><img border=3D"0" width=3D"23" height=3D"23=
+" src=3D"cid:image003.png@01DAC0B0.94304760" alt=3D"facebook icon"></span><=
+/a><span style=3D"font-size:10pt;line-height:14px;color:rgb(31,73,125)">=C2=
+=A0</span><a href=3D"https://twitter.com/ARONDOR_COM" style=3D"color:rgb(17=
+,85,204);font-family:&quot;Times New Roman&quot;,serif;font-size:16px" targ=
+et=3D"_blank"><span style=3D"font-size:10pt;line-height:14px;font-family:Ar=
+ial,sans-serif;color:rgb(51,122,183)"><img border=3D"0" width=3D"23" height=
+=3D"23" src=3D"cid:image004.png@01DAC0B0.94304760" alt=3D"twitter icon"></s=
+pan></a><span style=3D"font-size:10pt;line-height:14px;color:rgb(31,73,125)=
+">=C2=A0</span><a href=3D"https://www.youtube.com/channel/UCABFiFKNsT35Yf_e=
+Z0qA1oA?view_as=3Dsubscriber" style=3D"color:rgb(17,85,204);font-family:&qu=
+ot;Times New Roman&quot;,serif;font-size:16px" target=3D"_blank"><span styl=
+e=3D"font-size:10pt;line-height:14px;font-family:Arial,sans-serif;color:rgb=
+(51,122,183)"><img border=3D"0" width=3D"23" height=3D"23" src=3D"cid:image=
+005.png@01DAC0B0.94304760" alt=3D"youtube icon"></span></a><span style=3D"f=
+ont-size:10pt;line-height:14px;color:rgb(31,73,125)">=C2=A0</span><a href=
+=3D"https://www.linkedin.com/company/arondor/" style=3D"color:rgb(17,85,204=
+);font-family:&quot;Times New Roman&quot;,serif;font-size:16px" target=3D"_=
+blank"><span style=3D"font-size:10pt;line-height:14px;font-family:Arial,san=
+s-serif;color:rgb(51,122,183)"><img border=3D"0" width=3D"23" height=3D"23"=
+ src=3D"cid:image006.png@01DAC0B0.94304760" alt=3D"linkedin icon"></span></=
+a><span style=3D"font-size:10pt;line-height:14px;color:rgb(31,73,125)">=C2=
+=A0</span><br></td></tr><tr><td valign=3D"top" style=3D"font-family:Arial,s=
+ans-serif;padding:5px 0px 5px 10px;font-size:10pt;vertical-align:top"><font=
+ color=3D"#0b5394"><br></font><br></td></tr></tbody></table></td></tr></tbo=
+dy></table></div></div></div></div></div></div></div></div></div></div></di=
+v></div></div></div></div></div></div></div></div></div></div></div></div><=
+/div></div>
+
+--000000000000922554062deebd3d--
+--000000000000922556062deebd3e
+Content-Type: image/png; name="image004.png"
+Content-Disposition: inline; filename="image004.png"
+Content-Transfer-Encoding: base64
+Content-ID: <image004.png@01DAC0B0.94304760>
+X-Attachment-Id: 
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxQjgwMkU1QjBBNTJFNTExOTZDMDk1QTY0NTNC
+NzdCOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxNjUwQkZCMDVGQjQxMUU2OTQzN0Q1MzJG
+MUEwN0NDNyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxNjUwQkZBRjVGQjQxMUU2OTQzN0Q1
+MzJGMUEwN0NDNyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dz
+KSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjVCQTMyMzcx
+OTQ1RkU2MTE5NjM3ODZBMkU5N0FBNUREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFCODAy
+RTVCMEE1MkU1MTE5NkMwOTVBNjQ1M0I3N0I5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpS
+REY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+3goXwQAAAh5JREFUeNq0lU1IVFEU
+gB1HRKcSGVAIRMpamgtRwohA0CwKzak2kaK2UiNyFdk+yFZCtFECsYiIKZAoWrgToyAKElJUmBZu
+tWx0iCnG78B5cnrz3vz4c+Gb++a+975773nn3htIpVIF+1UCfvLAcPQAVR2ch9NQAyH4DUswA29h
+LnX/8p+c5YibqIYgAsEMg/sHkzBKB1+zyhH3UI1ARR4R+AG36GDKV464j+oRlO4gxD+hiw7epMk1
+FO/h0C6+4TJcpIN5+VOo4oNU94w4AUkfgQzgBgzCJ4jBit47BnfwHdmWUxrgghE8hduw6hLLlDsZ
+2RN4zHUznIXP5pk26LXyiEuS1JevwzuIa/tz2hPOQ1xv6vc5bN6V6w4rb3LJW5laHS+L+Apcgrvw
+xSNMMuNGV1u5/BSZ3mz5DmtmdNOKV6n0aPtrR17sulkvec7oizIu7+FoCVWt331HHne1V8EDKMuS
+emd0IGn9WnnM4wFJq1pNU69Rh3SLCHvcDlq5jaezZI/CC2jxCcdDOOez38Ss/LXuds6UZuGmpuis
+SyyZ8RIGfEK1CBM2WxZgXKcp5QS064qtQSht1XBKCWf4Ds/glXtvkSUb9flAuRYJbwfpu2HDIvkc
+06ku7VAs+3m/I/5Prh181BU5nadY9vGrvL+Yy0kkB8U16M4Spg8wJuFEvJ7zGWo6kXP0JBwHOVd/
+aehklt+QruZ9QO9F2RJgAINVsGtpExPoAAAAAElFTkSuQmCC
+--000000000000922556062deebd3e
+Content-Type: image/png; name="image006.png"
+Content-Disposition: inline; filename="image006.png"
+Content-Transfer-Encoding: base64
+Content-ID: <image006.png@01DAC0B0.94304760>
+X-Attachment-Id: 
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxQjgwMkU1QjBBNTJFNTExOTZDMDk1QTY0NTNC
+NzdCOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozQjQ3NzBBNzVGQjQxMUU2QjhGRkVEQUQ0
+OThDQjlEQiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozQjQ3NzBBNjVGQjQxMUU2QjhGRkVE
+QUQ0OThDQjlEQiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dz
+KSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjVCQTMyMzcx
+OTQ1RkU2MTE5NjM3ODZBMkU5N0FBNUREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFCODAy
+RTVCMEE1MkU1MTE5NkMwOTVBNjQ1M0I3N0I5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpS
+REY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+sKkmVAAAAklJREFUeNq0lU9IVFEU
+hx3HGahUcowwEwmFxBBRKDRxVUY7A41WLiwIWkh73SSIBkEobqJNMgtdpSitgogI6R9CIm6lIVIR
+zYxCTB2f34HzhtObN868hQc+7n3v3fu79557znkhx3HyjssKMn0I9U2GaC7CDbgOtVACu/ADvsBr
++OgMdf7y1fDbOcIVND1wH2JZNvgeRllgMqs4wo00z6ApgAcO4BE8ZpGk+zLfI1xP81KFV+F3juKi
+MyALoJGfJs7LQprnUAXj0AKtsBDgBH1w+z9xhKM0D6EZ9uAdx0vAIv2vAcTDMIjeBRstddCt/Qjc
+Y8A67RmNliBWDXfFRa54J1R4BvTrQjH1vbhHwrMBNmFOd3oFyu3VwS0rfhVOmAEvYETd9gr+wB2d
+2Abisg+cLqKXPwyXzfzT1i3nPEfbYvKa3ockzQ7P6/ptQvIAynm3wvMs/Se0cbPBfRstUY94xHNJ
+BSaq2mk+SWbSr9bX8/DNLz7F/ga4MCkF56FS/S+2A9sev6fEE5pluZhjsjJsxEKe06bE32TZ/YGP
++FGWsOIzsGg+JjPs1rtQ0rT2RPFUtHDr37mcp5qhsmAhz6e0L2Oi+ix20ogX6/uYufS3MJVWFRko
+1fCBxvWm+rFMd+aGotT0Iu3/VHdGNJGkrl9js/N+P4teOAsdRsC1Sh/flipiG1L/XeG0ksuHLakr
+mp1BTO6ri/nTufyJ3PogC930STLXJHEmYAzhpZx+c2YRcU2N1o9LWiX/aajJ8T8jupxx/nH+/Q8F
+GAA05rXDBw624gAAAABJRU5ErkJggg==
+--000000000000922556062deebd3e
+Content-Type: image/png; name="image005.png"
+Content-Disposition: inline; filename="image005.png"
+Content-Transfer-Encoding: base64
+Content-ID: <image005.png@01DAC0B0.94304760>
+X-Attachment-Id: 
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxQjgwMkU1QjBBNTJFNTExOTZDMDk1QTY0NTNC
+NzdCOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyNkIyOTUyRjVGQjQxMUU2QTdDMEYwMEQ5
+ODA2MTRDNiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyNkIyOTUyRTVGQjQxMUU2QTdDMEYw
+MEQ5ODA2MTRDNiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dz
+KSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjVCQTMyMzcx
+OTQ1RkU2MTE5NjM3ODZBMkU5N0FBNUREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFCODAy
+RTVCMEE1MkU1MTE5NkMwOTVBNjQ1M0I3N0I5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpS
+REY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+4sdXiwAAAl5JREFUeNq0lU1IVUEY
+hvMnf8IgNIyKIEKTQm2RhjcKl1EUYSKYkhBuhahlBK2KNoHQIkFBgggyChSiFhUZBdGPYLloUWHX
+CisNRcMy6/R88B4ZpnPuVcGBh7l35nzvzJnvne9kBEGwYrladtxExumb+XSVsB/2wBYogGl4D4/h
+DrwKztfPRGpE7RzhKrpT0JBqAzQLvgbtLPAirTjCJtgOGxZxAp/hJAv0uIOZnvARuk5H+BfMwV/4
+mULcnu8ivily50xsp3sA65z5J3AbtmojLWne4KvliDcYmBdHOIff3dDkPTwKjbAREkrmPpjQYpbg
+nV5MH5xggeEwWeVKnt/Wwmb4KEFzx3cYh1WwKULcnHUczoZnXg8rY6y6F8p0XAk9Z8KFkBcRY+OH
+3YQm0tgtU8l9qOSOKh+/Y2LWuJdofQrxaiiFYvgER+EdjEBtTMycK57jTZrPezTeCsc0fgh64YyZ
+IZ35w2OZ9sYPOm9kyf6iJH6AR/BS8yMqAz/8y+mKD3uTJbBNR/IaLsBlLTJrVoMbcBGa4Sr8ceKz
+XPF7EW81q1s5BpNiSovugPsqYOb1N454EG42FLdz/BbhEiNXAvkat/+rtTuLr5P1spw6c2VenNuU
+pLvkiYd1xez2FJISTsotubLcEDzTRqxdh1t+4eqAfuf/AajRDbS6s1u3r1KFqk3zU7JkthJ9js1O
+/ldyqTHlqs8VS/jw2Lk3IjwYWXKZGFKNubtIYas5da5wqi9RoSpki+wY155bHbcLh/DEgj5zziJF
+st0ulYACnfFbJXEQ0fHY+OX8+v8TYABoSrjp/c03SwAAAABJRU5ErkJggg==
+--000000000000922556062deebd3e
+Content-Type: image/png; name="image003.png"
+Content-Disposition: inline; filename="image003.png"
+Content-Transfer-Encoding: base64
+Content-ID: <image003.png@01DAC0B0.94304760>
+X-Attachment-Id: 
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEu
+MC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVz
+b3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1N
+Ok9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxQjgwMkU1QjBBNTJFNTExOTZDMDk1QTY0NTNC
+NzdCOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGRjBEQzBCNjVGQjMxMUU2QjQ5QUQxMjM2
+MkNFQkU2QSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGRjBEQzBCNTVGQjMxMUU2QjQ5QUQx
+MjM2MkNFQkU2QSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dz
+KSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjVCQTMyMzcx
+OTQ1RkU2MTE5NjM3ODZBMkU5N0FBNUREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjFCODAy
+RTVCMEE1MkU1MTE5NkMwOTVBNjQ1M0I3N0I5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpS
+REY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+1cRuagAAAhhJREFUeNq0lU1IVFEU
+x5vJJiGIosJaFExhORSIC8UWUVSuBt3MxkDUhCSiRSsXbkQXg7pK/GjTYiDEWhQILgxy4WKkJNq0
+CYbQtIQh0AKloXHm+btw3nC7vHffiNOBH+fd9/G/55177rkhx3EO/S+rsj0M9b+uxd2FOxCDU1CA
+dfgIbyHtJBObnt97RY7oWdwjeAhnAgJ8D2PwikkcqzjC13BTcGOfWRiGISb44ymO8CXcHNRZRLbg
+L1TDcfWZ9mwc+pggpwZhTVjlf8IivAEd0AhN8BhyxjvqXqc7CItwBPcAWnyEd2GUiKbhK9ffIQtF
+c7lUatCL6pGrPHfDYR9xlbslCUT92YykoNrj3RrRKokn4LKPcFHyXJCxWpdbENXTalirLn4dTvi8
++Bm6ICPjNLSp35eF9bKT+iY6Z6mOLHmeL+UnmfiF+0B6LhqVoltBF49YxBsQSuEHEP7GdUwW/zYc
+sRW+m5Ztyztqh7bDaRmfh/tQb4k8pIuvagvm95tu2eWFwKBd8Xfws4INcUUXn5UuVyl7URJnodZw
+Ty25d7Stnpexny3Dm396CxMs4CYtff8mlaL2Q7Olunakcf32OiwG4QLcM+4fhWcBqVCCTxBeNEvR
+jV714l4YCage076o8uT7VOBJJA0qjuuBuETuZWqtXsJzhDNlHXPaBMdwV6R/X5UNlZcz9JMccT/M
+460s8YPangADAEYxoqp9Xpu5AAAAAElFTkSuQmCC
+--000000000000922556062deebd3e--

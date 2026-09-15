@@ -1,0 +1,154 @@
+Passer au contenu principal
+ ⚡️🐍⚡️ Power Python with a 30% discount on PyCharm- all proceeds go to the Python Software Foundation. Offer ends soon, so grab it today!  Get 30% off PyCharm
+PyPI
+Chercher dans PyPI
+Rechercher des projets
+Rechercher
+Aide Sponsors Se connecter S'inscrire
+pyhtml2pdf 0.0.7
+pip install pyhtml2pdfCopier les instructions pip
+
+Dernière version
+Dernière version : 29 août 2023
+
+Simple python wrapper to convert HTML to PDF with headless Chrome via selenium.
+
+Navigation
+ Description du projet
+ Historique des versions
+ Téléchargement des fichiers
+Verified details 
+These details have been verified by PyPI
+Maintenu par
+Avatar de kumaf via gravatar.com kumaf
+Unverified details
+Ces détails n'ont pas été vérifiés par PyPi
+Liens du projet
+Homepage
+Métadonnées
+Licence : MIT License
+Créé par : Kumara Fernando
+Nécessite : Python >=3.6
+Classifieurs
+License
+OSI Approved :: MIT License
+Operating System
+OS Independent
+Programming Language
+Python :: 3
+Sponsored: Python Software Foundation
+JetBrains is a Contributing sponsor of the Python Software Foundation.
+PSF Sponsor · Served ethically
+Description du projet
+pyhtml2pdf
+Simple python wrapper to convert HTML to PDF with headless Chrome via selenium.
+
+Install
+pip install pyhtml2pdf
+Dependencies
+Selenium Chrome Webdriver (If Chrome is installed on the machine you won't need to install the chrome driver)
+Ghostscript
+Example
+Convert to PDF
+Use with website url
+
+from pyhtml2pdf import converter
+
+converter.convert('https://pypi.org', 'sample.pdf')
+Use with html file from local machine
+
+import os
+from pyhtml2pdf import converter
+
+path = os.path.abspath('index.html')
+converter.convert(f'file:///{path}', 'sample.pdf')
+Some JS objects may have animations or take a some time to render. You can set a time out in order to help render those objects. You can set timeout in seconds
+
+converter.convert(source, target, timeout=2)
+Compress the converted PDF
+
+Some PDFs may be oversized. So there is a built in PDF compression feature.
+
+The power of the compression,
+
+0: default
+1: prepress
+2: printer
+3: ebook
+4: screen
+converter.convert(source, target, compress=True, power=0)
+Pass Print Options
+You can use print options mentioned here
+
+converter.convert( f"file:///{path}", f"sample.pdf", print_options={"scale": 0.95} )
+Compress PDF
+Use it to compress a PDF file from local machine
+
+import os
+from pyhtml2pdf import compressor
+
+compressor.compress('sample.pdf', 'compressed_sample.pdf')
+Inspired the works from,
+
+https://github.com/maxvst/python-selenium-chrome-html-to-pdf-converter.git
+https://github.com/theeko74/pdfc
+
+Aide
+Installation de paquets
+Publier de paquets
+Guide d'utilisation
+Nom du projet réservé
+FAQ
+À propos de PyPI
+PyPI Blog
+Tableau de bord de l'infrastructure
+Statistiques
+Logos et marques
+Nos sponsors
+Contribuer à PyPI
+Bugs et commentaires
+Contribuer sur GitHub
+Traduire PyPI
+Sponsor pypi
+Liste des développeurs et développeuses
+Utilisation de PyPI
+Code de conduite
+Signaler un problème de sécurité
+Privacy Notice
+Terms of Use
+Politique d'utilisation acceptable
+Statut : All Systems Operational
+
+Développé est maintenu par la communauté Python, pour la communauté Python.
+Faites un don aujourd'hui !
+
+"PyPI", "Python Package Index", and the Blocks logos are registered Trademarks of the Python Software Foundation .
+
+© 2024 Python Software Foundation
+Plan du site
+
+English español  français 日本語 português (Brasil) українська Ελληνικά Deutsch 中文 (简体) 中文 (繁體) русский עברית Esperanto
+AWS
+AWS
+Cloud computing and Security Sponsor
+Datadog
+Datadog
+Monitoring
+Fastly
+Fastly
+CDN
+Google
+Google
+Download Analytics
+Microsoft
+Microsoft
+PSF Sponsor
+Pingdom
+Pingdom
+Monitoring
+Sentry
+Sentry
+Error logging
+StatusPage
+StatusPage
+Status page

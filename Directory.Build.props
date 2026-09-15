@@ -1,0 +1,65 @@
+<Project>
+  <Import Project="Version.props" />
+  <!-- Version unique de la solution. Remplace le SharedAssemblyInfo.cs lie dans
+       chaque csproj : en SDK-style, Directory.Build.props est le bon endroit et
+       ne provoque plus de CS0579. Bump via build/version.cmd. -->
+  <PropertyGroup Label="Identite">
+
+    <Company>Arondor</Company>
+    <Product>ACPoller</Product>
+    <Copyright>Copyright Arondor</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Langage et analyse">
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <SatelliteResourceLanguages>fr</SatelliteResourceLanguages>
+    <!-- La documentation XML n'est exigee que sur le contrat public : c'est le
+         seul assemblage consomme par des plugins clients qui n'ont pas le
+         source. Activee explicitement dans ACPoller.Abstractions.csproj. -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- CA1848 et CA1873 imposent un delegue LoggerMessage sur TOUT appel de
+         journalisation. Disproportionne sur les chemins froids : un log de
+         demarrage appele 103 fois ne justifie pas une methode partielle par
+         message. Regle du projet : LoggerMessage sur les chemins chauds
+         seulement, c'est-a-dire ce qui s'execute une fois par message traite
+         (pipeline, conversion, export), ou il sert autant a borner le volume
+         de log qu'a la performance. -->
+    <NoWarn>$(NoWarn);CA1848;CA1873</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Audit NuGet">
+    <NuGetAudit>true</NuGetAudit>
+    <!-- "all" et non "direct" : sans ca, les dependances transitives passent
+         sous le radar. Les trois vulnerabilites trouvees au demarrage du
+         projet etaient toutes transitives. -->
+    <NuGetAuditMode>all</NuGetAuditMode>
+    <NuGetAuditLevel>moderate</NuGetAuditLevel>
+    <!-- L'audit alerte mais ne bloque pas le build : une remontee de
+         dependance transitive n'est pas toujours sous ton controle, et un
+         avis publie un vendredi ne doit pas casser une livraison.
+         En contrepartie, la revue des vulnerabilites (dotnet list package,
+         options vulnerable et include-transitive) est un passage oblige avant
+         chaque livraison. -->
+    <WarningsNotAsErrors>NU1901;NU1902;NU1903;NU1904</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <!-- Les projets de test ne sont pas packages et relachent les regles de
+       nommage : un nom de methode de test avec underscores est lisible, pas
+       une faute. Les six regles de correction du .editorconfig restent des
+       erreurs, y compris ici. -->
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))" Label="Tests">
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CA1707;CA1861</NoWarn>
+  </PropertyGroup>
+
+</Project>

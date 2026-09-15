@@ -1,0 +1,152 @@
+<mah:MetroWindow x:Class="ACPoller.Ui.Views.HelpWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 Title="Aide"
+                 Height="720"
+                 Width="880"
+                 WindowStartupLocation="CenterOwner"
+                 TitleCharacterCasing="Normal">
+
+  <Window.Resources>
+    <Style x:Key="H1" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Margin" Value="0,20,0,10" />
+    </Style>
+
+    <Style x:Key="P" TargetType="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style x:Key="Code" TargetType="TextBlock">
+      <Setter Property="FontFamily" Value="Consolas" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+  </Window.Resources>
+
+  <TabControl Margin="12">
+
+    <TabItem Header="Jetons de nommage">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+          <TextBlock Style="{StaticResource P}"
+                     Text="Les jetons servent au nommage des fichiers de sortie et aux champs personnalises de type Token. Un format peut suivre deux points, par exemple {received:yyyyMMdd}." />
+
+          <TextBlock Style="{StaticResource Code}" xml:space="preserve">{date}        Date de TRAITEMENT, en heure locale. Change si le message est rejoue le lendemain.
+{time}        Heure de traitement.
+{datetime}    Date et heure de traitement.
+{received}    Date de RECEPTION du message. Stable entre deux tentatives : a preferer
+              pour un nommage qui doit rester reproductible apres incident.
+{guid}        Identifiant aleatoire, garantit l'unicite.
+{mailbox}     Partie locale de l'adresse de la boite.
+{config}      Nom de la configuration.
+{subject}     Sujet du message, tronque et assaini.
+{from}        Partie locale de l'adresse de l'expediteur.
+{index}       Numero de la piece. OBLIGATOIRE en mode PerAttachment.
+{name}        Nom du fichier sans extension.
+{ext}         Extension de la piece.
+{node}        Chemin logique complet, exemple transfert.eml_bl.pdf</TextBlock>
+
+          <TextBlock Style="{StaticResource H1}" Text="Assainissement" />
+          <TextBlock Style="{StaticResource P}"
+                     Text="Tous les caracteres interdits dans un nom de fichier Windows sont remplaces, separateurs de chemin compris : un sujet de mail contenant une barre oblique ne peut pas creer de sous-repertoire sur la cible. Le nom final est borne en longueur, et un nom vide devient 'sans-nom'." />
+        </StackPanel>
+      </ScrollViewer>
+    </TabItem>
+
+    <TabItem Header="Statuts des pieces">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+          <TextBlock Style="{StaticResource P}"
+                     Text="Le fichier d'information porte un statut par piece. Les distinguer est essentiel : trois d'entre eux signifient que la GED n'a PAS le document." />
+
+          <TextBlock Style="{StaticResource Code}" xml:space="preserve">Converted           PDF fidele produit. Present dans le PDF unifie.
+
+PassThrough         Deja au format PDF, repris tel quel ou repare par qpdf.
+                    Present dans le PDF unifie.
+
+PassThroughUnverified
+                    PDF livre TEL QUEL car le moteur de lecture n'a pas su
+                    l'ouvrir, meme apres reparation. Le document est bien
+                    livre, mais il est ABSENT du PDF unifie.
+
+Substituted         Piece NON convertie. Une page portant le nom du fichier et
+                    le motif est produite a sa place. Le contenu d'origine
+                    reste manquant.
+
+Failed              Piece non convertie, aucun PDF produit. Rien n'arrive en
+                    GED pour cette piece.
+
+Excluded            Ecartee volontairement : filtre d'extension, image de
+                    signature sous le seuil, ou borne d'extraction atteinte.
+
+Container           Archive ou message imbrique. Ne produit pas de document,
+                    seuls ses enfants comptent.</TextBlock>
+
+          <TextBlock Style="{StaticResource H1}" Text="En pratique" />
+          <TextBlock Style="{StaticResource P}"
+                     Text="Un lot ou FailedCount est superieur a zero merite un regard : le champ Warnings du fichier d'information porte le motif de chaque echec." />
+        </StackPanel>
+      </ScrollViewer>
+    </TabItem>
+
+    <TabItem Header="Champs personnalises">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+          <TextBlock Style="{StaticResource P}"
+                     Text="Les champs ajoutes au fichier d'information sont resolus dans cet ordre : valeur d'origine selon la source, format de date, table de traduction, valeur par defaut si le resultat est vide, longueur fixe." />
+
+          <TextBlock Style="{StaticResource H1}" Text="Sources" />
+          <TextBlock Style="{StaticResource Code}" xml:space="preserve">Fixed         Valeur litterale, identique pour tous les messages.
+Token         Gabarit a jetons, resolu comme le nommage des fichiers.
+Header        En-tete MIME du message, nom insensible a la casse.
+Property      Valeur deposee par un traitement metier, par exemple un code
+              fournisseur extrait du sujet par un plugin.
+Environment   Variable d'environnement du serveur, par exemple COMPUTERNAME.</TextBlock>
+
+          <TextBlock Style="{StaticResource H1}" Text="Sortie selon le format" />
+          <TextBlock Style="{StaticResource Code}" xml:space="preserve">json   objet "fields", noms en cles
+xml    bloc &lt;Fields&gt; avec &lt;Field name="..."&gt;valeur&lt;/Field&gt;
+csv    colonnes ajoutees APRES les colonnes fixes, repetees sur chaque ligne
+xslt   a la disposition de la feuille de transformation</TextBlock>
+
+          <TextBlock Style="{StaticResource P}"
+                     Text="Un champ non resolu ne fait jamais echouer le traitement : il produit sa valeur par defaut et un avertissement. C'est le document qui compte, pas la completude de son index." />
+        </StackPanel>
+      </ScrollViewer>
+    </TabItem>
+
+    <TabItem Header="Diagnostic">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+
+          <TextBlock Style="{StaticResource H1}" Text="Un message revient a chaque cycle" />
+          <TextBlock Style="{StaticResource P}"
+                     Text="Le marquage n'a pas lieu, ou la cle de deduplication n'est pas stable. Verifier que l'export reussit : le marquage n'intervient qu'APRES export confirme, volontairement. Un doublon se detecte et se corrige, une perte silencieuse non." />
+
+          <TextBlock Style="{StaticResource H1}" Text="Le PDF unifie est vide ou incomplet" />
+          <TextBlock Style="{StaticResource P}"
+                     Text="Regarder le statut de chaque piece dans le fichier d'information. PassThroughUnverified signifie que le document est livre a cote mais n'a pas pu etre fusionne. LibreOffice absent explique l'echec de toutes les pieces bureautiques." />
+
+          <TextBlock Style="{StaticResource H1}" Text="Le disque se remplit" />
+          <TextBlock Style="{StaticResource P}"
+                     Text="Le repertoire de travail n'est nettoye qu'apres export confirme. Une accumulation signale des exports en echec. Le bouton Maintenance declenche une passe immediate : elle met en quarantaine les unites inachevees de plus de sept jours et supprime les repertoires orphelins." />
+
+          <TextBlock Style="{StaticResource H1}" Text="Rejouer un message litigieux" />
+          <TextBlock Style="{StaticResource P}"
+                     Text="Le MIME brut est conserve dans le repertoire de travail du message, sous le nom message.eml. Le deposer dans un dossier, creer une configuration en protocole folder pointant dessus, et le message est rejoue a l'identique." />
+
+          <TextBlock Style="{StaticResource H1}" Text="Ou sont les journaux" />
+          <TextBlock Style="{StaticResource Code}" xml:space="preserve">logs\acpoller-AAAA-MM-JJ.log          journal complet
+logs\acpoller-errors-AAAA-MM-JJ.log   avertissements et erreurs seuls</TextBlock>
+          <TextBlock Style="{StaticResource P}"
+                     Text="Le niveau se change sans redemarrer par la variable d'environnement ACPOLLER_LOGLEVEL." />
+
+        </StackPanel>
+      </ScrollViewer>
+    </TabItem>
+  </TabControl>
+</mah:MetroWindow>

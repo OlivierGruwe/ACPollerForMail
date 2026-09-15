@@ -1,0 +1,24 @@
+Subject: 12 pdf corrompu
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937450.473.12456225971214493400@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============0985119194509216483=="
+
+--===============0985119194509216483==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Le PDF joint est invalide.
+
+--===============0985119194509216483==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="corrompu.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZz4+ZW5kb2JqCnRyYWlsZXI8PC9Sb290IDkg
+MCBSPj4KeHJlZgpDT1JST01QVQolJUVPRgo=
+
+--===============0985119194509216483==--

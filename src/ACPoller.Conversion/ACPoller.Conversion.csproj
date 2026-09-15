@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ACPoller.Abstractions\ACPoller.Abstractions.csproj" />
+    <ProjectReference Include="..\ACPoller.Core\ACPoller.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PDFsharp" />
+    <PackageReference Include="SixLabors.ImageSharp" />
+    <PackageReference Include="MimeKit" />
+    <PackageReference Include="MsgReader" />
+  </ItemGroup>
+</Project>

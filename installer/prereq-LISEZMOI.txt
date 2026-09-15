@@ -1,0 +1,25 @@
+Outils tiers optionnels
+=======================
+
+Deposer ici les paquets a embarquer dans l'installeur. Les deux sont
+optionnels : une compilation sans eux produit un installeur valide, mais les
+sections correspondantes n'installeront rien.
+
+  prereq\LibreOffice.msi     Paquet MSI LibreOffice, telecharge depuis
+                             libreoffice.org. Renommer le fichier exactement
+                             ainsi.
+
+  prereq\qpdf\               Contenu de l'archive qpdf pour Windows, dezippee.
+                             La structure doit contenir bin\qpdf.exe.
+
+LICENCES
+
+  LibreOffice   MPL 2.0. Appele hors processus, jamais lie : aucune
+                contamination de licence pour le produit.
+
+  qpdf          Apache 2.0. Appele en ligne de commande.
+
+Les deux peuvent etre redistribues sous ces licences, a condition de conserver
+leurs mentions de licence respectives. Verifier ce point avec le service
+juridique avant une livraison client, notamment si l'installeur est diffuse
+hors du cadre d'une prestation.

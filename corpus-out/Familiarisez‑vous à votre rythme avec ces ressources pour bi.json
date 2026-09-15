@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_a5bbffdf1895f323",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "AC7000000000FE46ABF4CA752C2mscom_mkt_prod3@infoemails.microsoft.com",
+  "Subject": "Familiarisez‑vous à votre rythme avec ces ressources pour bien démarrer avec Azure",
+  "From": "azure@infoemails.microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-05-24T22:06:39+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:02.1841604+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_a5bbffdf1895f323\\out\\Familiarisez‑vous à votre rythme avec ces ressources pour bi.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 83227,
+      "Sha256": "d752496342b10efca73389f853da29cb216550b540f2a4ef112e1ceb396dd326",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

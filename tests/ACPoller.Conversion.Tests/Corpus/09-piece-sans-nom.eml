@@ -1,0 +1,24 @@
+Subject: 09 piece sans nom
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937449.473.108977561320617482@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7536760644602212657=="
+
+--===============7536760644602212657==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+La piece jointe n'a pas de nom.
+
+--===============7536760644602212657==
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAA
+AABJRU5ErkJggg==
+
+--===============7536760644602212657==--

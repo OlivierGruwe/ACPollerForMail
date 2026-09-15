@@ -1,0 +1,71 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+
+  <!-- Interface strings, English.
+       Every key declared here must exist in Strings.fr.xaml as well: a missing
+       key shows up as an empty label, with no error and no clue. -->
+
+  <s:String x:Key="S_Subtitle">Mail capture, PDF conversion and delivery to ECM</s:String>
+
+  <!-- Action bar -->
+  <s:String x:Key="S_New">New</s:String>
+  <s:String x:Key="S_Edit">Edit</s:String>
+  <s:String x:Key="S_Delete">Delete</s:String>
+  <s:String x:Key="S_Test">Test</s:String>
+  <s:String x:Key="S_Restart">Restart</s:String>
+  <s:String x:Key="S_Refresh">Refresh</s:String>
+  <s:String x:Key="S_Maintenance">Maintenance</s:String>
+  <s:String x:Key="S_ServiceSettings">Service</s:String>
+  <s:String x:Key="S_Connection">Connection</s:String>
+  <s:String x:Key="S_Help">Help</s:String>
+  <s:String x:Key="S_Save">Save</s:String>
+  <s:String x:Key="S_Close">Close</s:String>
+  <s:String x:Key="S_Cancel">Cancel</s:String>
+  <s:String x:Key="S_Browse">Browse</s:String>
+  <s:String x:Key="S_Add">Add</s:String>
+  <s:String x:Key="S_Remove">Remove</s:String>
+  <s:String x:Key="S_MoveUp">Move up</s:String>
+  <s:String x:Key="S_MoveDown">Move down</s:String>
+
+  <!-- Lists and tabs -->
+  <s:String x:Key="S_Configurations">Configurations</s:String>
+  <s:String x:Key="S_Templates">Templates</s:String>
+  <s:String x:Key="S_Supervision">Monitoring</s:String>
+  <s:String x:Key="S_Dashboard">Dashboard</s:String>
+  <s:String x:Key="S_TabGeneral">General</s:String>
+  <s:String x:Key="S_TabProtocol">Protocol</s:String>
+  <s:String x:Key="S_TabConversion">Conversion</s:String>
+  <s:String x:Key="S_TabOutput">Output format</s:String>
+  <s:String x:Key="S_TabProcessors">Processors</s:String>
+  <s:String x:Key="S_TabTargets">Targets</s:String>
+  <s:String x:Key="S_TabFields">Fields</s:String>
+
+  <!-- Monitoring -->
+  <s:String x:Key="S_Issues">Issues</s:String>
+  <s:String x:Key="S_TestResults">Connection tests</s:String>
+  <s:String x:Key="S_Workers">Workers</s:String>
+  <s:String x:Key="S_Connecting">Connecting...</s:String>
+  <s:String x:Key="S_RestartRequired">ACPoller needs a restart</s:String>
+  <s:String x:Key="S_ShowDetail">Show details</s:String>
+
+  <!-- Connection settings -->
+  <s:String x:Key="S_ServiceAddress">Service address</s:String>
+  <s:String x:Key="S_Token">Control token</s:String>
+  <s:String x:Key="S_Theme">Theme</s:String>
+  <s:String x:Key="S_Language">Language</s:String>
+  <s:String x:Key="S_TestConnection">Test connection</s:String>
+
+  <!-- Tooltips -->
+  <s:String x:Key="H_Name">Unique identifier, used as the correlation key in logs and as the working directory name. Changing it creates a new configuration: the previous one remains until deleted.</s:String>
+  <s:String x:Key="H_Template">Name of a declared template. The configuration inherits every value from it and only overrides its own differences. Across dozens of mailboxes sharing one tenant, a configuration comes down to three lines.</s:String>
+  <s:String x:Key="H_InitialLookback">Applies to the very first cycle only, when nothing has been processed yet for this mailbox. Too low a value makes it look like nothing is arriving while the service works fine, and nothing reports it.</s:String>
+  <s:String x:Key="H_NotBefore">No message older than this date will ever be processed. Set it at go-live when history is not being imported: without it, the first run processes everything sitting in the mailbox.</s:String>
+  <s:String x:Key="H_Timeout">Once exceeded, the converter is KILLED rather than waited for. A LibreOffice instance stuck on a corrupt document never recovers: without this timeout, one document freezes a conversion slot for good.</s:String>
+  <s:String x:Key="H_OnFailure">Substitute produces a page carrying the file name and the reason, so the ECM sees something is missing. Skip drops the part silently. RejectMessage rejects the whole message.</s:String>
+  <s:String x:Key="H_Naming">Tokens: {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. A format may follow a colon. In PerAttachment mode, {index} is mandatory or files overwrite each other.</s:String>
+  <s:String x:Key="H_AtomicWrite">The file is written under a temporary extension, then renamed. Without it, an ECM watching the folder can pick up a PDF mid-write, and the error is undetectable on its side.</s:String>
+  <s:String x:Key="H_AllOrNothing">If one target fails, deliveries already made to the others are rolled back. An ECM holding a message that another one never received creates a reconciliation gap nobody notices before the audit.</s:String>
+  <s:String x:Key="H_AcceptAnyCertificate">Removes every protection against interception: a third party can sit between the service and the server undetected. Enable only against a known self-signed certificate, and document it.</s:String>
+  <s:String x:Key="H_HonorRetryAfter">Graph states how long to wait after throttling. Ignoring it makes things worse: the service resumes at once, gets throttled again, and the quota recovers more and more slowly.</s:String>
+</ResourceDictionary>

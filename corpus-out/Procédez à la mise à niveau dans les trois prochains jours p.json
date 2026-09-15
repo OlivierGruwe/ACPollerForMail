@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_6ee8c5f2bbfdeeff",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "AC700000000106394A14EFD1EB9mscom_mkt_prod3@infoemails.microsoft.com",
+  "Subject": "Procédez à la mise à niveau dans les trois prochains jours pour continuer d'utiliser Azure",
+  "From": "azure@infoemails.microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-06-19T01:58:31+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:17.998553+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_6ee8c5f2bbfdeeff\\out\\Procédez à la mise à niveau dans les trois prochains jours p.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 69063,
+      "Sha256": "5fc94396a0564663debb7ba70645d40cb497417b1d63caba72ffab4a0da8bff5",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

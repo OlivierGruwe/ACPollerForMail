@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ACPoller.Service": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56861;http://localhost:56862"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_47cc297dacf839e6",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "26c23ec5-e490-4355-9b8d-a1fb77126361@az.northcentralus.microsoft.com",
+  "Subject": "Votre abonnement Azure est prêt",
+  "From": "azure-noreply@microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-05-22T16:45:41+02:00",
+  "ProcessedUtc": "2026-09-09T14:41:55.5589497+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_47cc297dacf839e6\\out\\Votre abonnement Azure est prêt.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 66637,
+      "Sha256": "598f74241f30a1083d9172d48b2e68aa68e5e0ff0a3fa1400bdd28b7b50f76cd",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

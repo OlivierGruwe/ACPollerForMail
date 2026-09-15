@@ -1,0 +1,25 @@
+ACPoller 2.0 - Arondor
+Logiciel proprietaire. Tous droits reserves.
+
+COMPOSANTS TIERS
+
+Ce produit incorpore les composants suivants :
+
+  MailKit / MimeKit        MIT
+  Microsoft Graph SDK      MIT
+  PDFsharp                 MIT
+  SixLabors.ImageSharp     Apache 2.0
+  MsgReader                MIT
+  OpenMcdf                 MPL 2.0
+  FluentFTP                MIT
+  AWS SDK for .NET         Apache 2.0
+  NLog                     BSD 3-Clause
+  MahApps.Metro            MIT
+  CommunityToolkit.Mvvm    MIT
+
+Le produit appelle en outre, sans les redistribuer :
+
+  LibreOffice              MPL 2.0, appele hors processus
+  qpdf                     Apache 2.0, appele en ligne de commande
+
+Ces deux outils doivent etre installes separement sur le serveur.

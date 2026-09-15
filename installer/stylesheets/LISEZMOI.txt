@@ -1,0 +1,8 @@
+Feuilles de transformation XSLT livrees avec le produit.
+
+Deposer ici les feuilles propres a un client, puis renseigner leur chemin
+dans Output:Metadata:Template de la configuration concernee.
+
+Le XML d'entree est toujours le meme. Pour mettre au point une feuille :
+passer le format en "xml", regarder la sortie reelle, ecrire la feuille
+dessus, puis revenir en "xslt".

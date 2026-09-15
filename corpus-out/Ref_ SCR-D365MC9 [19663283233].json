@@ -1,0 +1,38 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_a8435e89b498d6cc",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "A9RE5FN38UU4.WPLD8N3OSDWH3@desktop-1evo1n3",
+  "Subject": "Ref: SCR-D365MC9 [19663283233]",
+  "From": "07041439925@udesc.br",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2026-09-04T14:38:09+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:54.5292538+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_a8435e89b498d6cc\\out\\Ref_ SCR-D365MC9 [19663283233].pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.txt",
+      "FileName": "corps.txt",
+      "Kind": "Body",
+      "ContentType": "text/plain",
+      "SizeBytes": 578,
+      "Sha256": "2fb64e08e3e136d3f59ce05e7f2287185004186d1d2b079cca856e5e65c39375",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "corps.txt.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

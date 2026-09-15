@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_4d9670cf31e59434",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "IUWD6AO68QU4.VIP289E6P637@ph1pepf0001735c",
+  "Subject": "Des informations de sécurité du compte Microsoft ont été ajoutées",
+  "From": "account-security-noreply@accountprotection.microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-05-22T16:45:40+02:00",
+  "ProcessedUtc": "2026-09-09T14:41:51.6675524+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_4d9670cf31e59434\\out\\Des informations de sécurité du compte Microsoft ont été ajo.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 3882,
+      "Sha256": "66ec2c71dd87a2e50089cff9160379a38ede72d3cf066aad5809ecc7e1ceb246",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

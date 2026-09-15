@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_350941483c11a90a",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "74ed9867-994d-485d-a230-0753f5d4a53d@az.eastus.microsoft.com",
+  "Subject": "Effectuez une mise à niveau dès maintenant pour réactiver votre compte gratuit Azure.",
+  "From": "azure-noreply@microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-06-21T21:02:17+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:23.0185173+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_350941483c11a90a\\out\\Effectuez une mise à niveau dès maintenant pour réactiver vo.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 72718,
+      "Sha256": "6cf23a97f20f0b3247610a6b2338f2da2b30640926fea3d5a13b55d065b21447",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_632004913006d962",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "868d43b9-6115-4be5-a533-34af0803970f@az.eastus2.microsoft.com",
+  "Subject": "Effectuez une mise à niveau avant le samedi 26 juillet 2025 pour conserver l’accès à vos données et services Azure.",
+  "From": "azure-noreply@microsoft.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-07-19T21:02:34+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:32.4236456+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_632004913006d962\\out\\Effectuez une mise à niveau avant le samedi 26 juillet 2025.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 71367,
+      "Sha256": "9e272f0e08d109e8eab1b36a773cce0c118e562fe858594048ceb49ca20d36d9",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 0,
+  "Fields": {}
+}

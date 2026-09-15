@@ -1,0 +1,70 @@
+Subject: 05 eml triple
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937432.473.1040843146981065780@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============2550787312093812009=="
+
+--===============2550787312093812009==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Trois niveaux.
+
+--===============2550787312093812009==
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+Subject: Niveau 2
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937431.473.7385409389949233239@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6504407417828876438=="
+
+--===============6504407417828876438==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Intermediaire.
+
+--===============6504407417828876438==
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+Subject: Niveau 3
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937431.473.1979301920118728684@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6329644555964267666=="
+
+--===============6329644555964267666==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Niveau le plus profond.
+
+--===============6329644555964267666==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="profond.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBv
+Ymo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlw
+ZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgMjAwIDIwMF0+PmVuZG9iagp0cmFpbGVy
+PDwvUm9vdCAxIDAgUj4+CiUlRU9GCg==
+
+--===============6329644555964267666==--
+
+--===============6504407417828876438==--
+
+--===============2550787312093812009==--

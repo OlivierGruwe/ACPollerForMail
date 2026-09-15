@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "CorrelationId": "CORPUS_fb22de367f17c9bc",
+  "Configuration": "CORPUS",
+  "Mailbox": "olivier.gruwe@laposte.net",
+  "MessageId": "CADmFFNqHnUQjZM8e3Go3YcGYtC43W3CCedZEOvzizs8AP=hstA@mail.gmail.com",
+  "Subject": "test Abbyy",
+  "From": "olivier.gruwe@arondor.com",
+  "To": [
+    "olivier.gruwe@laposte.net"
+  ],
+  "Cc": [],
+  "ReceivedUtc": "2025-06-02T11:14:49+02:00",
+  "ProcessedUtc": "2026-09-09T14:42:10.7077659+00:00",
+  "Attempt": 0,
+  "Properties": {
+    "MergedPdf": "C:\\ProgramData\\ACPoller\\work\\CORPUS_fb22de367f17c9bc\\out\\test Abbyy.pdf"
+  },
+  "Items": [
+    {
+      "Path": "corps.html",
+      "FileName": "corps.html",
+      "Kind": "Body",
+      "ContentType": "text/html",
+      "SizeBytes": 4613,
+      "Sha256": "76e0f9cdd372886086bdfb775c721858cb7027497bd5f3ad9fdff6a42a0e2e89",
+      "Status": "Converted",
+      "Converted": true,
+      "Substituted": false,
+      "PdfFileName": "corps.html.pdf",
+      "Unverified": false
+    },
+    {
+      "Path": "image004.png",
+      "FileName": "image004.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1518,
+      "Sha256": "57c5c0d570d4d078ced447ce6b960433058a6b0f454b350fcae4d1235ddd36cf",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "image005.png",
+      "FileName": "image005.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1582,
+      "Sha256": "e4cfe9b7c08c9a0c20fbb13b4db433c407dabeb8247489fc53c890c1ae2b3428",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "image003.png",
+      "FileName": "image003.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1512,
+      "Sha256": "e9eed7d68a4fb2f3c53c111bbc0b527560a6c997fd524607a5eff6b62325f3b2",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "image006.png",
+      "FileName": "image006.png",
+      "Kind": "InlineImage",
+      "ContentType": "image/png",
+      "SizeBytes": 1561,
+      "Sha256": "fb421270f7281d7a31769ac2619d3813790cfc792628d1971fe11088ef110c77",
+      "Status": "Excluded",
+      "Converted": false,
+      "Substituted": false,
+      "FailureReason": "Image incorporee sous le seuil de taille.",
+      "Unverified": false
+    },
+    {
+      "Path": "Confirmation_VA24-074036.pdf",
+      "FileName": "Confirmation_VA24-074036.pdf",
+      "Kind": "Attachment",
+      "ContentType": "application/pdf",
+      "SizeBytes": 75382,
+      "Sha256": "21f82c924ecc117331403ec6f991d6a21e1ec6444eb22facce0d81edcf56fdd8",
+      "Status": "PassThrough",
+      "Converted": true,
+      "Substituted": false,
+      "PageCount": 1,
+      "PdfFileName": "Confirmation_VA24-074036.pdf.pdf",
+      "Unverified": false
+    }
+  ],
+  "Warnings": [],
+  "FailedCount": 4,
+  "Fields": {}
+}

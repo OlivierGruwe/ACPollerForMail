@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <!-- Windows : service Windows, DPAPI, profils LibreOffice isoles. -->
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>acpoller-service</UserSecretsId>
+    <!-- Deploiement autonome : pas de runtime .NET a installer sur le serveur client. -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>false</PublishSingleFile>
+    <ApplicationIcon>acpoller.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="acpoller.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ACPoller.Core\ACPoller.Core.csproj" />
+    <ProjectReference Include="..\ACPoller.Sources.Folder\ACPoller.Sources.Folder.csproj" />
+    <ProjectReference Include="..\ACPoller.Sources.Imap\ACPoller.Sources.Imap.csproj" />
+    <ProjectReference Include="..\ACPoller.Sources.Graph\ACPoller.Sources.Graph.csproj" />
+    <ProjectReference Include="..\ACPoller.Conversion\ACPoller.Conversion.csproj" />
+    <ProjectReference Include="..\ACPoller.Export\ACPoller.Export.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" />
+    <PackageReference Include="NLog.Extensions.Logging" />
+    <PackageReference Include="Microsoft.Data.SqlClient" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json;nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+</Project>

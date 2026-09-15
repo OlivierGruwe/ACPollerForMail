@@ -1,0 +1,24 @@
+Subject: 11 encodage windows-1252
+From: expediteur@exemple.fr
+To: capture@exemple.fr
+Date: Mon, 07 Sep 2026 16:42:54 +0000
+Message-ID: <178879937450.473.3394401369348280952@exemple.fr>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============4549142481882185783=="
+
+--===============4549142481882185783==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Piece jointe en cp1252.
+
+--===============4549142481882185783==
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="export.txt"
+MIME-Version: 1.0
+
+Uulm6XJlbmNlIDogY3Lp6SBsZSAxZXIgYW/7dCwgY2/7dCAxMiw1MCCADQpEZXV4aehtZSBsaWdu
+ZQ0K
+
+--===============4549142481882185783==--

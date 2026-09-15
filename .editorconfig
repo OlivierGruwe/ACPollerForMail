@@ -1,0 +1,43 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.{json,yml,yaml,xml,csproj,props,targets}]
+indent_size = 2
+
+[*.cs]
+# Regles erigees en erreur : ce sont exactement les pieges qui ont coute
+# des incidents de production sur la v1.
+
+# CA2200 : "throw ex;" ecrase la stack d'origine. Cause de diagnostics faux.
+dotnet_diagnostic.CA2200.severity = error
+
+# CA2016 : ne pas propager le CancellationToken. Cause des workers qui ne
+# s'arretent jamais et des services qui se figent.
+dotnet_diagnostic.CA2016.severity = error
+
+# CA1001 : type possedant un champ IDisposable sans etre IDisposable.
+# Cause des fuites de HttpClient et de SemaphoreSlim.
+dotnet_diagnostic.CA1001.severity = error
+
+# CA2000 : objet jetable perdu avant liberation. Cause racine des verrous
+# fichiers ("PDF en cours d'utilisation").
+dotnet_diagnostic.CA2000.severity = error
+
+# CA1849 : appel bloquant dans une methode async (.Result, .Wait()).
+dotnet_diagnostic.CA1849.severity = error
+
+# CA5359 / CA5386 : desactivation de la validation TLS. A justifier explicitement.
+dotnet_diagnostic.CA5359.severity = error
+
+csharp_style_namespace_declarations = file_scoped:error
+csharp_prefer_braces = true:error
+# for_non_interface_members et non always : les membres d'interface sont
+# implicitement publics, exiger "public" dessus est du bruit.
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:error

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ACPoller.Conversion\ACPoller.Conversion.csproj" />
+    <ProjectReference Include="..\..\src\ACPoller.Core\ACPoller.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Shouldly" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Corpus de mails atypiques : sans corps, MIME exotique, zip imbrique,
+         eml recursif, PDF corrompu. C'est ce corpus qui manquait en v1. -->
+    <None Include="Corpus\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
