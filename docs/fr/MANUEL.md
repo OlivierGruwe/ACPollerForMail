@@ -1,8 +1,8 @@
-# ACPoller 2.0 — Manuel
+# ACPollerForMail 2.0 — Manuel
 
 ## 1. Ce que fait le produit
 
-ACPoller surveille des boites de messagerie, convertit en PDF tout ce qui y
+ACPollerForMail surveille des boites de messagerie, convertit en PDF tout ce qui y
 arrive, et depose le resultat dans une GED ou un systeme de fichiers.
 
 Le cycle, pour chaque message :
@@ -152,7 +152,7 @@ Il n'a pas besoin d'etre administrateur du serveur.
 
 ### Derouler l'installation
 
-1. Lancer `ACPoller-x.y.z-setup.exe` en administrateur
+1. Lancer `ACPollerForMail-x.y.z-setup.exe` en administrateur
 2. Choisir les composants : LibreOffice et qpdf si le serveur ne les a pas
 3. **Renseigner le compte de service** sur la page dediee
 4. Laisser l'assistant terminer
@@ -173,8 +173,8 @@ conserve une copie du fichier d'origine.
 eu lieu, puis les supprimer :
 
 ```
-findstr /i "ENC:" "C:\Program Files\ACPoller\appsettings.json"
-del "C:\Program Files\ACPoller\appsettings.json.clear.*.bak"
+findstr /i "ENC:" "C:\Program Files\ACPollerForMail\appsettings.json"
+del "C:\Program Files\ACPollerForMail\appsettings.json.clear.*.bak"
 ```
 
 Le service les purge de lui-meme passe vingt-quatre heures, mais autant ne pas
@@ -561,7 +561,7 @@ son API, et un service qui s'arrete sur ordre de son propre client ne pourrait
 pas confirmer l'ordre execute.
 
 ```
-Restart-Service ACPoller
+Restart-Service ACPollerForMail
 ```
 ---
 
@@ -576,7 +576,7 @@ rien a faire.
 Sans interface :
 
 ```
-curl -H "X-ACPoller-Token: <jeton>" http://127.0.0.1:5199/api/status
+curl -H "X-ACPollerForMail-Token: <jeton>" http://127.0.0.1:5199/api/status
 ```
 
 ### Suspendre une boite
@@ -656,8 +656,8 @@ Le service tourne et ne trouve rien. Regarder, dans cet ordre :
 Passer le niveau de journalisation en `Debug` rend le cycle bavard :
 
 ```
-setx ACPOLLER_LOGLEVEL Debug /M
-Restart-Service ACPoller
+setx ACPollerForMail_LOGLEVEL Debug /M
+Restart-Service ACPollerForMail
 ```
 
 ### Le disque se remplit
@@ -672,7 +672,7 @@ orphelins.
 ### Le service ne demarre pas
 
 ```
-findstr /i "worker(s) demarre" logs\acpoller-*.log
+findstr /i "worker(s) demarre" logs\ACPollerForMail-*.log
 ```
 
 La ligne `N worker(s) demarre(s), M ecarte(s)` donne le compte. Si `M` n'est
@@ -685,7 +685,7 @@ Le jeton de l'interface ne correspond pas a celui du service. Ouvrir
 service injoignable d'un jeton refuse.
 
 Le jeton en clair est dans
-`C:\ProgramData\ACPoller\ui-settings.default.json`.
+`C:\ProgramData\ACPollerForMail\ui-settings.default.json`.
 
 ### Retrouver le traitement d'un message
 
@@ -693,7 +693,7 @@ Le fichier d'information porte un `CorrelationId`, present dans tous les
 journaux du traitement :
 
 ```
-findstr /i "<CorrelationId>" logs\acpoller-*.log
+findstr /i "<CorrelationId>" logs\ACPollerForMail-*.log
 ```
 
 ---
@@ -770,21 +770,21 @@ chaque ligne. Ajouter un champ ne decale donc jamais les colonnes existantes.
 
 | Chemin | Contenu | Critique |
 |---|---|---|
-| `C:\Program Files\ACPoller\appsettings.json` | Configuration, secrets chiffres | Oui |
-| `C:\Program Files\ACPoller\logs\` | Journaux | Non |
-| `C:\Program Files\ACPoller\docs\` | Ce manuel | Non |
-| `C:\ProgramData\ACPoller\work\` | Unites de travail en cours | Non |
-| `C:\ProgramData\ACPoller\work\state\processed.db` | Journal des messages traites | **Critique** |
-| `C:\ProgramData\ACPoller\work\_quarantaine\` | Unites abandonnees, 30 jours | Non |
-| `C:\ProgramData\ACPoller\ui-settings.default.json` | Adresse et jeton de l'interface | Non |
-| `%APPDATA%\ACPoller\ui-settings.json` | Reglages de l'exploitant | Non |
+| `C:\Program Files\ACPollerForMail\appsettings.json` | Configuration, secrets chiffres | Oui |
+| `C:\Program Files\ACPollerForMail\logs\` | Journaux | Non |
+| `C:\Program Files\ACPollerForMail\docs\` | Ce manuel | Non |
+| `C:\ProgramData\ACPollerForMail\work\` | Unites de travail en cours | Non |
+| `C:\ProgramData\ACPollerForMail\work\state\processed.db` | Journal des messages traites | **Critique** |
+| `C:\ProgramData\ACPollerForMail\work\_quarantaine\` | Unites abandonnees, 30 jours | Non |
+| `C:\ProgramData\ACPollerForMail\ui-settings.default.json` | Adresse et jeton de l'interface | Non |
+| `%APPDATA%\ACPollerForMail\ui-settings.json` | Reglages de l'exploitant | Non |
 
 ### Sauvegarde
 
 Deux elements doivent figurer dans la sauvegarde du serveur :
 
-- `C:\ProgramData\ACPoller\work\state\processed.db`
-- `C:\Program Files\ACPoller\appsettings.json`
+- `C:\ProgramData\ACPollerForMail\work\state\processed.db`
+- `C:\Program Files\ACPollerForMail\appsettings.json`
 
 Le premier est le seul dont la perte a une consequence irreversible. Le
 second se reconstruit, mais il faudrait ressaisir tous les secrets.
@@ -794,7 +794,7 @@ second se reconstruit, mais il faudrait ressaisir tous les secrets.
 ## Annexe D — API de pilotage
 
 Ecoute sur la boucle locale uniquement. Toute requete porte l'en-tete
-`X-ACPoller-Token`.
+`X-ACPollerForMail-Token`.
 
 | Methode | Route | Effet |
 |---|---|---|
@@ -827,7 +827,7 @@ A derouler sur le serveur client avant de declarer le service operationnel.
 
 | Verification | Comment | Attendu |
 |---|---|---|
-| Service demarre | `Get-Service ACPoller` | `Running` |
+| Service demarre | `Get-Service ACPollerForMail` | `Running` |
 | Workers actifs | Journal de demarrage | `N demarre(s), 0 ecarte(s)` |
 | Source joignable | Bouton **Tester** | Tous les composants en vert |
 | Cibles joignables | Bouton **Tester** | Ecriture reelle confirmee |
@@ -836,7 +836,7 @@ A derouler sur le serveur client avant de declarer le service operationnel.
 | Acces reseau du compte | Tester une cible UNC | Depot reussi |
 | Premier message | Deposer un message de test | PDF et fichier d'information deposes |
 | Idempotence | Attendre un second cycle | Le message n'est pas retraite |
-| Redemarrage | `Restart-Service ACPoller` | Reprise sans doublon |
+| Redemarrage | `Restart-Service ACPollerForMail` | Reprise sans doublon |
 | Date plancher | Onglet General | Renseignee si l'historique n'est pas repris |
 | Secrets chiffres | `findstr ENC: appsettings.json` | Au moins une occurrence |
 | Sauvegardes en clair | `dir *.clear.*.bak` | Supprimees |

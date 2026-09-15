@@ -13,293 +13,269 @@
                  TitleCharacterCasing="Normal"
                  Icon="pack://application:,,,/Resources/acpoller.ico">
 
-    <Window.DataContext>
-        <vm:MainViewModel />
-    </Window.DataContext>
+  <Window.DataContext>
+    <vm:MainViewModel />
+  </Window.DataContext>
 
-    <mah:MetroWindow.InputBindings>
-        <!-- F1 est le premier reflexe : son absence donne l'impression qu'il n'y
+  <mah:MetroWindow.InputBindings>
+    <!-- F1 est le premier reflexe : son absence donne l'impression qu'il n'y
          a pas d'aide. -->
-        <KeyBinding Key="F1" Command="{Binding OpenHelpCommand}" />
-        <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
-    </mah:MetroWindow.InputBindings>
+    <KeyBinding Key="F1" Command="{Binding OpenHelpCommand}" />
+    <KeyBinding Key="F5" Command="{Binding RefreshCommand}" />
+  </mah:MetroWindow.InputBindings>
 
-    <mah:MetroWindow.RightWindowCommands>
-        <mah:WindowCommands>
-            <mah:ToggleSwitch IsOn="{Binding IsDarkTheme}"
-                        OnContent="Sombre"
-                        OffContent="Clair"
+  <mah:MetroWindow.RightWindowCommands>
+    <mah:WindowCommands>
+      <mah:ToggleSwitch IsOn="{Binding IsDarkTheme}"
+                        OnContent="{DynamicResource S_Main_Sombre}"
+                        OffContent="{DynamicResource S_Main_Clair}"
                         VerticalAlignment="Center"
                         Margin="0,0,8,0" />
-        </mah:WindowCommands>
-    </mah:MetroWindow.RightWindowCommands>
+    </mah:WindowCommands>
+  </mah:MetroWindow.RightWindowCommands>
 
-    <DockPanel>
+  <DockPanel>
 
-        <!-- Bandeau d'identite. Le logo sur fond blanc reste lisible dans les deux
+    <!-- Bandeau d'identite. Le logo sur fond blanc reste lisible dans les deux
          themes : le gris ardoise du logotype disparaitrait sur fond sombre, et
          il n'existe pas de version inversee. -->
-        <Border DockPanel.Dock="Top" Background="White" Padding="20,14">
-            <DockPanel>
-                <Image DockPanel.Dock="Left"
+    <Border DockPanel.Dock="Top" Background="White" Padding="20,14">
+      <DockPanel>
+        <Image DockPanel.Dock="Left"
                Source="pack://application:,,,/Resources/arondor-logo.png"
                Height="34" VerticalAlignment="Center" Margin="0,0,20,0" />
 
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="ACPoller" FontSize="20" FontWeight="Light" Foreground="#5B667A" />
-                    <TextBlock Text="Capture de messagerie, conversion PDF et depot en GED"
+        <StackPanel VerticalAlignment="Center">
+          <TextBlock Text="{DynamicResource S_Main_Acpoller}" FontSize="20" FontWeight="Light" Foreground="#5B667A" />
+          <TextBlock Text="{DynamicResource S_Main_CaptureDeMessagerieConversion}"
                      FontSize="11" Foreground="#00A6DE" Margin="0,1,0,0" />
-                </StackPanel>
-            </DockPanel>
-        </Border>
+        </StackPanel>
+      </DockPanel>
+    </Border>
 
-        <!-- Barre d'actions. Sous le bandeau plutot que dans la barre de titre :
+    <!-- Barre d'actions. Sous le bandeau plutot que dans la barre de titre :
          les commandes de la barre de titre MahApps sont peu contrastees et
          passent inapercues. -->
-        <Border DockPanel.Dock="Top"
+    <Border DockPanel.Dock="Top"
             Background="{DynamicResource MahApps.Brushes.Gray10}"
             BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"
             BorderThickness="0,1,0,1"
             Padding="16,8">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-                    <Button Content="Aide" Command="{Binding OpenHelpCommand}"
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+          <Button Content="{DynamicResource S_Main_Aide}" Command="{Binding OpenHelpCommand}"
                   Style="{StaticResource MahApps.Styles.Button.Square}" Padding="14,4" />
-                    <Button Content="Service" Command="{Binding OpenServiceSettingsCommand}"
-                  Style="{StaticResource MahApps.Styles.Button.Square}"
-                  Padding="14,4" Margin="8,0,0,0"
-                  ToolTip="Reglages du service : repertoires, outils, maintenance, API. Demandent un redemarrage." />
-                    <Button Content="Reglages" Command="{Binding OpenSettingsCommand}"
+          <Button Content="{DynamicResource S_Main_Reglages}" Command="{Binding OpenSettingsCommand}"
                   Style="{StaticResource MahApps.Styles.Button.Square}"
                   Padding="14,4" Margin="8,0,0,0" />
-                    
-                </StackPanel>
+        </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="Nouvelle" Command="{Binding NewConfigurationCommand}"
+        <StackPanel Orientation="Horizontal">
+          <Button Content="{DynamicResource S_Main_Nouvelle}" Command="{Binding NewConfigurationCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Padding="14,4" />
 
-                    <Button Content="Modifier" Command="{Binding EditConfigurationCommand}"
+          <Button Content="{DynamicResource S_Main_Modifier}" Command="{Binding EditConfigurationCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square}"
                   Padding="14,4" Margin="8,0,0,0" />
 
-                    <Button Content="Supprimer" Command="{Binding DeleteConfigurationCommand}"
+          <Button Content="{DynamicResource S_Main_Supprimer}" Command="{Binding DeleteConfigurationCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square}"
                   Padding="14,4" Margin="8,0,0,0" />
 
-                    <Rectangle Width="1" Margin="12,2" Fill="{DynamicResource MahApps.Brushes.Gray8}" />
+          <Rectangle Width="1" Margin="12,2" Fill="{DynamicResource MahApps.Brushes.Gray8}" />
 
-                    <Button Content="Tester" Command="{Binding TestCommand}"
+          <Button Content="{DynamicResource S_Main_Tester}" Command="{Binding TestCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square}" Padding="14,4" />
 
-                    <Button Content="Redemarrer" Command="{Binding RestartCommand}"
+          <Button Content="{DynamicResource S_Main_Redemarrer}" Command="{Binding RestartCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square}"
                   Padding="14,4" Margin="8,0,0,0" />
 
-                    <Rectangle Width="1" Margin="12,2" Fill="{DynamicResource MahApps.Brushes.Gray8}" />
+          <Rectangle Width="1" Margin="12,2" Fill="{DynamicResource MahApps.Brushes.Gray8}" />
 
-                    <Button Content="Rafraichir" Command="{Binding RefreshCommand}"
+          <Button Content="{DynamicResource S_Main_Rafraichir}" Command="{Binding RefreshCommand}"
                   Style="{StaticResource MahApps.Styles.Button.Square}" Padding="14,4" />
 
-                    <Button Content="Maintenance" Command="{Binding RunMaintenanceCommand}"
+          <Button Content="{DynamicResource S_Main_Maintenance}" Command="{Binding RunMaintenanceCommand}"
                   IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
                   Style="{StaticResource MahApps.Styles.Button.Square}"
                   Padding="14,4" Margin="8,0,0,0" />
-                </StackPanel>
-            </DockPanel>
-        </Border>
+        </StackPanel>
+      </DockPanel>
+    </Border>
 
-        <Border DockPanel.Dock="Top"
-            Background="#33C9942B"
-            BorderBrush="#C9942B"
-            BorderThickness="0,0,0,1"
-            Padding="16,10"
-            Visibility="{Binding RestartRequired, Converter={StaticResource BoolToVisibility}}">
-            <DockPanel>
-                <Button DockPanel.Dock="Right" Content="Voir le detail"
-                Command="{Binding ShowRestartDetailCommand}"
-                Style="{StaticResource MahApps.Styles.Button.Square}" Padding="12,4" />
-
-                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="SemiBold">
-          <Run Text="ACPoller demande un redemarrage :" />
-          <Run Text="{Binding PendingRestart.Count, Mode=OneWay}" />
-          <Run Text="reglage(s) modifie(s) n'ont pas encore pris effet." />
-                </TextBlock>
-            </DockPanel>
-        </Border>
-        
-        <!-- Bandeau d'etat : la premiere chose que regarde un exploitant. -->
-        <Border DockPanel.Dock="Top"
+    <!-- Bandeau d'etat : la premiere chose que regarde un exploitant. -->
+    <Border DockPanel.Dock="Top"
             Background="{DynamicResource MahApps.Brushes.Accent4}"
             BorderBrush="{DynamicResource MahApps.Brushes.Gray8}"
             BorderThickness="0,0,0,1"
             Padding="16,8">
-            <DockPanel>
-                <Ellipse Width="10" Height="10" Margin="0,0,10,0" VerticalAlignment="Center"
+      <DockPanel>
+        <Ellipse Width="10" Height="10" Margin="0,0,10,0" VerticalAlignment="Center"
                  Fill="{Binding IsConnected, Converter={StaticResource BoolToBrush}}" />
 
-                <mah:ProgressRing DockPanel.Dock="Right" Width="18" Height="18" Margin="12,0,0,0"
+        <mah:ProgressRing DockPanel.Dock="Right" Width="18" Height="18" Margin="12,0,0,0"
                           IsActive="{Binding IsBusy}" />
 
-                <TextBlock Text="{Binding ConnectionState}" VerticalAlignment="Center"
+        <TextBlock Text="{Binding ConnectionState}" VerticalAlignment="Center"
                    FontSize="13" TextTrimming="CharacterEllipsis" />
-            </DockPanel>
-        </Border>
+      </DockPanel>
+    </Border>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="360" MinWidth="260" />
-                <ColumnDefinition Width="6" />
-                <ColumnDefinition Width="*" MinWidth="480" />
-            </Grid.ColumnDefinitions>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="360" MinWidth="260" />
+        <ColumnDefinition Width="6" />
+        <ColumnDefinition Width="*" MinWidth="480" />
+      </Grid.ColumnDefinitions>
 
-            <GridSplitter Grid.Column="1" Width="6"
+      <GridSplitter Grid.Column="1" Width="6"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                     Background="Transparent" />
 
-            <Border Grid.Column="0"
+      <Border Grid.Column="0"
               BorderThickness="0,0,1,0"
               BorderBrush="{DynamicResource MahApps.Brushes.Gray8}">
-                <TabControl Margin="6">
+        <TabControl Margin="6">
 
-                    <TabItem Header="Configurations">
-                        <ListBox ItemsSource="{Binding Configurations}"
+          <TabItem Header="{DynamicResource S_Main_Configurations}">
+            <ListBox ItemsSource="{Binding Configurations}"
                      SelectedItem="{Binding SelectedConfiguration}"
                      BorderThickness="0"
                      Background="Transparent"
                      HorizontalContentAlignment="Stretch">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="2,6">
-                                        <DockPanel>
-                                            <Border DockPanel.Dock="Right"
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Margin="2,6">
+                    <DockPanel>
+                      <Border DockPanel.Dock="Right"
                               Background="{DynamicResource MahApps.Brushes.Accent3}"
                               CornerRadius="3" Padding="6,1" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding Protocol}" FontSize="10"
+                        <TextBlock Text="{Binding Protocol}" FontSize="10"
                                    Foreground="{DynamicResource MahApps.Brushes.IdealForeground}" />
-                                            </Border>
-                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
+                      </Border>
+                      <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
                                  TextTrimming="CharacterEllipsis" />
-                                        </DockPanel>
+                    </DockPanel>
 
-                                        <TextBlock Text="{Binding Mailbox}" FontSize="11" Opacity="0.7"
+                    <TextBlock Text="{Binding Mailbox}" FontSize="11" Opacity="0.7"
                                TextTrimming="CharacterEllipsis" />
 
-                                        <!-- Le nombre d'anomalies est visible sans ouvrir la
+                    <!-- Le nombre d'anomalies est visible sans ouvrir la
                          configuration : c'est ce qui permet de reperer une
                          boite mal parametree dans une liste de cent. -->
-                                        <TextBlock FontSize="11" Margin="0,2,0,0" Foreground="#E04A4A"
+                    <TextBlock FontSize="11" Margin="0,2,0,0" Foreground="#E04A4A"
                                Visibility="{Binding Issues.Count, Converter={StaticResource CountToVisibility}}">
                       <Run Text="{Binding Issues.Count, Mode=OneWay}" />
-                      <Run Text="anomalie(s)" />
-                                        </TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </TabItem>
+                      <Run Text="{DynamicResource S_Main_AnomalieS}" />
+                    </TextBlock>
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </TabItem>
 
-                    <TabItem Header="Gabarits">
-                        <DockPanel Margin="4">
-                            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
-                                <Button Content="Nouveau" Command="{Binding NewTemplateCommand}" Padding="10,3" />
-                                <Button Content="Modifier" Command="{Binding EditTemplateCommand}"
+          <TabItem Header="{DynamicResource S_Main_Gabarits}">
+            <DockPanel Margin="4">
+              <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,8,0,0">
+                <Button Content="{DynamicResource S_Main_Nouveau}" Command="{Binding NewTemplateCommand}" Padding="10,3" />
+                <Button Content="{DynamicResource S_Main_Modifier}" Command="{Binding EditTemplateCommand}"
                         Padding="10,3" Margin="6,0,0,0" />
-                                <Button Content="Supprimer" Command="{Binding DeleteTemplateCommand}"
+                <Button Content="{DynamicResource S_Main_Supprimer}" Command="{Binding DeleteTemplateCommand}"
                         Padding="10,3" Margin="6,0,0,0" />
-                            </StackPanel>
+              </StackPanel>
 
-                            <ListBox ItemsSource="{Binding Templates}"
+              <ListBox ItemsSource="{Binding Templates}"
                        SelectedItem="{Binding SelectedTemplate}"
                        BorderThickness="0" Background="Transparent"
                        HorizontalContentAlignment="Stretch">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Margin="2,6">
-                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <StackPanel Margin="2,6">
+                      <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
                                  TextTrimming="CharacterEllipsis" />
 
-                                            <!-- Le nombre d'heritieres est la PORTEE d'une
+                      <!-- Le nombre d'heritieres est la PORTEE d'une
                            modification : c'est l'information a voir avant
                            d'ouvrir le gabarit, pas apres. -->
-                                            <TextBlock FontSize="11" Opacity="0.7">
+                      <TextBlock FontSize="11" Opacity="0.7">
                         <Run Text="{Binding UsedBy.Count, Mode=OneWay}" />
-                        <Run Text="configuration(s)" />
-                                            </TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </DockPanel>
-                    </TabItem>
-                </TabControl>
-            </Border>
+                        <Run Text="{DynamicResource S_Main_ConfigurationS}" />
+                      </TextBlock>
+                    </StackPanel>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </DockPanel>
+          </TabItem>
+        </TabControl>
+      </Border>
 
-            <!-- La supervision reste le premier onglet : c'est ce qu'on ouvre pour
+      <!-- La supervision reste le premier onglet : c'est ce qu'on ouvre pour
            AGIR. Le tableau de bord est ce qu'on regarde pour savoir s'il faut
            agir. -->
-            <TabControl Grid.Column="2" Margin="10">
+      <TabControl Grid.Column="2" Margin="10">
 
-                <TabItem Header="Supervision">
-                    <ScrollViewer Margin="10" VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
+        <TabItem Header="{DynamicResource S_Main_Supervision}">
+          <ScrollViewer Margin="10" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
 
-                            <TextBlock Text="{Binding SelectedConfiguration.Name}"
+              <TextBlock Text="{Binding SelectedConfiguration.Name}"
                          FontSize="22" FontWeight="Light" />
 
-                            <TextBlock Text="{Binding SelectedConfiguration.Mailbox}"
+              <TextBlock Text="{Binding SelectedConfiguration.Mailbox}"
                          FontSize="12" Opacity="0.7" Margin="0,2,0,0" />
 
-                            <TextBlock Text="Anomalies" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,8" />
-                            <ItemsControl ItemsSource="{Binding SelectedConfiguration.Issues}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Margin="0,3" TextWrapping="Wrap">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Foreground" Value="#C9942B" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Blocking}" Value="True">
-                                                            <Setter Property="Foreground" Value="#E04A4A" />
-                                                            <Setter Property="FontWeight" Value="SemiBold" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
+              <TextBlock Text="{DynamicResource S_Main_Anomalies}" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,8" />
+              <ItemsControl ItemsSource="{Binding SelectedConfiguration.Issues}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Margin="0,3" TextWrapping="Wrap">
+                      <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                          <Setter Property="Foreground" Value="#C9942B" />
+                          <Style.Triggers>
+                            <DataTrigger Binding="{Binding Blocking}" Value="True">
+                              <Setter Property="Foreground" Value="#E04A4A" />
+                              <Setter Property="FontWeight" Value="SemiBold" />
+                            </DataTrigger>
+                          </Style.Triggers>
+                        </Style>
+                      </TextBlock.Style>
                       <Run Text="{Binding Path, Mode=OneWay}" FontFamily="Consolas" FontSize="11" />
                       <Run Text=" " />
                       <Run Text="{Binding Message, Mode=OneWay}" />
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                    </TextBlock>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
 
-                            <TextBlock Text="Tests de connexion" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,8" />
-                            <ItemsControl ItemsSource="{Binding TestResults}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <DockPanel Margin="0,3">
-                                            <Ellipse DockPanel.Dock="Left" Width="8" Height="8" Margin="0,0,8,0"
+              <TextBlock Text="{DynamicResource S_Main_TestsDeConnexion}" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,8" />
+              <ItemsControl ItemsSource="{Binding TestResults}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <DockPanel Margin="0,3">
+                      <Ellipse DockPanel.Dock="Left" Width="8" Height="8" Margin="0,0,8,0"
                                VerticalAlignment="Center"
                                Fill="{Binding Success, Converter={StaticResource BoolToBrush}}" />
-                                            <TextBlock TextWrapping="Wrap">
+                      <TextBlock TextWrapping="Wrap">
                         <Run Text="{Binding Component, Mode=OneWay}" FontWeight="SemiBold" />
                         <Run Text=" " />
                         <Run Text="{Binding Message, Mode=OneWay}" />
-                        <Run Text=" (" /><Run Text="{Binding ElapsedMs, Mode=OneWay}" /><Run Text=" ms)" />
-                                            </TextBlock>
-                                        </DockPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                        <Run Text=" (" /><Run Text="{Binding ElapsedMs, Mode=OneWay}" /><Run Text="{DynamicResource S_Main_Ms}" />
+                      </TextBlock>
+                    </DockPanel>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
 
-                            <TextBlock Text="Workers" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,8" />
-                            <DataGrid ItemsSource="{Binding Workers}"
+              <TextBlock Text="{DynamicResource S_Main_Workers}" FontSize="14" FontWeight="SemiBold" Margin="0,24,0,8" />
+              <DataGrid ItemsSource="{Binding Workers}"
                         AutoGenerateColumns="False"
                         IsReadOnly="True"
                         HeadersVisibility="Column"
@@ -308,22 +284,22 @@
                         Background="Transparent"
                         RowBackground="Transparent"
                         CanUserAddRows="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Configuration" Binding="{Binding Name}" Width="*" />
-                                    <DataGridTextColumn Header="Etat" Binding="{Binding State}" Width="90" />
-                                    <DataGridTextColumn Header="Dernier cycle" Binding="{Binding LastCycleUtc, StringFormat=g}" Width="150" />
-                                    <DataGridTextColumn Header="Derniere erreur" Binding="{Binding LastError}" Width="2*" />
-                                </DataGrid.Columns>
-                            </DataGrid>
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="{DynamicResource S_Main_Configuration}" Binding="{Binding Name}" Width="*" />
+                  <DataGridTextColumn Header="{DynamicResource S_Main_Etat}" Binding="{Binding State}" Width="90" />
+                  <DataGridTextColumn Header="{DynamicResource S_Main_DernierCycle}" Binding="{Binding LastCycleUtc, StringFormat=g}" Width="150" />
+                  <DataGridTextColumn Header="{DynamicResource S_Main_DerniereErreur}" Binding="{Binding LastError}" Width="2*" />
+                </DataGrid.Columns>
+              </DataGrid>
 
-                        </StackPanel>
-                    </ScrollViewer>
-                </TabItem>
+            </StackPanel>
+          </ScrollViewer>
+        </TabItem>
 
-                <TabItem Header="Tableau de bord">
-                    <views:DashboardView DataContext="{Binding Dashboard}" />
-                </TabItem>
-            </TabControl>
-        </Grid>
-    </DockPanel>
+        <TabItem Header="{DynamicResource S_Main_TableauDeBord}">
+          <views:DashboardView DataContext="{Binding Dashboard}" />
+        </TabItem>
+      </TabControl>
+    </Grid>
+  </DockPanel>
 </mah:MetroWindow>

@@ -17,12 +17,18 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-
+import shutil
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
+
+# Les deux outils ne sont pas toujours dans le PATH apres installation, et
+# subprocess ne fait pas la meme resolution que le shell. Chemins explicites
+# avec repli sur le PATH quand il suffit.
+PANDOC = shutil.which("pandoc") or r"C:\Users\olivier.gruwe_arondo\AppData\Local\Pandoc\pandoc.exe"
+WKHTML = shutil.which("wkhtmltopdf") or r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 
 RACINE = Path(__file__).parent
 
@@ -82,7 +88,7 @@ def pied_de_page(index: int, total: int, titre: str):
 
     c.setFont("Helvetica", 7)
     c.setFillColor(HexColor("#7a828c"))
-    c.drawString(45, 26, f"ACPoller 2.0  —  {titre}")
+    c.drawString(45, 26, f"ACPollerForMail  —  {titre}")
     c.drawRightString(A4[0] - 45, 26, f"{index} / {total}")
     c.save()
 
@@ -102,7 +108,7 @@ def page_couverture(image: Path):
 
 
 def construire(langue: str, nom: str, titre: str, soustitre, couverture, sommaire):
-    dossier = RACINE.parent / langue
+    dossier = RACINE / langue
     source = dossier / f"{nom}.md"
 
     if not source.exists():
@@ -113,7 +119,7 @@ def construire(langue: str, nom: str, titre: str, soustitre, couverture, sommair
     corps = RACINE / f"_{nom}-corps.pdf"
 
     commande = [
-        "pandoc", str(source), "-f", "markdown", "-t", "html5", "-s",
+        PANDOC, str(source), "-f", "markdown", "-t", "html5", "-s",
         "--metadata", "title= ", "-c", "style.css", "-o", str(html),
     ]
 
@@ -133,7 +139,7 @@ def construire(langue: str, nom: str, titre: str, soustitre, couverture, sommair
         texte = texte.replace("</head>", STYLE_SOMMAIRE.format())
     elif soustitre:
         entete = (f'<div class="couverture">\n'
-                  f'  <div class="produit">ACPoller 2.0</div>\n'
+                  f'  <div class="produit">ACPollerForMail 2.0</div>\n'
                   f'  <div class="soustitre">{soustitre}</div>\n'
                   f'</div>\n')
         texte = texte.replace("<body>", "<body>\n" + entete, 1)
@@ -142,7 +148,7 @@ def construire(langue: str, nom: str, titre: str, soustitre, couverture, sommair
     html.write_text(texte, encoding="utf-8")
 
     subprocess.run([
-        "wkhtmltopdf", "--enable-local-file-access",
+        WKHTML, "--enable-local-file-access",
         "--margin-top", "16mm", "--margin-bottom", "16mm",
         "--margin-left", "16mm", "--margin-right", "16mm",
         "--quiet", str(html), str(corps),
@@ -164,7 +170,7 @@ def construire(langue: str, nom: str, titre: str, soustitre, couverture, sommair
         ecrivain.add_page(page)
 
     ecrivain.add_metadata({
-        "/Title": f"ACPoller 2.0 — {titre}",
+        "/Title": f"ACPollerForMail 2.0 — {titre}",
         "/Author": "Arondor",
     })
 

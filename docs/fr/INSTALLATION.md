@@ -1,4 +1,4 @@
-# ACPoller — Guide d'installation
+# ACPollerForMail — Guide d'installation
 
 ## Prerequis
 
@@ -36,7 +36,7 @@ Le compte n'a pas besoin d'etre administrateur du serveur.
 
 ## Installation
 
-1. Lancer `ACPoller-x.y.z-setup.exe` en administrateur
+1. Lancer `ACPollerForMail-x.y.z-setup.exe` en administrateur
 2. Accepter la licence, choisir les composants
 3. **Renseigner le compte de service** sur la page dediee
 4. Cocher LibreOffice et qpdf s'ils ne sont pas deja installes
@@ -54,7 +54,7 @@ de progression parait figee pendant ce temps, c'est normal.
 
 Le service est installe mais ne fait rien : aucune boite n'est declaree.
 
-1. Lancer **ACPoller** depuis le menu Demarrer
+1. Lancer **ACPollerForMail** depuis le menu Demarrer
 2. L'interface se connecte seule, le jeton lui ayant ete depose
 3. Bouton **Nouvelle**, renseigner la source et au moins une cible
 4. Bouton **Tester** avant d'enregistrer
@@ -87,8 +87,8 @@ conserve une copie du fichier d'origine sous `appsettings.json.clear.*.bak`.
 chiffrement a eu lieu, puis les supprimer :
 
 ```
-findstr /i "ENC:" "C:\Program Files\ACPoller\appsettings.json"
-del "C:\Program Files\ACPoller\appsettings.json.clear.*.bak"
+findstr /i "ENC:" "C:\Program Files\ACPollerForMail\appsettings.json"
+del "C:\Program Files\ACPollerForMail\appsettings.json.clear.*.bak"
 ```
 
 ---
@@ -111,14 +111,14 @@ reprendre les reglages ajoutes par la nouvelle version.
 
 L'installeur conserve volontairement :
 
-- `C:\Program Files\ACPoller\appsettings.json`, qui porte les secrets et le
+- `C:\Program Files\ACPollerForMail\appsettings.json`, qui porte les secrets et le
   parametrage
-- `C:\ProgramData\ACPoller`, qui porte le journal des messages traites
+- `C:\ProgramData\ACPollerForMail`, qui porte le journal des messages traites
 
 **Effacer le journal des messages traites provoque un retraitement complet de
 l'historique a la prochaine installation**, donc des doublons en GED.
 
-LibreOffice n'est pas desinstalle : il a pu etre installe avant ACPoller ou
+LibreOffice n'est pas desinstalle : il a pu etre installe avant ACPollerForMail ou
 servir a autre chose sur ce serveur.
 
 ---
@@ -129,7 +129,7 @@ A derouler sur le serveur client avant de declarer le service operationnel.
 
 | Verification | Comment | Resultat attendu |
 |---|---|---|
-| Service demarre | `Get-Service ACPoller` | `Running` |
+| Service demarre | `Get-Service ACPollerForMail` | `Running` |
 | Workers actifs | Journal de demarrage | `N worker(s) demarre(s), 0 ecarte(s)` |
 | Source joignable | Bouton **Tester** | Tous les composants en vert |
 | Cibles joignables | Bouton **Tester** | Ecriture reelle confirmee |
@@ -138,7 +138,7 @@ A derouler sur le serveur client avant de declarer le service operationnel.
 | Acces reseau du compte | Tester une cible UNC | Depot reussi |
 | Premier message | Deposer un mail de test | PDF et fichier d'information en GED |
 | Idempotence | Attendre un second cycle | Le message n'est pas retraite |
-| Redemarrage | `Restart-Service ACPoller` | Reprise sans doublon |
+| Redemarrage | `Restart-Service ACPollerForMail` | Reprise sans doublon |
 
 La ligne **acces reseau du compte** est celle qui echoue le plus souvent, et
 elle n'echoue que sur un vrai partage : un test local ne la couvre pas.

@@ -29,7 +29,7 @@
 
   <TabControl Margin="12">
 
-    <TabItem Header="Jetons de nommage">
+    <TabItem Header="{DynamicResource S_Help_JetonsDeNommage}">
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
           <TextBlock Style="{StaticResource P}"
@@ -50,18 +50,18 @@
 {ext}         Extension de la piece.
 {node}        Chemin logique complet, exemple transfert.eml_bl.pdf</TextBlock>
 
-          <TextBlock Style="{StaticResource H1}" Text="Assainissement" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_Assainissement}" />
           <TextBlock Style="{StaticResource P}"
-                     Text="Tous les caracteres interdits dans un nom de fichier Windows sont remplaces, separateurs de chemin compris : un sujet de mail contenant une barre oblique ne peut pas creer de sous-repertoire sur la cible. Le nom final est borne en longueur, et un nom vide devient 'sans-nom'." />
+                     Text="{DynamicResource S_Help_TousLesCaracteresInterdits}" />
         </StackPanel>
       </ScrollViewer>
     </TabItem>
 
-    <TabItem Header="Statuts des pieces">
+    <TabItem Header="{DynamicResource S_Help_StatutsDesPieces}">
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
           <TextBlock Style="{StaticResource P}"
-                     Text="Le fichier d'information porte un statut par piece. Les distinguer est essentiel : trois d'entre eux signifient que la GED n'a PAS le document." />
+                     Text="{DynamicResource S_Help_LeFichierDInformation}" />
 
           <TextBlock Style="{StaticResource Code}" xml:space="preserve">Converted           PDF fidele produit. Present dans le PDF unifie.
 
@@ -86,20 +86,20 @@ Excluded            Ecartee volontairement : filtre d'extension, image de
 Container           Archive ou message imbrique. Ne produit pas de document,
                     seuls ses enfants comptent.</TextBlock>
 
-          <TextBlock Style="{StaticResource H1}" Text="En pratique" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_EnPratique}" />
           <TextBlock Style="{StaticResource P}"
-                     Text="Un lot ou FailedCount est superieur a zero merite un regard : le champ Warnings du fichier d'information porte le motif de chaque echec." />
+                     Text="{DynamicResource S_Help_UnLotOuFailedcount}" />
         </StackPanel>
       </ScrollViewer>
     </TabItem>
 
-    <TabItem Header="Champs personnalises">
+    <TabItem Header="{DynamicResource S_Help_ChampsPersonnalises}">
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
           <TextBlock Style="{StaticResource P}"
-                     Text="Les champs ajoutes au fichier d'information sont resolus dans cet ordre : valeur d'origine selon la source, format de date, table de traduction, valeur par defaut si le resultat est vide, longueur fixe." />
+                     Text="{DynamicResource S_Help_LesChampsAjoutesAu}" />
 
-          <TextBlock Style="{StaticResource H1}" Text="Sources" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_Sources}" />
           <TextBlock Style="{StaticResource Code}" xml:space="preserve">Fixed         Valeur litterale, identique pour tous les messages.
 Token         Gabarit a jetons, resolu comme le nommage des fichiers.
 Header        En-tete MIME du message, nom insensible a la casse.
@@ -107,43 +107,43 @@ Property      Valeur deposee par un traitement metier, par exemple un code
               fournisseur extrait du sujet par un plugin.
 Environment   Variable d'environnement du serveur, par exemple COMPUTERNAME.</TextBlock>
 
-          <TextBlock Style="{StaticResource H1}" Text="Sortie selon le format" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_SortieSelonLeFormat}" />
           <TextBlock Style="{StaticResource Code}" xml:space="preserve">json   objet "fields", noms en cles
 xml    bloc &lt;Fields&gt; avec &lt;Field name="..."&gt;valeur&lt;/Field&gt;
 csv    colonnes ajoutees APRES les colonnes fixes, repetees sur chaque ligne
 xslt   a la disposition de la feuille de transformation</TextBlock>
 
           <TextBlock Style="{StaticResource P}"
-                     Text="Un champ non resolu ne fait jamais echouer le traitement : il produit sa valeur par defaut et un avertissement. C'est le document qui compte, pas la completude de son index." />
+                     Text="{DynamicResource S_Help_UnChampNonResolu}" />
         </StackPanel>
       </ScrollViewer>
     </TabItem>
 
-    <TabItem Header="Diagnostic">
+    <TabItem Header="{DynamicResource S_Help_Diagnostic}">
       <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="20">
 
-          <TextBlock Style="{StaticResource H1}" Text="Un message revient a chaque cycle" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_UnMessageRevientA}" />
           <TextBlock Style="{StaticResource P}"
-                     Text="Le marquage n'a pas lieu, ou la cle de deduplication n'est pas stable. Verifier que l'export reussit : le marquage n'intervient qu'APRES export confirme, volontairement. Un doublon se detecte et se corrige, une perte silencieuse non." />
+                     Text="{DynamicResource S_Help_LeMarquageNA}" />
 
-          <TextBlock Style="{StaticResource H1}" Text="Le PDF unifie est vide ou incomplet" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_LePdfUnifieEst}" />
           <TextBlock Style="{StaticResource P}"
-                     Text="Regarder le statut de chaque piece dans le fichier d'information. PassThroughUnverified signifie que le document est livre a cote mais n'a pas pu etre fusionne. LibreOffice absent explique l'echec de toutes les pieces bureautiques." />
+                     Text="{DynamicResource S_Help_RegarderLeStatutDe}" />
 
-          <TextBlock Style="{StaticResource H1}" Text="Le disque se remplit" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_LeDisqueSeRemplit}" />
           <TextBlock Style="{StaticResource P}"
-                     Text="Le repertoire de travail n'est nettoye qu'apres export confirme. Une accumulation signale des exports en echec. Le bouton Maintenance declenche une passe immediate : elle met en quarantaine les unites inachevees de plus de sept jours et supprime les repertoires orphelins." />
+                     Text="{DynamicResource S_Help_LeRepertoireDeTravail}" />
 
-          <TextBlock Style="{StaticResource H1}" Text="Rejouer un message litigieux" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_RejouerUnMessageLitigieux}" />
           <TextBlock Style="{StaticResource P}"
-                     Text="Le MIME brut est conserve dans le repertoire de travail du message, sous le nom message.eml. Le deposer dans un dossier, creer une configuration en protocole folder pointant dessus, et le message est rejoue a l'identique." />
+                     Text="{DynamicResource S_Help_LeMimeBrutEst}" />
 
-          <TextBlock Style="{StaticResource H1}" Text="Ou sont les journaux" />
+          <TextBlock Style="{StaticResource H1}" Text="{DynamicResource S_Help_OuSontLesJournaux}" />
           <TextBlock Style="{StaticResource Code}" xml:space="preserve">logs\acpoller-AAAA-MM-JJ.log          journal complet
 logs\acpoller-errors-AAAA-MM-JJ.log   avertissements et erreurs seuls</TextBlock>
           <TextBlock Style="{StaticResource P}"
-                     Text="Le niveau se change sans redemarrer par la variable d'environnement ACPOLLER_LOGLEVEL." />
+                     Text="{DynamicResource S_Help_LeNiveauSeChange}" />
 
         </StackPanel>
       </ScrollViewer>

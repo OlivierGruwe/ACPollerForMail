@@ -40,21 +40,21 @@
     <StackPanel Margin="20">
 
       <DockPanel>
-        <Button DockPanel.Dock="Right" Content="Remettre a zero"
+        <Button DockPanel.Dock="Right" Content="{DynamicResource S_Dash_RemettreAZero}"
                 Command="{Binding ResetCommand}"
                 Style="{StaticResource MahApps.Styles.Button.Square}" Padding="12,4" />
         <TextBlock Text="{Binding WindowLabel}" VerticalAlignment="Center"
                    FontSize="12" Opacity="0.7" />
       </DockPanel>
 
-      <TextBlock Text="Traitement" Style="{StaticResource Section}" />
+      <TextBlock Text="{DynamicResource S_Dash_Traitement}" Style="{StaticResource Section}" />
 
       <WrapPanel>
         <Border Style="{StaticResource Card}">
           <StackPanel>
             <TextBlock Text="{Binding Data.Exported}" Style="{StaticResource Figure}"
                        Foreground="#2EA043" />
-            <TextBlock Text="Messages exportes" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_MessagesExportes}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
 
@@ -73,7 +73,7 @@
               </TextBlock.Style>
               <Run Text="{Binding Data.Failed, Mode=OneWay}" />
             </TextBlock>
-            <TextBlock Text="En echec" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_EnEchec}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
 
@@ -83,35 +83,35 @@
               <Run Text="{Binding Data.SuccessRate, Mode=OneWay}" />
               <Run Text="%" />
             </TextBlock>
-            <TextBlock Text="Taux de succes" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_TauxDeSucces}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
             <TextBlock Text="{Binding Data.Rejected}" Style="{StaticResource Figure}" />
-            <TextBlock Text="Rejetes par un traitement metier" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_RejetesParUnTraitement}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
             <TextBlock Text="{Binding Data.Skipped}" Style="{StaticResource Figure}" />
-            <TextBlock Text="Ecartes" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_Ecartes}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
       </WrapPanel>
 
-      <TextBlock Text="Performance et sante" Style="{StaticResource Section}" />
+      <TextBlock Text="{DynamicResource S_Dash_PerformanceEtSante}" Style="{StaticResource Section}" />
 
       <WrapPanel>
         <Border Style="{StaticResource Card}">
           <StackPanel>
             <TextBlock Style="{StaticResource Figure}">
               <Run Text="{Binding Data.AverageDurationMs, Mode=OneWay}" />
-              <Run Text="ms" FontSize="14" />
+              <Run Text="{DynamicResource S_Dash_Ms}" FontSize="14" />
             </TextBlock>
-            <TextBlock Text="Duree moyenne" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_DureeMoyenne}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
 
@@ -119,18 +119,18 @@
           <StackPanel>
             <TextBlock Style="{StaticResource Figure}">
               <Run Text="{Binding Data.P95DurationMs, Mode=OneWay}" />
-              <Run Text="ms" FontSize="14" />
+              <Run Text="{DynamicResource S_Dash_Ms}" FontSize="14" />
             </TextBlock>
             <!-- Le P95 dit ce que la moyenne cache : les messages lents
                  saturent les slots de concurrence. -->
-            <TextBlock Text="95e centile. Ecart important avec la moyenne : des messages saturent les slots."
+            <TextBlock Text="{DynamicResource S_Dash_95eCentileEcartImportant}"
                        Style="{StaticResource Caption}" MaxWidth="180" />
           </StackPanel>
         </Border>
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
-            <TextBlock>
+            <TextBlock >
               <TextBlock.Style>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource Figure}">
                   <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}" />
@@ -143,14 +143,14 @@
               </TextBlock.Style>
               <Run Text="{Binding Data.ThrottleEvents, Mode=OneWay}" />
             </TextBlock>
-            <TextBlock Text="Limitations Graph. Non nul en regime etabli : reduire la concurrence."
+            <TextBlock Text="{DynamicResource S_Dash_LimitationsGraphNonNul}"
                        Style="{StaticResource Caption}" MaxWidth="180" />
           </StackPanel>
         </Border>
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
-            <TextBlock>
+            <TextBlock >
               <TextBlock.Style>
                 <Style TargetType="TextBlock" BasedOn="{StaticResource Figure}">
                   <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Text}" />
@@ -164,7 +164,7 @@
               <Run Text="{Binding Data.FreeDiskPercent, Mode=OneWay}" />
               <Run Text="%" />
             </TextBlock>
-            <TextBlock Text="Disque libre. A saturation, la capture s'arrete."
+            <TextBlock Text="{DynamicResource S_Dash_DisqueLibreASaturation}"
                        Style="{StaticResource Caption}" MaxWidth="180" />
           </StackPanel>
         </Border>
@@ -172,19 +172,19 @@
         <Border Style="{StaticResource Card}">
           <StackPanel>
             <TextBlock Text="{Binding Data.ConversionFailures}" Style="{StaticResource Figure}" />
-            <TextBlock Text="Pieces non converties" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_PiecesNonConverties}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
 
         <Border Style="{StaticResource Card}">
           <StackPanel>
             <TextBlock Text="{Binding Data.CycleErrors}" Style="{StaticResource Figure}" />
-            <TextBlock Text="Cycles en erreur" Style="{StaticResource Caption}" />
+            <TextBlock Text="{DynamicResource S_Dash_CyclesEnErreur}" Style="{StaticResource Caption}" />
           </StackPanel>
         </Border>
       </WrapPanel>
 
-      <TextBlock Text="Volume par heure" Style="{StaticResource Section}" />
+      <TextBlock Text="{DynamicResource S_Dash_VolumeParHeure}" Style="{StaticResource Section}" />
 
       <Border BorderBrush="{DynamicResource MahApps.Brushes.Gray8}" BorderThickness="0,0,0,1"
               Padding="0,0,0,4">
@@ -210,7 +210,7 @@
         </ItemsControl>
       </Border>
 
-      <TextBlock Text="Par configuration" Style="{StaticResource Section}" />
+      <TextBlock Text="{DynamicResource S_Dash_ParConfiguration}" Style="{StaticResource Section}" />
 
       <DataGrid ItemsSource="{Binding ByConfiguration}"
                 AutoGenerateColumns="False"
@@ -223,11 +223,11 @@
                 CanUserAddRows="False"
                 MaxHeight="320">
         <DataGrid.Columns>
-          <DataGridTextColumn Header="Configuration" Binding="{Binding Name}" Width="*" />
-          <DataGridTextColumn Header="Exportes" Binding="{Binding Exported}" Width="90" />
-          <DataGridTextColumn Header="Echecs" Binding="{Binding Failed}" Width="80" />
-          <DataGridTextColumn Header="Rejets" Binding="{Binding Rejected}" Width="80" />
-          <DataGridTextColumn Header="Duree moy." Binding="{Binding AverageDurationMs, StringFormat={}{0} ms}"
+          <DataGridTextColumn Header="{DynamicResource S_Dash_Configuration}" Binding="{Binding Name}" Width="*" />
+          <DataGridTextColumn Header="{DynamicResource S_Dash_Exportes}" Binding="{Binding Exported}" Width="90" />
+          <DataGridTextColumn Header="{DynamicResource S_Dash_Echecs}" Binding="{Binding Failed}" Width="80" />
+          <DataGridTextColumn Header="{DynamicResource S_Dash_Rejets}" Binding="{Binding Rejected}" Width="80" />
+          <DataGridTextColumn Header="{DynamicResource S_Dash_DureeMoy}" Binding="{Binding AverageDurationMs, StringFormat={}{0} ms}"
                               Width="100" />
         </DataGrid.Columns>
 

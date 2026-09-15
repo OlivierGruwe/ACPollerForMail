@@ -44,46 +44,46 @@
     <Border Grid.Row="0" Background="#33C9942B" BorderBrush="#C9942B" BorderThickness="1"
             CornerRadius="3" Padding="12,10" Margin="0,0,0,14">
       <TextBlock TextWrapping="Wrap" FontSize="11"
-                 Text="Ces reglages ne sont pas rechargeables a chaud. Toute modification enregistree ici ne prendra effet qu'apres un redemarrage complet du service, et la capture est interrompue pendant ce temps." />
+                 Text="{DynamicResource S_Svc_CesReglagesNeSont}" />
     </Border>
 
     <TabControl Grid.Row="1">
 
-      <TabItem Header="Service">
+      <TabItem Header="{DynamicResource S_Svc_Service}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
           <StackPanel Margin="16">
 
-            <TextBlock Text="Repertoire de travail" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_RepertoireDeTravail}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding WorkDirectory, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="Consolas" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Contient les unites de travail en cours, le journal des messages traites et la quarantaine. Le changer PERD le journal d'idempotence : les messages encore presents dans les boites seront retraites, donc des doublons en GED." />
+                       Text="{DynamicResource S_Svc_ContientLesUnitesDe}" />
 
-            <TextBlock Text="Traitements simultanes, toutes boites confondues" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_TraitementsSimultanesToutesBoites}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding MaxGlobalConcurrency}" Minimum="1" Maximum="64"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Borne le travail reel, pas le nombre de workers. Cent boites peuvent ecouter avec quatre traitements a la fois. Augmenter au-dela du nombre de profils LibreOffice ne sert a rien : la conversion deviendra le goulot." />
+                       Text="{DynamicResource S_Svc_BorneLeTravailReel}" />
 
-            <TextBlock Text="Repertoire des plugins" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_RepertoireDesPlugins}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding PluginDirectory, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="Consolas" />
 
-            <TextBlock Text="Retention du journal des messages traites (jours)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_RetentionDuJournalDes}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding ProcessedRetentionDays}" Minimum="1" Maximum="3650"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Au-dela, une entree est purgee. Trop court, un message ancien laisse dans une boite serait retraite. La valeur doit depasser la duree pendant laquelle un message peut rester non traite." />
+                       Text="{DynamicResource S_Svc_AuDelaUneEntree}" />
 
           </StackPanel>
         </ScrollViewer>
       </TabItem>
 
-      <TabItem Header="Outils">
+      <TabItem Header="{DynamicResource S_Svc_Outils}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
           <StackPanel Margin="16">
 
-            <TextBlock Text="LibreOffice (soffice.exe)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_LibreofficeSofficeExe}" Style="{StaticResource Label}" />
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -92,19 +92,19 @@
               </Grid.ColumnDefinitions>
               <TextBox Grid.Column="0" FontFamily="Consolas"
                        Text="{Binding SofficePath, UpdateSourceTrigger=PropertyChanged}" />
-              <Button Grid.Column="2" Content="Parcourir" Padding="12,3"
+              <Button Grid.Column="2" Content="{DynamicResource S_Svc_Parcourir}" Padding="12,3"
                       Command="{Binding BrowseCommand}" CommandParameter="soffice" />
             </Grid>
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Sans LibreOffice, aucune piece bureautique n'est convertie : Word, Excel et PowerPoint sortent en page de substitution. Apache OpenOffice ne convient pas, son soffice ne gere pas la conversion en ligne de commande." />
+                       Text="{DynamicResource S_Svc_SansLibreofficeAucunePiece}" />
 
-            <TextBlock Text="Profils LibreOffice simultanes" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_ProfilsLibreofficeSimultanes}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding LibreOfficeProfiles}" Minimum="1" Maximum="16"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Chaque conversion utilise un profil isole. Deux conversions partageant un profil se bloquent mutuellement, c'est pourquoi ce nombre borne reellement la conversion parallele." />
+                       Text="{DynamicResource S_Svc_ChaqueConversionUtiliseUn}" />
 
-            <TextBlock Text="qpdf" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_Qpdf}" Style="{StaticResource Label}" />
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -113,13 +113,13 @@
               </Grid.ColumnDefinitions>
               <TextBox Grid.Column="0" FontFamily="Consolas"
                        Text="{Binding QpdfPath, UpdateSourceTrigger=PropertyChanged}" />
-              <Button Grid.Column="2" Content="Parcourir" Padding="12,3"
+              <Button Grid.Column="2" Content="{DynamicResource S_Svc_Parcourir}" Padding="12,3"
                       Command="{Binding BrowseCommand}" CommandParameter="qpdf" />
             </Grid>
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Repare les PDF que le moteur de lecture refuse. Sur un flux de factures reelles, cela represente quelques pourcents des documents, qui seraient sinon livres sans etre fusionnes." />
+                       Text="{DynamicResource S_Svc_RepareLesPdfQue}" />
 
-            <TextBlock Text="Repertoire des polices" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_RepertoireDesPolices}" Style="{StaticResource Label}" />
             <Grid>
               <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -128,65 +128,65 @@
               </Grid.ColumnDefinitions>
               <TextBox Grid.Column="0" FontFamily="Consolas"
                        Text="{Binding FontDirectory, UpdateSourceTrigger=PropertyChanged}" />
-              <Button Grid.Column="2" Content="Parcourir" Padding="12,3"
+              <Button Grid.Column="2" Content="{DynamicResource S_Svc_Parcourir}" Padding="12,3"
                       Command="{Binding BrowseCommand}" CommandParameter="fonts" />
             </Grid>
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Les polices sont incorporees dans les PDF produits, qui sont archives des annees. Dependre d'une police systeme fait varier le rendu d'un serveur a l'autre." />
+                       Text="{DynamicResource S_Svc_LesPolicesSontIncorporees}" />
 
           </StackPanel>
         </ScrollViewer>
       </TabItem>
 
-      <TabItem Header="Maintenance">
+      <TabItem Header="{DynamicResource S_Svc_Maintenance}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
           <StackPanel Margin="16">
 
-            <TextBlock Text="Periode entre deux passes (minutes)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_PeriodeEntreDeuxPasses}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding MaintenanceIntervalMinutes}" Minimum="5" Maximum="1440"
                                Width="120" HorizontalAlignment="Left" />
 
-            <TextBlock Text="Mise en quarantaine apres (jours)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_MiseEnQuarantaineApres}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding QuarantineAfterDays}" Minimum="1" Maximum="365"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Une unite de travail inachevee depuis plus longtemps est deplacee en quarantaine plutot que supprimee : elle porte le MIME d'origine, seul moyen de rejouer le message apres correction." />
+                       Text="{DynamicResource S_Svc_UneUniteDeTravail}" />
 
-            <TextBlock Text="Seuil d'alerte d'espace disque (%)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_SeuilDAlerteD}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding LowDiskThresholdPercent}" Minimum="1" Maximum="90"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="En dessous, une alerte est journalisee et affichee. La capture ne s'arrete pas d'elle-meme : elle echouera a saturation, ce qui est bien plus brutal." />
+                       Text="{DynamicResource S_Svc_EnDessousUneAlerte}" />
 
           </StackPanel>
         </ScrollViewer>
       </TabItem>
 
-      <TabItem Header="Pilotage">
+      <TabItem Header="{DynamicResource S_Svc_Pilotage}">
         <ScrollViewer VerticalScrollBarVisibility="Auto">
           <StackPanel Margin="16">
 
-            <CheckBox Content="Activer l'API de pilotage" IsChecked="{Binding ControlApiEnabled}" />
+            <CheckBox Content="{DynamicResource S_Svc_ActiverLApiDe}" IsChecked="{Binding ControlApiEnabled}" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="La desactiver rend cette interface inutilisable : elle ne communique avec le service que par cette API. Il faudra reactiver le reglage a la main dans le fichier de configuration." />
+                       Text="{DynamicResource S_Svc_LaDesactiverRendCette}" />
 
-            <TextBlock Text="Port d'ecoute" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_PortDEcoute}" Style="{StaticResource Label}" />
             <mah:NumericUpDown Value="{Binding ControlApiPort}" Minimum="1024" Maximum="65535"
                                Width="120" HorizontalAlignment="Left" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Ecoute uniquement sur la boucle locale. Apres changement, penser a corriger l'adresse dans les reglages de connexion de cette interface." />
+                       Text="{DynamicResource S_Svc_EcouteUniquementSurLa}" />
 
-            <TextBlock Text="Jeton de pilotage (vide = inchange)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_JetonDePilotageVide}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding ControlApiToken, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="Consolas" />
             <TextBlock TextWrapping="Wrap" FontSize="10" Foreground="#C9942B" Margin="0,4,0,0"
-                       Text="Changer le jeton invalide TOUS les postes d'exploitation deja configures, y compris celui-ci. Il faudra le reporter dans les reglages de connexion de chaque interface." />
+                       Text="{DynamicResource S_Svc_ChangerLeJetonInvalide}" />
 
-            <TextBlock Text="Base de metriques (vide = inchange)" Style="{StaticResource Label}" />
+            <TextBlock Text="{DynamicResource S_Svc_BaseDeMetriquesVide}" Style="{StaticResource Label}" />
             <TextBox Text="{Binding MetricsConnectionString, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="Consolas" />
             <TextBlock Style="{StaticResource Hint}"
-                       Text="Chaine de connexion SQL Server pour l'historique long. Le tableau de bord fonctionne sans elle, sur une fenetre de vingt-quatre heures en memoire." />
+                       Text="{DynamicResource S_Svc_ChaineDeConnexionSql}" />
 
           </StackPanel>
         </ScrollViewer>
@@ -221,9 +221,9 @@
 
     <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
       <mah:ProgressRing Width="18" Height="18" Margin="0,0,12,0" IsActive="{Binding IsBusy}" />
-      <Button Content="Fermer" IsCancel="True"
+      <Button Content="{DynamicResource S_Svc_Fermer}" IsCancel="True"
               Style="{StaticResource MahApps.Styles.Button.Square}" Padding="20,6" />
-      <Button Content="Enregistrer" Click="OnSave"
+      <Button Content="{DynamicResource S_Svc_Enregistrer}" Click="OnSave"
               IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"
               Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
               Padding="20,6" Margin="8,0,0,0" />

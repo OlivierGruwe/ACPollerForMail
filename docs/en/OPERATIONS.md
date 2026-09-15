@@ -1,4 +1,4 @@
-# ACPoller — Operations guide
+# ACPollerForMail — Operations guide
 
 This document is written for whoever runs the service day to day, not for
 whoever built it. It answers questions in the order they actually come up in
@@ -10,20 +10,20 @@ production.
 
 | Path | Contents | Critical |
 |---|---|---|
-| `C:\Program Files\ACPoller\appsettings.json` | Configuration, encrypted secrets | Yes |
-| `C:\Program Files\ACPoller\logs\` | Service logs | No |
-| `C:\ProgramData\ACPoller\work\` | Working units in progress | No |
-| `C:\ProgramData\ACPoller\work\state\processed.db` | Processed-message log | **Critical** |
-| `C:\ProgramData\ACPoller\work\_quarantaine\` | Abandoned units, kept 30 days | No |
-| `C:\ProgramData\ACPoller\ui-settings.default.json` | Interface address and token | No |
-| `%APPDATA%\ACPoller\ui-settings.json` | Each operator's own settings | No |
+| `C:\Program Files\ACPollerForMail\appsettings.json` | Configuration, encrypted secrets | Yes |
+| `C:\Program Files\ACPollerForMail\logs\` | Service logs | No |
+| `C:\ProgramData\ACPollerForMail\work\` | Working units in progress | No |
+| `C:\ProgramData\ACPollerForMail\work\state\processed.db` | Processed-message log | **Critical** |
+| `C:\ProgramData\ACPollerForMail\work\_quarantaine\` | Abandoned units, kept 30 days | No |
+| `C:\ProgramData\ACPollerForMail\ui-settings.default.json` | Interface address and token | No |
+| `%APPDATA%\ACPollerForMail\ui-settings.json` | Each operator's own settings | No |
 
 ### Backup
 
 Two items belong in the server backup:
 
-- `C:\ProgramData\ACPoller\work\state\processed.db`
-- `C:\Program Files\ACPoller\appsettings.json`
+- `C:\ProgramData\ACPollerForMail\work\state\processed.db`
+- `C:\Program Files\ACPollerForMail\appsettings.json`
 
 **Losing `processed.db` causes everything still in the mailboxes to be
 processed again**, hence duplicates in the ECM. It is the only file whose loss
@@ -55,7 +55,7 @@ stops.
 Without the interface, the same information in one command:
 
 ```
-curl -H "X-ACPoller-Token: <token>" http://127.0.0.1:5199/api/status
+curl -H "X-ACPollerForMail-Token: <token>" http://127.0.0.1:5199/api/status
 ```
 
 ---
@@ -108,7 +108,7 @@ thirty days, with the original message. That is intended, but it takes space.
 The start-up log says everything:
 
 ```
-findstr /i "worker(s) demarre" logs\acpoller-*.log
+findstr /i "worker(s) demarre" logs\ACPollerForMail-*.log
 ```
 
 The line `N worker(s) demarre(s), M ecarte(s)` gives the count. If `M` is not
@@ -119,12 +119,12 @@ deliberate. It appears in the interface with its issues in red.
 
 ### The interface says the token is rejected
 
-The token in `%APPDATA%\ACPoller\ui-settings.json` does not match the service
+The token in `%APPDATA%\ACPollerForMail\ui-settings.json` does not match the service
 one. Open **Connection**, then **Test connection**: the message tells an
 unreachable service apart from a rejected token.
 
 The token in clear text sits in
-`C:\ProgramData\ACPoller\ui-settings.default.json`, left there by the
+`C:\ProgramData\ACPollerForMail\ui-settings.default.json`, left there by the
 installer.
 
 ---
@@ -164,7 +164,7 @@ What to look at first:
 To trace the full processing of a message:
 
 ```
-findstr /i "<CorrelationId>" logs\acpoller-*.log
+findstr /i "<CorrelationId>" logs\ACPollerForMail-*.log
 ```
 
 ---
@@ -196,14 +196,14 @@ many mailboxes inherit from each.
 banner appears and a notification shows in the system tray. Restart with:
 
 ```
-Restart-Service ACPoller
+Restart-Service ACPollerForMail
 ```
 
 ### Changing the log level without a rebuild
 
 ```
-setx ACPOLLER_LOGLEVEL Debug /M
-Restart-Service ACPoller
+setx ACPollerForMail_LOGLEVEL Debug /M
+Restart-Service ACPollerForMail
 ```
 
 The variable avoids editing `nlog.config`, but the service still has to

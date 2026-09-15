@@ -61,6 +61,27 @@ function Write-Step($message) {
     Write-Host "  $message" -ForegroundColor Cyan
 }
 
+function Write-UiDefaults([string] $chemin, [string] $token, [int] $port) {
+    <#
+        Ecrit les reglages d'interface, en levant au prealable une ACL
+        restrictive posee par une execution precedente.
+
+        Sans ce deverrouillage, un script d'installation devient non rejouable
+        des la deuxieme execution : il a lui-meme pose les droits qui
+        l'empechent de reecrire. Un script d'installation non rejouable est un
+        script qu'on ne peut pas corriger.
+    #>
+    if (Test-Path $chemin) {
+        & icacls.exe $chemin /grant "*S-1-5-32-544:(F)" /Q 2>&1 | Out-Null
+    }
+
+    @{
+        BaseAddress = "http://127.0.0.1:$port"
+        Token       = $token
+        Theme       = 0
+    } | ConvertTo-Json | Set-Content $chemin -Encoding UTF8
+}
+
 function New-ControlToken {
     # Generateur cryptographique et non Get-Random : ce jeton donne le
     # pilotage complet du service. Hexadecimal pour eviter tout probleme
@@ -137,13 +158,9 @@ if (Test-Path $settingsPath) {
         # Reglages par defaut de l'interface, lisibles par tous les
         # exploitants du serveur. L'interface les utilise au premier
         # lancement, puis les reglages propres a l'utilisateur priment.
-        $port = if ($settings.ControlApi.Port) { $settings.ControlApi.Port } else { 5199 }
+        $port = if ($settings.ControlApi.Port) { [int] $settings.ControlApi.Port } else { 5199 }
 
-        @{
-            BaseAddress = "http://127.0.0.1:$port"
-            Token       = $token
-            Theme       = 0
-        } | ConvertTo-Json | Set-Content $uiDefaultsPath -Encoding UTF8
+        Write-UiDefaults -chemin $uiDefaultsPath -token $token -port $port
 
         Write-Step "Reglages d'interface deposes : $uiDefaultsPath"
     }
@@ -159,6 +176,21 @@ pour regenerer le jeton et redeployer les reglages.
     }
     else {
         Write-Step "Jeton de pilotage existant conserve"
+
+        # Le fichier d'interface est depose MEME quand le jeton n'est pas
+        # regenere. Sans cela, une installation sur une configuration
+        # preexistante laisse l'interface sans jeton, et l'exploitant doit le
+        # recopier a la main alors que le script l'a sous les yeux.
+        #
+        # Impossible en revanche si le jeton est deja chiffre : il n'est plus
+        # recuperable en clair, et c'est le cas traite juste au-dessus.
+        if (-not $isEncrypted -and -not (Test-Path $uiDefaultsPath)) {
+            $port = if ($settings.ControlApi.Port) { [int] $settings.ControlApi.Port } else { 5199 }
+
+            Write-UiDefaults -chemin $uiDefaultsPath -token $currentToken -port $port
+
+            Write-Step "Reglages d'interface deposes : $uiDefaultsPath"
+        }
     }
 }
 
@@ -208,11 +240,18 @@ if (Test-Path $uiDefaultsPath) {
 
     # Le jeton y est EN CLAIR : il donne acces au pilotage du service, a la
     # relance des workers et a la lecture de la configuration, secrets exclus.
-    # Lecture reservee aux administrateurs, qui sont les seuls a exploiter le
-    # service. Ajouter un groupe d'exploitation ici si le besoin existe.
+    # La restriction utile est l'ABSENCE des utilisateurs standard, pas la
+    # limitation des administrateurs : ceux-ci peuvent de toute facon reprendre
+    # la propriete du fichier. Leur donner la lecture seule rendait surtout ce
+    # script non rejouable, ce qui est pire.
     & icacls.exe $uiDefaultsPath /inheritance:r /Q | Out-Null
-    & icacls.exe $uiDefaultsPath /grant "*S-1-5-32-544:(R)" /Q | Out-Null  # Administrateurs, lecture
+    & icacls.exe $uiDefaultsPath /grant "*S-1-5-32-544:(F)" /Q | Out-Null  # Administrateurs
     & icacls.exe $uiDefaultsPath /grant "*S-1-5-18:(F)" /Q | Out-Null      # SYSTEM
+
+    # Ajouter ici le groupe d'exploitation si des non-administrateurs doivent
+    # utiliser l'interface. C'est un choix a faire consciemment : donner ce
+    # jeton, c'est donner le droit de redemarrer des workers en production.
+    # & icacls.exe $uiDefaultsPath /grant "DOMAINE\Exploitation:(R)" /Q | Out-Null
 }
 
 # --- Service Windows ----------------------------------------------------------

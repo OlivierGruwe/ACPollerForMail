@@ -84,7 +84,7 @@ Unicode true
 
 ; Page de bienvenue, absente jusqu'ici : sans elle, le bandeau lateral n'a
 ; nulle part ou s'afficher.
-!define MUI_WELCOMEPAGE_TITLE "ACPoller 2.0"
+!define MUI_WELCOMEPAGE_TITLE "ACPollerForMAil"
 !define MUI_WELCOMEPAGE_TEXT "Capture de messagerie, conversion PDF et depot en GED.$\r$\n$\r$\nCet assistant installe le service et son interface de supervision.$\r$\n$\r$\nLe service sera arrete pendant l'installation si une version precedente est presente."
 
 !insertmacro MUI_PAGE_WELCOME
@@ -209,16 +209,34 @@ Section "Service et interface" SEC_MAIN
   SetOutPath "$INSTDIR\fonts"
   File /nonfatal /r "fonts\*.*"
 
-  SetOutPath "$INSTDIR\docs"
-  File /nonfatal "..\docs\INSTALLATION.pdf"
-  File /nonfatal "..\docs\EXPLOITATION.pdf"
+  SetOutPath "$INSTDIR\docs\fr"
+  File /nonfatal "..\docs\fr\*.pdf"
+
+  SetOutPath "$INSTDIR\docs\en"
+  File /nonfatal "..\docs\en\*.pdf"
   
   SetOutPath "$INSTDIR"
 
   CreateDirectory "$SMPROGRAMS\${PRODUCT}"
   CreateShortcut "$SMPROGRAMS\${PRODUCT}\${PRODUCT}.lnk" "$INSTDIR\ACPoller.Ui.exe"
-  CreateShortcut "$SMPROGRAMS\${PRODUCT}\Guide d'exploitation.lnk" "$INSTDIR\docs\EXPLOITATION.pdf"
-  CreateShortcut "$SMPROGRAMS\${PRODUCT}\Manuel.lnk" "$INSTDIR\docs\MANUEL.pdf"
+  ; La documentation suit la langue du serveur, comme l'interface. Poser la
+  ; question dans l'assistant ajouterait une page pour un choix que le systeme
+  ; a deja fait.
+  ${If} $LANGUAGE == 1036
+    CreateShortcut "$SMPROGRAMS\${PRODUCT}\Guide d'exploitation.lnk" "$INSTDIR\docs\fr\EXPLOITATION.pdf"
+  ${Else}
+    CreateShortcut "$SMPROGRAMS\${PRODUCT}\Operations guide.lnk" "$INSTDIR\docs\en\OPERATIONS.pdf"
+  ${EndIf}
+  
+    ; La documentation suit la langue du serveur, comme l'interface. Poser la
+  ; question dans l'assistant ajouterait une page pour un choix que le systeme
+  ; a deja fait.
+  ${If} $LANGUAGE == 1036
+    CreateShortcut "$SMPROGRAMS\${PRODUCT}\Manuel d'utilisation.lnk" "$INSTDIR\docs\fr\MANUEL.pdf"
+  ${Else}
+    CreateShortcut "$SMPROGRAMS\${PRODUCT}\Manual.lnk" "$INSTDIR\docs\en\MANUAL.pdf"
+  ${EndIf}
+  
   WriteRegStr HKLM "Software\${PRODUCT}" "InstallPath" "$INSTDIR"
   WriteRegStr HKLM "Software\${PRODUCT}" "Version" "${VERSION}"
 SectionEnd

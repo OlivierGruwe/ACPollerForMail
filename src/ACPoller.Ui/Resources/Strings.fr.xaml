@@ -3,71 +3,278 @@
                     xmlns:s="clr-namespace:System;assembly=System.Runtime">
 
   <!-- Chaines de l'interface, version francaise.
-       Consommees par DynamicResource pour que le basculement de langue soit
-       immediat, sans redemarrage. -->
 
-  <s:String x:Key="S_Subtitle">Capture de messagerie, conversion PDF et depot en GED</s:String>
+       Consommees par DynamicResource et non StaticResource : c'est ce qui rend
+       le basculement de langue immediat, sans redemarrage ni reouverture des
+       fenetres.
 
-  <!-- Barre d'actions -->
-  <s:String x:Key="S_New">Nouvelle</s:String>
-  <s:String x:Key="S_Edit">Modifier</s:String>
-  <s:String x:Key="S_Delete">Supprimer</s:String>
-  <s:String x:Key="S_Test">Tester</s:String>
-  <s:String x:Key="S_Restart">Redemarrer</s:String>
-  <s:String x:Key="S_Refresh">Rafraichir</s:String>
-  <s:String x:Key="S_Maintenance">Maintenance</s:String>
-  <s:String x:Key="S_ServiceSettings">Service</s:String>
-  <s:String x:Key="S_Connection">Connexion</s:String>
-  <s:String x:Key="S_Help">Aide</s:String>
-  <s:String x:Key="S_Save">Enregistrer</s:String>
-  <s:String x:Key="S_Close">Fermer</s:String>
-  <s:String x:Key="S_Cancel">Annuler</s:String>
-  <s:String x:Key="S_Browse">Parcourir</s:String>
-  <s:String x:Key="S_Add">Ajouter</s:String>
-  <s:String x:Key="S_Remove">Retirer</s:String>
-  <s:String x:Key="S_MoveUp">Monter</s:String>
-  <s:String x:Key="S_MoveDown">Descendre</s:String>
+       CHAQUE cle declaree ici doit exister dans Strings.en.xaml. Une cle
+       manquante donne un libelle VIDE, sans erreur et sans indice sur l'origine
+       du probleme. -->
 
-  <!-- Listes et onglets -->
-  <s:String x:Key="S_Configurations">Configurations</s:String>
-  <s:String x:Key="S_Templates">Gabarits</s:String>
-  <s:String x:Key="S_Supervision">Supervision</s:String>
-  <s:String x:Key="S_Dashboard">Tableau de bord</s:String>
-  <s:String x:Key="S_TabGeneral">General</s:String>
-  <s:String x:Key="S_TabProtocol">Protocole</s:String>
-  <s:String x:Key="S_TabConversion">Conversion</s:String>
-  <s:String x:Key="S_TabOutput">Format de sortie</s:String>
-  <s:String x:Key="S_TabProcessors">Traitements</s:String>
-  <s:String x:Key="S_TabTargets">Cibles</s:String>
-  <s:String x:Key="S_TabFields">Champs</s:String>
 
-  <!-- Supervision -->
-  <s:String x:Key="S_Issues">Anomalies</s:String>
-  <s:String x:Key="S_TestResults">Tests de connexion</s:String>
-  <s:String x:Key="S_Workers">Workers</s:String>
-  <s:String x:Key="S_Connecting">Connexion...</s:String>
-  <s:String x:Key="S_RestartRequired">ACPoller demande un redemarrage</s:String>
-  <s:String x:Key="S_ShowDetail">Voir le detail</s:String>
+  <!-- Fenetre principale -->
+  <s:String x:Key="S_Main_Sombre">Sombre</s:String>
+  <s:String x:Key="S_Main_Clair">Clair</s:String>
+  <s:String x:Key="S_Main_Acpoller">ACPoller</s:String>
+  <s:String x:Key="S_Main_CaptureDeMessagerieConversion">Capture de messagerie, conversion PDF et depot en GED</s:String>
+  <s:String x:Key="S_Main_Aide">Aide</s:String>
+  <s:String x:Key="S_Main_Reglages">Reglages</s:String>
+  <s:String x:Key="S_Main_Nouvelle">Nouvelle</s:String>
+  <s:String x:Key="S_Main_Modifier">Modifier</s:String>
+  <s:String x:Key="S_Main_Supprimer">Supprimer</s:String>
+  <s:String x:Key="S_Main_Tester">Tester</s:String>
+  <s:String x:Key="S_Main_Redemarrer">Redemarrer</s:String>
+  <s:String x:Key="S_Main_Rafraichir">Rafraichir</s:String>
+  <s:String x:Key="S_Main_Maintenance">Maintenance</s:String>
+  <s:String x:Key="S_Main_Configurations">Configurations</s:String>
+  <s:String x:Key="S_Main_AnomalieS">anomalie(s)</s:String>
+  <s:String x:Key="S_Main_Gabarits">Gabarits</s:String>
+  <s:String x:Key="S_Main_Nouveau">Nouveau</s:String>
+  <s:String x:Key="S_Main_ConfigurationS">configuration(s)</s:String>
+  <s:String x:Key="S_Main_Supervision">Supervision</s:String>
+  <s:String x:Key="S_Main_Anomalies">Anomalies</s:String>
+  <s:String x:Key="S_Main_TestsDeConnexion">Tests de connexion</s:String>
+  <s:String x:Key="S_Main_Ms"> ms)</s:String>
+  <s:String x:Key="S_Main_Workers">Workers</s:String>
+  <s:String x:Key="S_Main_Configuration">Configuration</s:String>
+  <s:String x:Key="S_Main_Etat">Etat</s:String>
+  <s:String x:Key="S_Main_DernierCycle">Dernier cycle</s:String>
+  <s:String x:Key="S_Main_DerniereErreur">Derniere erreur</s:String>
+  <s:String x:Key="S_Main_TableauDeBord">Tableau de bord</s:String>
+
+  <!-- Editeur de configuration -->
+  <s:String x:Key="S_Edit_General">General</s:String>
+  <s:String x:Key="S_Edit_Nom">Nom</s:String>
+  <s:String x:Key="S_Edit_ConfigurationActive">Configuration active</s:String>
+  <s:String x:Key="S_Edit_GabaritDontHeriter">Gabarit dont heriter</s:String>
+  <s:String x:Key="S_Edit_LaisserVidePourUne">Laisser vide pour une configuration autonome. Les valeurs du gabarit s'appliquent, et seuls les ecarts declares ici les remplacent.</s:String>
+  <s:String x:Key="S_Edit_CeGabaritEstUn">Ce gabarit est un modele : toute modification s'applique immediatement a l'ensemble des configurations qui en heritent, et leurs workers sont redemarres.</s:String>
+  <s:String x:Key="S_Edit_Collecte">Collecte</s:String>
+  <s:String x:Key="S_Edit_PeriodeEntreDeuxCycles">Periode entre deux cycles (secondes)</s:String>
+  <s:String x:Key="S_Edit_DecalageAleatoireAuDemarrage">Decalage aleatoire au demarrage (secondes)</s:String>
+  <s:String x:Key="S_Edit_NePrendreQueLes">Ne prendre que les messages non lus</s:String>
+  <s:String x:Key="S_Edit_NombreMaximalDeMessages">Nombre maximal de messages par cycle</s:String>
+  <s:String x:Key="S_Edit_NePrendreQueLes2">Ne prendre que les messages porteurs de pieces jointes</s:String>
+  <s:String x:Key="S_Edit_RattrapageAuPremierCycle">Rattrapage au premier cycle (jours)</s:String>
+  <s:String x:Key="S_Edit_AuToutPremierCycle">Au tout premier cycle seulement. Zero prend tout ce que le dossier contient. Contrairement a la date plancher ci-dessous, cette valeur GLISSE : un redemarrage dans six mois rattrapera les N derniers jours a ce moment-la.</s:String>
+  <s:String x:Key="S_Edit_NeJamaisTraiterLes">Ne jamais traiter les messages anterieurs a</s:String>
+  <s:String x:Key="S_Edit_ARenseignerALa">A renseigner a la mise en production quand l'historique n'est pas repris.</s:String>
+  <s:String x:Key="S_Edit_Protocole">Protocole</s:String>
+  <s:String x:Key="S_Edit_BoiteIdentifiantDuJournal">Boite (identifiant du journal des traitements)</s:String>
+  <s:String x:Key="S_Edit_MicrosoftGraph">Microsoft Graph</s:String>
+  <s:String x:Key="S_Edit_Tenantid">TenantId</s:String>
+  <s:String x:Key="S_Edit_Clientid">ClientId</s:String>
+  <s:String x:Key="S_Edit_SecretClientVideInchange">Secret client (vide = inchange)</s:String>
+  <s:String x:Key="S_Edit_EmpreinteDeCertificatPreferable">Empreinte de certificat (preferable au secret)</s:String>
+  <s:String x:Key="S_Edit_UnCertificatNExpire">Un certificat n'expire pas un vendredi soir sans prevenir.</s:String>
+  <s:String x:Key="S_Edit_LimitationDeDebit">Limitation de debit</s:String>
+  <s:String x:Key="S_Edit_RequetesSimultanees">Requetes simultanees</s:String>
+  <s:String x:Key="S_Edit_EspacementMinimalMs">Espacement minimal (ms)</s:String>
+  <s:String x:Key="S_Edit_CesBornesSontPartagees">Ces bornes sont PARTAGEES par toutes les boites du meme locataire. L'espacement compte autant que la concurrence : sans lui, huit appels partent a la meme milliseconde et declenchent la limitation avant meme d'atteindre la limite.</s:String>
+  <s:String x:Key="S_Edit_RespecterLeDelaiDemande">Respecter le delai demande par Graph apres une limitation</s:String>
+  <s:String x:Key="S_Edit_Imap">IMAP</s:String>
+  <s:String x:Key="S_Edit_Hote">Hote</s:String>
+  <s:String x:Key="S_Edit_Port">Port</s:String>
+  <s:String x:Key="S_Edit_SslImpliciteDecocherPour">SSL implicite (decocher pour STARTTLS)</s:String>
+  <s:String x:Key="S_Edit_Utilisateur">Utilisateur</s:String>
+  <s:String x:Key="S_Edit_MotDePasseVide">Mot de passe (vide = inchange)</s:String>
+  <s:String x:Key="S_Edit_RepertoireLocal">Repertoire local</s:String>
+  <s:String x:Key="S_Edit_CheminDesFichiersEml">Chemin des fichiers .eml</s:String>
+  <s:String x:Key="S_Edit_SertAuRejeuD">Sert au rejeu d'un message litigieux et a la recette, sans boite ni reseau.</s:String>
+  <s:String x:Key="S_Edit_DossierEtDisposition">Dossier et disposition</s:String>
+  <s:String x:Key="S_Edit_DossierSurveille">Dossier surveille</s:String>
+  <s:String x:Key="S_Edit_NomCanoniqueEtNon">Nom canonique et non libelle : un libelle casse sur une boite localisee.</s:String>
+  <s:String x:Key="S_Edit_ApresTraitement">Apres traitement</s:String>
+  <s:String x:Key="S_Edit_DossierDeDestinationSi">Dossier de destination (si deplacement)</s:String>
+  <s:String x:Key="S_Edit_Conversion">Conversion</s:String>
+  <s:String x:Key="S_Edit_DelaiMaximalParPiece">Delai maximal par piece (minutes)</s:String>
+  <s:String x:Key="S_Edit_DepasseLeConvertisseurEst">Depasse, le convertisseur est tue et non attendu.</s:String>
+  <s:String x:Key="S_Edit_PieceNonConvertible">Piece non convertible</s:String>
+  <s:String x:Key="S_Edit_SubstituteProduitUnePage">Substitute produit une page portant le motif, Skip omet la piece, RejectMessage rejette tout le message.</s:String>
+  <s:String x:Key="S_Edit_ConvertirLeCorpsDu">Convertir le corps du message</s:String>
+  <s:String x:Key="S_Edit_JoindreAussiLesPieces">Joindre aussi les pieces d'origine</s:String>
+  <s:String x:Key="S_Edit_TailleMinimaleDUne">Taille minimale d'une image incorporee (Ko)</s:String>
+  <s:String x:Key="S_Edit_EnDessousLImage">En dessous, l'image est ecartee : c'est un logo de signature.</s:String>
+  <s:String x:Key="S_Edit_ExtractionRecursive">Extraction recursive</s:String>
+  <s:String x:Key="S_Edit_ProfondeurMaximale">Profondeur maximale</s:String>
+  <s:String x:Key="S_Edit_NombreMaximalDePieces">Nombre maximal de pieces</s:String>
+  <s:String x:Key="S_Edit_CesBornesProtegentD">Ces bornes protegent d'une archive forgee. Les augmenter sans raison expose le service.</s:String>
+  <s:String x:Key="S_Edit_VolumeDecompresseMaximalMo">Volume decompresse maximal (Mo)</s:String>
+  <s:String x:Key="S_Edit_TailleMaximaleDUne">Taille maximale d'une entree (Mo)</s:String>
+  <s:String x:Key="S_Edit_ExtensionsEcartees">Extensions ecartees</s:String>
+  <s:String x:Key="S_Edit_SepareesParDesVirgules">Separees par des virgules. Exemple : p7s, ics, vcf. Sert a ecarter les signatures electroniques et les invitations, qui n'ont pas vocation a partir en GED.</s:String>
+  <s:String x:Key="S_Edit_FormatDeSortie">Format de sortie</s:String>
+  <s:String x:Key="S_Edit_ModeDeProductionDes">Mode de production des PDF</s:String>
+  <s:String x:Key="S_Edit_FormatDuFichierD">Format du fichier d'information</s:String>
+  <s:String x:Key="S_Edit_XsltAppliqueUneFeuille">xslt applique une feuille de transformation au XML canonique : c'est ce qui permet de produire la structure exacte attendue par une GED, sans livraison de code.</s:String>
+  <s:String x:Key="S_Edit_FeuilleDeTransformation">Feuille de transformation</s:String>
+  <s:String x:Key="S_Edit_Parcourir">Parcourir</s:String>
+  <s:String x:Key="S_Edit_CheminSurLeServeur">Chemin sur le SERVEUR. Le bouton n'est qu'une aide a la saisie et ne vaut que si l'UI tourne sur le serveur.</s:String>
+  <s:String x:Key="S_Edit_ExtensionDuFichierProduit">Extension du fichier produit (sans point)</s:String>
+  <s:String x:Key="S_Edit_VideDonneXmlUne">Vide donne .xml. Une feuille declarant method=text produit du plat : mettre alors txt, idx ou csv selon ce qu'attend la GED.</s:String>
+  <s:String x:Key="S_Edit_MiseAuPointPasser">Mise au point : passer le format en xml, regarder la sortie, ecrire la feuille dessus, puis revenir en xslt. Les deux formats produisent le meme XML d'entree.</s:String>
+  <s:String x:Key="S_Edit_GabaritDeNommage">Gabarit de nommage</s:String>
+  <s:String x:Key="S_Edit_PolitiqueDeDepot">Politique de depot</s:String>
+  <s:String x:Key="S_Edit_EcritureAtomiqueFichierTemporaire">Ecriture atomique (fichier temporaire puis renommage)</s:String>
+  <s:String x:Key="S_Edit_SansElleLaGed">Sans elle, la GED peut lire un PDF en cours d'ecriture.</s:String>
+  <s:String x:Key="S_Edit_ToutOuRienEntre">Tout ou rien entre les cibles</s:String>
+  <s:String x:Key="S_Edit_UnEchecSurUne">Un echec sur une cible annule les depots deja faits sur les autres.</s:String>
+  <s:String x:Key="S_Edit_FichierTemoinEcritEn">Fichier temoin ecrit en dernier (vide = aucun)</s:String>
+  <s:String x:Key="S_Edit_TentativesSurEchecTransitoire">Tentatives sur echec transitoire</s:String>
+  <s:String x:Key="S_Edit_DelaiAvantLaSeconde">Delai avant la seconde tentative (secondes)</s:String>
+  <s:String x:Key="S_Edit_DoubleAChaqueNouvel">Double a chaque nouvel essai. Trop court sur une GED qui redemarre, les trois tentatives sont consommees avant qu'elle ne reponde.</s:String>
+  <s:String x:Key="S_Edit_Traitements">Traitements</s:String>
+  <s:String x:Key="S_Edit_TraitementsMetierApportesPar">Traitements metier apportes par les plugins installes. Ils s'executent dans l'ordre affiche, aux etapes indiquees.</s:String>
+  <s:String x:Key="S_Edit_AucunTraitementMetierDisponible">Aucun traitement metier disponible. Deposer les DLL dans le repertoire de plugins et redemarrer le service.</s:String>
+  <s:String x:Key="S_Edit_PluginsRefuses">Plugins refuses</s:String>
+  <s:String x:Key="S_Edit_CesAssemblagesSontPresents">Ces assemblages sont presents mais n'ont pas ete charges : leurs traitements ne sont pas proposes.</s:String>
+  <s:String x:Key="S_Edit_Cibles">Cibles</s:String>
+  <s:String x:Key="S_Edit_Ajouter">Ajouter</s:String>
+  <s:String x:Key="S_Edit_Retirer">Retirer</s:String>
+  <s:String x:Key="S_Edit_TypeDeTransport">Type de transport</s:String>
+  <s:String x:Key="S_Edit_NomDeLaCible">Nom de la cible</s:String>
+  <s:String x:Key="S_Edit_ReprisDansLesJournaux">Repris dans les journaux : sans nom, les erreurs sont illisibles.</s:String>
+  <s:String x:Key="S_Edit_SystemeDeFichiers">Systeme de fichiers</s:String>
+  <s:String x:Key="S_Edit_RepertoireDeDepotLocal">Repertoire de depot (local ou UNC)</s:String>
+  <s:String x:Key="S_Edit_CreerLeRepertoireS">Creer le repertoire s'il n'existe pas</s:String>
+  <s:String x:Key="S_Edit_FtpFtps">FTP / FTPS</s:String>
+  <s:String x:Key="S_Edit_RepertoireDistant">Repertoire distant</s:String>
+  <s:String x:Key="S_Edit_Chiffrement">Chiffrement</s:String>
+  <s:String x:Key="S_Edit_AccepterToutCertificatServeur">Accepter tout certificat serveur</s:String>
+  <s:String x:Key="S_Edit_SupprimeTouteProtectionContre">Supprime toute protection contre l'interception. A n'activer que sur un certificat auto-signe connu, et a documenter.</s:String>
+  <s:String x:Key="S_Edit_S3OuCompatible">S3 ou compatible</s:String>
+  <s:String x:Key="S_Edit_Bucket">Bucket</s:String>
+  <s:String x:Key="S_Edit_PrefixeDesCles">Prefixe des cles</s:String>
+  <s:String x:Key="S_Edit_Region">Region</s:String>
+  <s:String x:Key="S_Edit_PointDAccesPersonnalise">Point d'acces personnalise (MinIO, Garage, Ceph)</s:String>
+  <s:String x:Key="S_Edit_RenseigneLeStyleChemin">Renseigne, le style chemin et le mode de somme de controle compatible sont actives automatiquement.</s:String>
+  <s:String x:Key="S_Edit_CleDAccesVide">Cle d'acces (vide = chaine de resolution AWS)</s:String>
+  <s:String x:Key="S_Edit_CleSecreteVideInchange">Cle secrete (vide = inchange)</s:String>
+  <s:String x:Key="S_Edit_ChiffrementAuRepos">Chiffrement au repos</s:String>
+  <s:String x:Key="S_Edit_Aes256SurAwsLaisser">AES256 sur AWS. Laisser vide sur MinIO ou Garage sans chiffrement serveur configure, sinon le depot est refuse.</s:String>
+  <s:String x:Key="S_Edit_DllDExportCliente">DLL d'export cliente</s:String>
+  <s:String x:Key="S_Edit_Assemblage">Assemblage</s:String>
+  <s:String x:Key="S_Edit_LesReglagesPropresAu">Les reglages propres au plugin se saisissent dans le tableau ci-dessous.</s:String>
+  <s:String x:Key="S_Edit_TousLesReglages">Tous les reglages</s:String>
+  <s:String x:Key="S_Edit_LesChampsCiDessus">Les champs ci-dessus ecrivent dans ce meme tableau. Ajouter une ligne ici permet de renseigner un reglage qu'aucun champ dedie ne couvre.</s:String>
+  <s:String x:Key="S_Edit_Reglage">Reglage</s:String>
+  <s:String x:Key="S_Edit_Valeur">Valeur</s:String>
+  <s:String x:Key="S_Edit_Champs">Champs</s:String>
+  <s:String x:Key="S_Edit_LOrdreFaitFoi">L'ordre fait foi : c'est celui des colonnes du CSV. Les deplacer change le format de sortie.</s:String>
+  <s:String x:Key="S_Edit_Monter">Monter</s:String>
+  <s:String x:Key="S_Edit_Descendre">Descendre</s:String>
+  <s:String x:Key="S_Edit_NomDuChampEn">Nom du champ en sortie</s:String>
+  <s:String x:Key="S_Edit_OrigineDeLaValeur">Origine de la valeur</s:String>
+  <s:String x:Key="S_Edit_FormatDeDateIgnore">Format de date (ignore si la valeur n'en est pas une)</s:String>
+  <s:String x:Key="S_Edit_ValeurParDefautSi">Valeur par defaut si le resultat est vide</s:String>
+  <s:String x:Key="S_Edit_LongueurFixe0Libre">Longueur fixe (0 = libre)</s:String>
+  <s:String x:Key="S_Edit_RemplirAGauche">Remplir a gauche</s:String>
+  <s:String x:Key="S_Edit_PourLesGedQui">Pour les GED qui lisent du positionnel. Une valeur trop longue est tronquee : deborder decalerait toutes les colonnes suivantes.</s:String>
+  <s:String x:Key="S_Edit_TraductionsDeValeur">Traductions de valeur</s:String>
+  <s:String x:Key="S_Edit_AppliqueesApresResolutionConvertit">Appliquees apres resolution : convertit un libelle en code attendu par la GED.</s:String>
+  <s:String x:Key="S_Edit_ValeurLue">Valeur lue</s:String>
+  <s:String x:Key="S_Edit_ValeurEcrite">Valeur ecrite</s:String>
+  <s:String x:Key="S_Edit_Json">JSON</s:String>
+  <s:String x:Key="S_Edit_RafraichirLApercu">Rafraichir l'apercu</s:String>
+  <s:String x:Key="S_Edit_Fermer">Fermer</s:String>
+  <s:String x:Key="S_Edit_Enregistrer">Enregistrer</s:String>
 
   <!-- Reglages de connexion -->
-  <s:String x:Key="S_ServiceAddress">Adresse du service</s:String>
-  <s:String x:Key="S_Token">Jeton de pilotage</s:String>
-  <s:String x:Key="S_Theme">Theme</s:String>
-  <s:String x:Key="S_Language">Langue</s:String>
-  <s:String x:Key="S_TestConnection">Tester la connexion</s:String>
+  <s:String x:Key="S_Conn_ConnexionAuService">Connexion au service</s:String>
+  <s:String x:Key="S_Conn_AdresseDuService">Adresse du service</s:String>
+  <s:String x:Key="S_Conn_JetonDePilotage">Jeton de pilotage</s:String>
+  <s:String x:Key="S_Conn_Theme">Theme</s:String>
+  <s:String x:Key="S_Conn_TesterLaConnexion">Tester la connexion</s:String>
+  <s:String x:Key="S_Conn_Enregistrer">Enregistrer</s:String>
+  <s:String x:Key="S_Conn_Annuler">Annuler</s:String>
+  <s:String x:Key="S_Conn_VosReglages">Vos reglages :</s:String>
+  <s:String x:Key="S_Conn_ValeursDInstallation">Valeurs d'installation :</s:String>
 
-  <!-- Aide contextuelle. Le vocabulaire des infobulles vit ici aussi : une
-       aide restee en francais dans une interface anglaise serait pire que pas
-       d'aide du tout. -->
-  <s:String x:Key="H_Name">Identifiant unique, utilise comme cle de correlation dans les journaux et comme nom du repertoire de travail. Le changer revient a creer une nouvelle configuration : l'ancienne subsistera tant qu'elle n'est pas supprimee.</s:String>
-  <s:String x:Key="H_Template">Nom d'un gabarit declare. La configuration en herite toutes les valeurs et ne surcharge que ses ecarts. Sur un parc de dizaines de boites partageant le meme locataire, une configuration se resume alors a trois lignes.</s:String>
-  <s:String x:Key="H_InitialLookback">Ne s'applique qu'au tout premier cycle, quand le service n'a encore rien traite pour cette boite. Une valeur trop faible fait croire que rien n'arrive alors que le service fonctionne, et c'est le diagnostic le plus penible parce que rien ne le signale.</s:String>
-  <s:String x:Key="H_NotBefore">Aucun message anterieur a cette date ne sera jamais traite. A renseigner a la mise en production quand l'historique n'est pas repris : sans elle, le premier demarrage traite tout ce qui dort dans la boite.</s:String>
-  <s:String x:Key="H_Timeout">Depasse, le convertisseur est TUE et non attendu. Un LibreOffice bloque sur un document corrompu ne se debloque jamais : sans ce delai, un seul document fige un slot de conversion definitivement.</s:String>
-  <s:String x:Key="H_OnFailure">Substitute produit une page portant le nom du fichier et le motif : la GED voit qu'il manque quelque chose. Skip omet la piece silencieusement. RejectMessage rejette tout le message.</s:String>
-  <s:String x:Key="H_Naming">Jetons : {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. Un format peut suivre deux points. En mode PerAttachment, {index} est obligatoire sous peine d'ecrasement.</s:String>
-  <s:String x:Key="H_AtomicWrite">Le fichier est ecrit sous une extension temporaire puis renomme. Sans cela, une GED qui scrute le repertoire peut ramasser un PDF en cours d'ecriture, et l'erreur est indetectable de son cote.</s:String>
-  <s:String x:Key="H_AllOrNothing">Si une cible echoue, les depots deja faits sur les autres sont annules. Une GED qui recoit un message qu'une seconde n'a pas recu produit un ecart de reconciliation que personne ne detecte avant l'audit.</s:String>
-  <s:String x:Key="H_AcceptAnyCertificate">Supprime toute protection contre l'interception : un tiers peut se placer entre le service et le serveur sans etre detecte. A n'activer que sur un certificat auto-signe connu, et a documenter.</s:String>
-  <s:String x:Key="H_HonorRetryAfter">Graph indique combien de temps attendre apres une limitation. L'ignorer aggrave la situation : le service repart aussitot, reprend une limitation, et le quota se reconstitue de plus en plus lentement.</s:String>
+  <!-- Reglages de service -->
+  <s:String x:Key="S_Svc_CesReglagesNeSont">Ces reglages ne sont pas rechargeables a chaud. Toute modification enregistree ici ne prendra effet qu'apres un redemarrage complet du service, et la capture est interrompue pendant ce temps.</s:String>
+  <s:String x:Key="S_Svc_Service">Service</s:String>
+  <s:String x:Key="S_Svc_RepertoireDeTravail">Repertoire de travail</s:String>
+  <s:String x:Key="S_Svc_ContientLesUnitesDe">Contient les unites de travail en cours, le journal des messages traites et la quarantaine. Le changer PERD le journal d'idempotence : les messages encore presents dans les boites seront retraites, donc des doublons en GED.</s:String>
+  <s:String x:Key="S_Svc_TraitementsSimultanesToutesBoites">Traitements simultanes, toutes boites confondues</s:String>
+  <s:String x:Key="S_Svc_BorneLeTravailReel">Borne le travail reel, pas le nombre de workers. Cent boites peuvent ecouter avec quatre traitements a la fois. Augmenter au-dela du nombre de profils LibreOffice ne sert a rien : la conversion deviendra le goulot.</s:String>
+  <s:String x:Key="S_Svc_RepertoireDesPlugins">Repertoire des plugins</s:String>
+  <s:String x:Key="S_Svc_RetentionDuJournalDes">Retention du journal des messages traites (jours)</s:String>
+  <s:String x:Key="S_Svc_AuDelaUneEntree">Au-dela, une entree est purgee. Trop court, un message ancien laisse dans une boite serait retraite. La valeur doit depasser la duree pendant laquelle un message peut rester non traite.</s:String>
+  <s:String x:Key="S_Svc_Outils">Outils</s:String>
+  <s:String x:Key="S_Svc_LibreofficeSofficeExe">LibreOffice (soffice.exe)</s:String>
+  <s:String x:Key="S_Svc_Parcourir">Parcourir</s:String>
+  <s:String x:Key="S_Svc_SansLibreofficeAucunePiece">Sans LibreOffice, aucune piece bureautique n'est convertie : Word, Excel et PowerPoint sortent en page de substitution. Apache OpenOffice ne convient pas, son soffice ne gere pas la conversion en ligne de commande.</s:String>
+  <s:String x:Key="S_Svc_ProfilsLibreofficeSimultanes">Profils LibreOffice simultanes</s:String>
+  <s:String x:Key="S_Svc_ChaqueConversionUtiliseUn">Chaque conversion utilise un profil isole. Deux conversions partageant un profil se bloquent mutuellement, c'est pourquoi ce nombre borne reellement la conversion parallele.</s:String>
+  <s:String x:Key="S_Svc_Qpdf">qpdf</s:String>
+  <s:String x:Key="S_Svc_RepareLesPdfQue">Repare les PDF que le moteur de lecture refuse. Sur un flux de factures reelles, cela represente quelques pourcents des documents, qui seraient sinon livres sans etre fusionnes.</s:String>
+  <s:String x:Key="S_Svc_RepertoireDesPolices">Repertoire des polices</s:String>
+  <s:String x:Key="S_Svc_LesPolicesSontIncorporees">Les polices sont incorporees dans les PDF produits, qui sont archives des annees. Dependre d'une police systeme fait varier le rendu d'un serveur a l'autre.</s:String>
+  <s:String x:Key="S_Svc_Maintenance">Maintenance</s:String>
+  <s:String x:Key="S_Svc_PeriodeEntreDeuxPasses">Periode entre deux passes (minutes)</s:String>
+  <s:String x:Key="S_Svc_MiseEnQuarantaineApres">Mise en quarantaine apres (jours)</s:String>
+  <s:String x:Key="S_Svc_UneUniteDeTravail">Une unite de travail inachevee depuis plus longtemps est deplacee en quarantaine plutot que supprimee : elle porte le MIME d'origine, seul moyen de rejouer le message apres correction.</s:String>
+  <s:String x:Key="S_Svc_SeuilDAlerteD">Seuil d'alerte d'espace disque (%)</s:String>
+  <s:String x:Key="S_Svc_EnDessousUneAlerte">En dessous, une alerte est journalisee et affichee. La capture ne s'arrete pas d'elle-meme : elle echouera a saturation, ce qui est bien plus brutal.</s:String>
+  <s:String x:Key="S_Svc_Pilotage">Pilotage</s:String>
+  <s:String x:Key="S_Svc_ActiverLApiDe">Activer l'API de pilotage</s:String>
+  <s:String x:Key="S_Svc_LaDesactiverRendCette">La desactiver rend cette interface inutilisable : elle ne communique avec le service que par cette API. Il faudra reactiver le reglage a la main dans le fichier de configuration.</s:String>
+  <s:String x:Key="S_Svc_PortDEcoute">Port d'ecoute</s:String>
+  <s:String x:Key="S_Svc_EcouteUniquementSurLa">Ecoute uniquement sur la boucle locale. Apres changement, penser a corriger l'adresse dans les reglages de connexion de cette interface.</s:String>
+  <s:String x:Key="S_Svc_JetonDePilotageVide">Jeton de pilotage (vide = inchange)</s:String>
+  <s:String x:Key="S_Svc_ChangerLeJetonInvalide">Changer le jeton invalide TOUS les postes d'exploitation deja configures, y compris celui-ci. Il faudra le reporter dans les reglages de connexion de chaque interface.</s:String>
+  <s:String x:Key="S_Svc_BaseDeMetriquesVide">Base de metriques (vide = inchange)</s:String>
+  <s:String x:Key="S_Svc_ChaineDeConnexionSql">Chaine de connexion SQL Server pour l'historique long. Le tableau de bord fonctionne sans elle, sur une fenetre de vingt-quatre heures en memoire.</s:String>
+  <s:String x:Key="S_Svc_Fermer">Fermer</s:String>
+  <s:String x:Key="S_Svc_Enregistrer">Enregistrer</s:String>
+
+  <!-- Tableau de bord -->
+  <s:String x:Key="S_Dash_RemettreAZero">Remettre a zero</s:String>
+  <s:String x:Key="S_Dash_Traitement">Traitement</s:String>
+  <s:String x:Key="S_Dash_MessagesExportes">Messages exportes</s:String>
+  <s:String x:Key="S_Dash_EnEchec">En echec</s:String>
+  <s:String x:Key="S_Dash_TauxDeSucces">Taux de succes</s:String>
+  <s:String x:Key="S_Dash_RejetesParUnTraitement">Rejetes par un traitement metier</s:String>
+  <s:String x:Key="S_Dash_Ecartes">Ecartes</s:String>
+  <s:String x:Key="S_Dash_PerformanceEtSante">Performance et sante</s:String>
+  <s:String x:Key="S_Dash_Ms">ms</s:String>
+  <s:String x:Key="S_Dash_DureeMoyenne">Duree moyenne</s:String>
+  <s:String x:Key="S_Dash_95eCentileEcartImportant">95e centile. Ecart important avec la moyenne : des messages saturent les slots.</s:String>
+  <s:String x:Key="S_Dash_LimitationsGraphNonNul">Limitations Graph. Non nul en regime etabli : reduire la concurrence.</s:String>
+  <s:String x:Key="S_Dash_DisqueLibreASaturation">Disque libre. A saturation, la capture s'arrete.</s:String>
+  <s:String x:Key="S_Dash_PiecesNonConverties">Pieces non converties</s:String>
+  <s:String x:Key="S_Dash_CyclesEnErreur">Cycles en erreur</s:String>
+  <s:String x:Key="S_Dash_VolumeParHeure">Volume par heure</s:String>
+  <s:String x:Key="S_Dash_ParConfiguration">Par configuration</s:String>
+  <s:String x:Key="S_Dash_Configuration">Configuration</s:String>
+  <s:String x:Key="S_Dash_Exportes">Exportes</s:String>
+  <s:String x:Key="S_Dash_Echecs">Echecs</s:String>
+  <s:String x:Key="S_Dash_Rejets">Rejets</s:String>
+  <s:String x:Key="S_Dash_DureeMoy">Duree moy.</s:String>
+
+  <!-- Aide -->
+  <s:String x:Key="S_Help_JetonsDeNommage">Jetons de nommage</s:String>
+  <s:String x:Key="S_Help_Assainissement">Assainissement</s:String>
+  <s:String x:Key="S_Help_TousLesCaracteresInterdits">Tous les caracteres interdits dans un nom de fichier Windows sont remplaces, separateurs de chemin compris : un sujet de mail contenant une barre oblique ne peut pas creer de sous-repertoire sur la cible. Le nom final est borne en longueur, et un nom vide devient 'sans-nom'.</s:String>
+  <s:String x:Key="S_Help_StatutsDesPieces">Statuts des pieces</s:String>
+  <s:String x:Key="S_Help_LeFichierDInformation">Le fichier d'information porte un statut par piece. Les distinguer est essentiel : trois d'entre eux signifient que la GED n'a PAS le document.</s:String>
+  <s:String x:Key="S_Help_EnPratique">En pratique</s:String>
+  <s:String x:Key="S_Help_UnLotOuFailedcount">Un lot ou FailedCount est superieur a zero merite un regard : le champ Warnings du fichier d'information porte le motif de chaque echec.</s:String>
+  <s:String x:Key="S_Help_ChampsPersonnalises">Champs personnalises</s:String>
+  <s:String x:Key="S_Help_LesChampsAjoutesAu">Les champs ajoutes au fichier d'information sont resolus dans cet ordre : valeur d'origine selon la source, format de date, table de traduction, valeur par defaut si le resultat est vide, longueur fixe.</s:String>
+  <s:String x:Key="S_Help_Sources">Sources</s:String>
+  <s:String x:Key="S_Help_SortieSelonLeFormat">Sortie selon le format</s:String>
+  <s:String x:Key="S_Help_UnChampNonResolu">Un champ non resolu ne fait jamais echouer le traitement : il produit sa valeur par defaut et un avertissement. C'est le document qui compte, pas la completude de son index.</s:String>
+  <s:String x:Key="S_Help_Diagnostic">Diagnostic</s:String>
+  <s:String x:Key="S_Help_UnMessageRevientA">Un message revient a chaque cycle</s:String>
+  <s:String x:Key="S_Help_LeMarquageNA">Le marquage n'a pas lieu, ou la cle de deduplication n'est pas stable. Verifier que l'export reussit : le marquage n'intervient qu'APRES export confirme, volontairement. Un doublon se detecte et se corrige, une perte silencieuse non.</s:String>
+  <s:String x:Key="S_Help_LePdfUnifieEst">Le PDF unifie est vide ou incomplet</s:String>
+  <s:String x:Key="S_Help_RegarderLeStatutDe">Regarder le statut de chaque piece dans le fichier d'information. PassThroughUnverified signifie que le document est livre a cote mais n'a pas pu etre fusionne. LibreOffice absent explique l'echec de toutes les pieces bureautiques.</s:String>
+  <s:String x:Key="S_Help_LeDisqueSeRemplit">Le disque se remplit</s:String>
+  <s:String x:Key="S_Help_LeRepertoireDeTravail">Le repertoire de travail n'est nettoye qu'apres export confirme. Une accumulation signale des exports en echec. Le bouton Maintenance declenche une passe immediate : elle met en quarantaine les unites inachevees de plus de sept jours et supprime les repertoires orphelins.</s:String>
+  <s:String x:Key="S_Help_RejouerUnMessageLitigieux">Rejouer un message litigieux</s:String>
+  <s:String x:Key="S_Help_LeMimeBrutEst">Le MIME brut est conserve dans le repertoire de travail du message, sous le nom message.eml. Le deposer dans un dossier, creer une configuration en protocole folder pointant dessus, et le message est rejoue a l'identique.</s:String>
+  <s:String x:Key="S_Help_OuSontLesJournaux">Ou sont les journaux</s:String>
+  <s:String x:Key="S_Help_LeNiveauSeChange">Le niveau se change sans redemarrer par la variable d'environnement ACPOLLER_LOGLEVEL.</s:String>
 </ResourceDictionary>

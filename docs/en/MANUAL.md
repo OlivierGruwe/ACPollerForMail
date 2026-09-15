@@ -1,8 +1,8 @@
-# ACPoller 2.0 — Manual
+# ACPollerForMail — Manual
 
 ## 1. What the product does
 
-ACPoller watches mailboxes, converts everything that arrives into PDF, and
+ACPollerForMail watches mailboxes, converts everything that arrives into PDF, and
 delivers the result to an ECM system or a file share.
 
 The cycle, for each message:
@@ -149,7 +149,7 @@ It does not need to be a server administrator.
 
 ### Running the installer
 
-1. Run `ACPoller-x.y.z-setup.exe` as administrator
+1. Run `ACPollerForMail-x.y.z-setup.exe` as administrator
 2. Pick the components: LibreOffice and qpdf if the server lacks them
 3. **Enter the service account** on the dedicated page
 4. Let the wizard finish
@@ -170,8 +170,8 @@ keeps a copy of the original file.
 place, then delete them:
 
 ```
-findstr /i "ENC:" "C:\Program Files\ACPoller\appsettings.json"
-del "C:\Program Files\ACPoller\appsettings.json.clear.*.bak"
+findstr /i "ENC:" "C:\Program Files\ACPollerForMail\appsettings.json"
+del "C:\Program Files\ACPollerForMail\appsettings.json.clear.*.bak"
 ```
 
 The service purges them by itself after twenty-four hours, but there is no
@@ -546,7 +546,7 @@ API, and a service shutting down on its own client's order could not confirm
 the order was carried out.
 
 ```
-Restart-Service ACPoller
+Restart-Service ACPollerForMail
 ```
 ---
 
@@ -560,7 +560,7 @@ throttling shows and the disk has room, there is nothing to do.
 Without the interface:
 
 ```
-curl -H "X-ACPoller-Token: <token>" http://127.0.0.1:5199/api/status
+curl -H "X-ACPollerForMail-Token: <token>" http://127.0.0.1:5199/api/status
 ```
 
 ### Suspending a mailbox
@@ -637,8 +637,8 @@ The service runs and finds nothing. Look, in this order:
 Switching the log level to `Debug` makes the cycle verbose:
 
 ```
-setx ACPOLLER_LOGLEVEL Debug /M
-Restart-Service ACPoller
+setx ACPollerForMail_LOGLEVEL Debug /M
+Restart-Service ACPollerForMail
 ```
 
 ### The disk fills up
@@ -652,7 +652,7 @@ units older than seven days, removal of orphan directories.
 ### The service does not start
 
 ```
-findstr /i "worker(s) demarre" logs\acpoller-*.log
+findstr /i "worker(s) demarre" logs\ACPollerForMail-*.log
 ```
 
 The line `N worker(s) demarre(s), M ecarte(s)` gives the count. If `M` is not
@@ -665,7 +665,7 @@ The interface token does not match the service one. Open **Connection**, then
 rejected token.
 
 The token in clear text sits in
-`C:\ProgramData\ACPoller\ui-settings.default.json`.
+`C:\ProgramData\ACPollerForMail\ui-settings.default.json`.
 
 ### Tracing one message
 
@@ -673,7 +673,7 @@ The information file carries a `CorrelationId`, present in every log line of
 that processing:
 
 ```
-findstr /i "<CorrelationId>" logs\acpoller-*.log
+findstr /i "<CorrelationId>" logs\ACPollerForMail-*.log
 ```
 
 ---
@@ -751,21 +751,21 @@ Adding a field therefore never shifts the existing columns.
 
 | Path | Contents | Critical |
 |---|---|---|
-| `C:\Program Files\ACPoller\appsettings.json` | Configuration, encrypted secrets | Yes |
-| `C:\Program Files\ACPoller\logs\` | Logs | No |
-| `C:\Program Files\ACPoller\docs\` | This manual | No |
-| `C:\ProgramData\ACPoller\work\` | Working units in progress | No |
-| `C:\ProgramData\ACPoller\work\state\processed.db` | Processed-message log | **Critical** |
-| `C:\ProgramData\ACPoller\work\_quarantaine\` | Abandoned units, 30 days | No |
-| `C:\ProgramData\ACPoller\ui-settings.default.json` | Interface address and token | No |
-| `%APPDATA%\ACPoller\ui-settings.json` | Operator's own settings | No |
+| `C:\Program Files\ACPollerForMail\appsettings.json` | Configuration, encrypted secrets | Yes |
+| `C:\Program Files\ACPollerForMail\logs\` | Logs | No |
+| `C:\Program Files\ACPollerForMail\docs\` | This manual | No |
+| `C:\ProgramData\ACPollerForMail\work\` | Working units in progress | No |
+| `C:\ProgramData\ACPollerForMail\work\state\processed.db` | Processed-message log | **Critical** |
+| `C:\ProgramData\ACPollerForMail\work\_quarantaine\` | Abandoned units, 30 days | No |
+| `C:\ProgramData\ACPollerForMail\ui-settings.default.json` | Interface address and token | No |
+| `%APPDATA%\ACPollerForMail\ui-settings.json` | Operator's own settings | No |
 
 ### Backup
 
 Two items belong in the server backup:
 
-- `C:\ProgramData\ACPoller\work\state\processed.db`
-- `C:\Program Files\ACPoller\appsettings.json`
+- `C:\ProgramData\ACPollerForMail\work\state\processed.db`
+- `C:\Program Files\ACPollerForMail\appsettings.json`
 
 The first is the only one whose loss is irreversible. The second can be
 rebuilt, but every secret would have to be entered again.
@@ -775,7 +775,7 @@ rebuilt, but every secret would have to be entered again.
 ## Appendix D — Control API
 
 Listens on the loopback interface only. Every request carries the
-`X-ACPoller-Token` header.
+`X-ACPollerForMail-Token` header.
 
 | Method | Route | Effect |
 |---|---|---|
@@ -808,7 +808,7 @@ To be run on the customer server before declaring the service operational.
 
 | Check | How | Expected |
 |---|---|---|
-| Service started | `Get-Service ACPoller` | `Running` |
+| Service started | `Get-Service ACPollerForMail` | `Running` |
 | Active workers | Start-up log | `N started, 0 set aside` |
 | Source reachable | **Test** button | Every component green |
 | Targets reachable | **Test** button | Actual write confirmed |
@@ -817,7 +817,7 @@ To be run on the customer server before declaring the service operational.
 | Account network access | Test a UNC target | Delivery succeeds |
 | First message | Drop a test message | PDF and information file delivered |
 | Idempotence | Wait for a second cycle | The message is not processed again |
-| Restart | `Restart-Service ACPoller` | Resumes without duplicates |
+| Restart | `Restart-Service ACPollerForMail` | Resumes without duplicates |
 | Floor date | General tab | Set if history is not imported |
 | Encrypted secrets | `findstr ENC: appsettings.json` | At least one match |
 | Clear-text backups | `dir *.clear.*.bak` | Deleted |

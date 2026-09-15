@@ -38,6 +38,7 @@ public static class LocalizationService
     /// <param name="language">Langue voulue.</param>
     public static void Apply(AppLanguage language)
     {
+
         var application = System.Windows.Application.Current;
 
         if (application is null)
@@ -47,6 +48,7 @@ public static class LocalizationService
 
         var code = Resolve(language);
         var uri = new Uri($"{Prefix}{code}.xaml", UriKind.Absolute);
+        System.Diagnostics.Debug.WriteLine($"Langue appliquee : {code}, dictionnaire {uri}");
 
         var dictionary = new ResourceDictionary { Source = uri };
 

@@ -26,14 +26,14 @@
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <TextBlock Grid.Row="0" Text="Connexion au service"
+    <TextBlock Grid.Row="0" Text="{DynamicResource S_Conn_ConnexionAuService}"
                FontSize="18" FontWeight="Light" Margin="0,0,0,16" />
 
     <TextBox Grid.Row="1"
              Text="{Binding BaseAddress, UpdateSourceTrigger=PropertyChanged}"
              mah:TextBoxHelper.Watermark="http://127.0.0.1:5199"
              mah:TextBoxHelper.UseFloatingWatermark="True"
-             Tag="Adresse du service"
+             Tag="{DynamicResource S_Conn_AdresseDuService}"
              Margin="0,0,0,14" />
 
     <!-- PasswordBox n'est pas liable proprement, et masquer le jeton
@@ -44,22 +44,19 @@
              Text="{Binding Token, UpdateSourceTrigger=PropertyChanged}"
              mah:TextBoxHelper.Watermark="Depose par l'installeur, ou valeur de ControlApi:Token"
              mah:TextBoxHelper.UseFloatingWatermark="True"
-             Tag="Jeton de pilotage"
+             Tag="{DynamicResource S_Conn_JetonDePilotage}"
              FontFamily="Consolas"
              Margin="0,0,0,14" />
 
     <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,16">
-      <TextBlock Text="{DynamicResource S_Theme}" VerticalAlignment="Center" Margin="0,0,12,0" />
+      <TextBlock Text="{DynamicResource S_Conn_Theme}" VerticalAlignment="Center" Margin="0,0,12,0" />
       <ComboBox ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Themes}}"
-                SelectedItem="{Binding Theme}" Width="140" />
-
-      <TextBlock Text="{DynamicResource S_Language}" VerticalAlignment="Center" Margin="20,0,12,0" />
-      <ComboBox ItemsSource="{Binding Source={x:Static vm:SettingsViewModel.Languages}}"
-                SelectedItem="{Binding Language}" Width="140" />
+                SelectedItem="{Binding Theme}"
+                Width="160" />
     </StackPanel>
 
     <StackPanel Grid.Row="4" Orientation="Horizontal">
-      <Button Content="Tester la connexion"
+      <Button Content="{DynamicResource S_Conn_TesterLaConnexion}"
               Command="{Binding TestCommand}"
               IsEnabled="{Binding IsTesting, Converter={StaticResource InverseBool}}"
               Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
@@ -76,12 +73,12 @@
                Foreground="{Binding TestSucceeded, Converter={StaticResource BoolToBrush}}" />
 
     <DockPanel Grid.Row="6">
-      <Button DockPanel.Dock="Right" Content="Enregistrer"
+      <Button DockPanel.Dock="Right" Content="{DynamicResource S_Conn_Enregistrer}"
               Click="OnSave"
               Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
               Padding="20,6" Margin="8,0,0,0" />
 
-      <Button DockPanel.Dock="Right" Content="Annuler"
+      <Button DockPanel.Dock="Right" Content="{DynamicResource S_Conn_Annuler}"
               IsCancel="True"
               Style="{StaticResource MahApps.Styles.Button.Square}"
               Padding="20,6" />
@@ -94,7 +91,7 @@
                    TextTrimming="CharacterEllipsis"
                    MaxWidth="380" HorizontalAlignment="Left"
                    ToolTip="{Binding SettingsLocation}">
-          <Run Text="Vos reglages :" />
+          <Run Text="{DynamicResource S_Conn_VosReglages}" />
           <Run Text="{Binding SettingsLocation, Mode=OneWay}" />
         </TextBlock>
 
@@ -106,7 +103,7 @@
                    MaxWidth="380" HorizontalAlignment="Left"
                    Visibility="{Binding HasDefaults, Converter={StaticResource BoolToVisibility}}"
                    ToolTip="{Binding DefaultsLocation}">
-          <Run Text="Valeurs d'installation :" />
+          <Run Text="{DynamicResource S_Conn_ValeursDInstallation}" />
           <Run Text="{Binding DefaultsLocation, Mode=OneWay}" />
         </TextBlock>
       </StackPanel>

@@ -3,69 +3,277 @@
                     xmlns:s="clr-namespace:System;assembly=System.Runtime">
 
   <!-- Interface strings, English.
-       Every key declared here must exist in Strings.fr.xaml as well: a missing
-       key shows up as an empty label, with no error and no clue. -->
 
-  <s:String x:Key="S_Subtitle">Mail capture, PDF conversion and delivery to ECM</s:String>
+       Consumed through DynamicResource rather than StaticResource: that is what
+       makes the language switch immediate, with no restart and no need to
+       reopen windows.
 
-  <!-- Action bar -->
-  <s:String x:Key="S_New">New</s:String>
-  <s:String x:Key="S_Edit">Edit</s:String>
-  <s:String x:Key="S_Delete">Delete</s:String>
-  <s:String x:Key="S_Test">Test</s:String>
-  <s:String x:Key="S_Restart">Restart</s:String>
-  <s:String x:Key="S_Refresh">Refresh</s:String>
-  <s:String x:Key="S_Maintenance">Maintenance</s:String>
-  <s:String x:Key="S_ServiceSettings">Service</s:String>
-  <s:String x:Key="S_Connection">Connection</s:String>
-  <s:String x:Key="S_Help">Help</s:String>
-  <s:String x:Key="S_Save">Save</s:String>
-  <s:String x:Key="S_Close">Close</s:String>
-  <s:String x:Key="S_Cancel">Cancel</s:String>
-  <s:String x:Key="S_Browse">Browse</s:String>
-  <s:String x:Key="S_Add">Add</s:String>
-  <s:String x:Key="S_Remove">Remove</s:String>
-  <s:String x:Key="S_MoveUp">Move up</s:String>
-  <s:String x:Key="S_MoveDown">Move down</s:String>
+       EVERY key declared here must exist in Strings.fr.xaml. A missing key
+       yields an EMPTY label, with no error and no clue about the cause. -->
 
-  <!-- Lists and tabs -->
-  <s:String x:Key="S_Configurations">Configurations</s:String>
-  <s:String x:Key="S_Templates">Templates</s:String>
-  <s:String x:Key="S_Supervision">Monitoring</s:String>
-  <s:String x:Key="S_Dashboard">Dashboard</s:String>
-  <s:String x:Key="S_TabGeneral">General</s:String>
-  <s:String x:Key="S_TabProtocol">Protocol</s:String>
-  <s:String x:Key="S_TabConversion">Conversion</s:String>
-  <s:String x:Key="S_TabOutput">Output format</s:String>
-  <s:String x:Key="S_TabProcessors">Processors</s:String>
-  <s:String x:Key="S_TabTargets">Targets</s:String>
-  <s:String x:Key="S_TabFields">Fields</s:String>
 
-  <!-- Monitoring -->
-  <s:String x:Key="S_Issues">Issues</s:String>
-  <s:String x:Key="S_TestResults">Connection tests</s:String>
-  <s:String x:Key="S_Workers">Workers</s:String>
-  <s:String x:Key="S_Connecting">Connecting...</s:String>
-  <s:String x:Key="S_RestartRequired">ACPoller needs a restart</s:String>
-  <s:String x:Key="S_ShowDetail">Show details</s:String>
+  <!-- Main window -->
+  <s:String x:Key="S_Main_Sombre">Dark</s:String>
+  <s:String x:Key="S_Main_Clair">Light</s:String>
+  <s:String x:Key="S_Main_Acpoller">ACPoller</s:String>
+  <s:String x:Key="S_Main_CaptureDeMessagerieConversion">Mail capture, PDF conversion and delivery to ECM</s:String>
+  <s:String x:Key="S_Main_Aide">Help</s:String>
+  <s:String x:Key="S_Main_Reglages">Connection</s:String>
+  <s:String x:Key="S_Main_Nouvelle">New</s:String>
+  <s:String x:Key="S_Main_Modifier">Edit</s:String>
+  <s:String x:Key="S_Main_Supprimer">Delete</s:String>
+  <s:String x:Key="S_Main_Tester">Test</s:String>
+  <s:String x:Key="S_Main_Redemarrer">Restart</s:String>
+  <s:String x:Key="S_Main_Rafraichir">Refresh</s:String>
+  <s:String x:Key="S_Main_Maintenance">Maintenance</s:String>
+  <s:String x:Key="S_Main_Configurations">Configurations</s:String>
+  <s:String x:Key="S_Main_AnomalieS">issue(s)</s:String>
+  <s:String x:Key="S_Main_Gabarits">Templates</s:String>
+  <s:String x:Key="S_Main_Nouveau">New</s:String>
+  <s:String x:Key="S_Main_ConfigurationS">configuration(s)</s:String>
+  <s:String x:Key="S_Main_Supervision">Monitoring</s:String>
+  <s:String x:Key="S_Main_Anomalies">Issues</s:String>
+  <s:String x:Key="S_Main_TestsDeConnexion">Connection tests</s:String>
+  <s:String x:Key="S_Main_Ms"> ms)</s:String>
+  <s:String x:Key="S_Main_Workers">Workers</s:String>
+  <s:String x:Key="S_Main_Configuration">Configuration</s:String>
+  <s:String x:Key="S_Main_Etat">State</s:String>
+  <s:String x:Key="S_Main_DernierCycle">Last cycle</s:String>
+  <s:String x:Key="S_Main_DerniereErreur">Last error</s:String>
+  <s:String x:Key="S_Main_TableauDeBord">Dashboard</s:String>
+
+  <!-- Configuration editor -->
+  <s:String x:Key="S_Edit_General">General</s:String>
+  <s:String x:Key="S_Edit_Nom">Name</s:String>
+  <s:String x:Key="S_Edit_ConfigurationActive">Configuration active</s:String>
+  <s:String x:Key="S_Edit_GabaritDontHeriter">Template to inherit from</s:String>
+  <s:String x:Key="S_Edit_LaisserVidePourUne">Leave empty for a standalone configuration. The template values apply, and only the differences declared here override them.</s:String>
+  <s:String x:Key="S_Edit_CeGabaritEstUn">This template is a model: any change applies immediately to every configuration inheriting from it, and their workers are restarted.</s:String>
+  <s:String x:Key="S_Edit_Collecte">Collection</s:String>
+  <s:String x:Key="S_Edit_PeriodeEntreDeuxCycles">Interval between cycles (seconds)</s:String>
+  <s:String x:Key="S_Edit_DecalageAleatoireAuDemarrage">Random startup delay (seconds)</s:String>
+  <s:String x:Key="S_Edit_NePrendreQueLes">Unread messages only</s:String>
+  <s:String x:Key="S_Edit_NombreMaximalDeMessages">Maximum messages per cycle</s:String>
+  <s:String x:Key="S_Edit_NePrendreQueLes2">Only messages carrying attachments</s:String>
+  <s:String x:Key="S_Edit_RattrapageAuPremierCycle">First-cycle lookback (days)</s:String>
+  <s:String x:Key="S_Edit_AuToutPremierCycle">Very first cycle only. Zero takes everything the folder holds. Unlike the floor date below, this value SLIDES: a restart in six months will catch up the last N days from that point.</s:String>
+  <s:String x:Key="S_Edit_NeJamaisTraiterLes">Never process messages older than</s:String>
+  <s:String x:Key="S_Edit_ARenseignerALa">Set this at go-live when history is not being imported.</s:String>
+  <s:String x:Key="S_Edit_Protocole">Protocol</s:String>
+  <s:String x:Key="S_Edit_BoiteIdentifiantDuJournal">Mailbox (key of the processing log)</s:String>
+  <s:String x:Key="S_Edit_MicrosoftGraph">Microsoft Graph</s:String>
+  <s:String x:Key="S_Edit_Tenantid">TenantId</s:String>
+  <s:String x:Key="S_Edit_Clientid">ClientId</s:String>
+  <s:String x:Key="S_Edit_SecretClientVideInchange">Client secret (empty = unchanged)</s:String>
+  <s:String x:Key="S_Edit_EmpreinteDeCertificatPreferable">Certificate thumbprint (preferable to a secret)</s:String>
+  <s:String x:Key="S_Edit_UnCertificatNExpire">A certificate does not expire on a Friday evening without warning.</s:String>
+  <s:String x:Key="S_Edit_LimitationDeDebit">Throttling</s:String>
+  <s:String x:Key="S_Edit_RequetesSimultanees">Concurrent requests</s:String>
+  <s:String x:Key="S_Edit_EspacementMinimalMs">Minimum spacing (ms)</s:String>
+  <s:String x:Key="S_Edit_CesBornesSontPartagees">These bounds are SHARED by every mailbox of the same tenant. Spacing matters as much as concurrency: without it, eight calls leave on the same millisecond and trigger throttling before reaching the limit.</s:String>
+  <s:String x:Key="S_Edit_RespecterLeDelaiDemande">Honour the delay Graph asks for after throttling</s:String>
+  <s:String x:Key="S_Edit_Imap">IMAP</s:String>
+  <s:String x:Key="S_Edit_Hote">Host</s:String>
+  <s:String x:Key="S_Edit_Port">Port</s:String>
+  <s:String x:Key="S_Edit_SslImpliciteDecocherPour">Implicit SSL (clear for STARTTLS)</s:String>
+  <s:String x:Key="S_Edit_Utilisateur">User name</s:String>
+  <s:String x:Key="S_Edit_MotDePasseVide">Password (empty = unchanged)</s:String>
+  <s:String x:Key="S_Edit_RepertoireLocal">Local folder</s:String>
+  <s:String x:Key="S_Edit_CheminDesFichiersEml">Path to the .eml files</s:String>
+  <s:String x:Key="S_Edit_SertAuRejeuD">Used to replay a problematic message and to run acceptance tests, without a mailbox or a network.</s:String>
+  <s:String x:Key="S_Edit_DossierEtDisposition">Folder and disposition</s:String>
+  <s:String x:Key="S_Edit_DossierSurveille">Watched folder</s:String>
+  <s:String x:Key="S_Edit_NomCanoniqueEtNon">Canonical name, not label: a label breaks on a localised mailbox.</s:String>
+  <s:String x:Key="S_Edit_ApresTraitement">After processing</s:String>
+  <s:String x:Key="S_Edit_DossierDeDestinationSi">Destination folder (when moving)</s:String>
+  <s:String x:Key="S_Edit_Conversion">Conversion</s:String>
+  <s:String x:Key="S_Edit_DelaiMaximalParPiece">Maximum time per part (minutes)</s:String>
+  <s:String x:Key="S_Edit_DepasseLeConvertisseurEst">Once exceeded, the converter is killed rather than waited for.</s:String>
+  <s:String x:Key="S_Edit_PieceNonConvertible">Unconvertible part</s:String>
+  <s:String x:Key="S_Edit_SubstituteProduitUnePage">Substitute produces a page carrying the reason, Skip drops the part, RejectMessage rejects the whole message.</s:String>
+  <s:String x:Key="S_Edit_ConvertirLeCorpsDu">Convert the message body</s:String>
+  <s:String x:Key="S_Edit_JoindreAussiLesPieces">Also attach the original parts</s:String>
+  <s:String x:Key="S_Edit_TailleMinimaleDUne">Minimum inline image size (KB)</s:String>
+  <s:String x:Key="S_Edit_EnDessousLImage">Below this, the image is dropped: it is a signature logo.</s:String>
+  <s:String x:Key="S_Edit_ExtractionRecursive">Recursive extraction</s:String>
+  <s:String x:Key="S_Edit_ProfondeurMaximale">Maximum depth</s:String>
+  <s:String x:Key="S_Edit_NombreMaximalDePieces">Maximum number of parts</s:String>
+  <s:String x:Key="S_Edit_CesBornesProtegentD">These bounds protect against a crafted archive. Raising them without reason exposes the service.</s:String>
+  <s:String x:Key="S_Edit_VolumeDecompresseMaximalMo">Maximum expanded volume (MB)</s:String>
+  <s:String x:Key="S_Edit_TailleMaximaleDUne">Maximum size of one entry (MB)</s:String>
+  <s:String x:Key="S_Edit_ExtensionsEcartees">Excluded extensions</s:String>
+  <s:String x:Key="S_Edit_SepareesParDesVirgules">Comma separated. Example: p7s, ics, vcf. Used to drop electronic signatures and calendar invitations, which have no business reaching the ECM.</s:String>
+  <s:String x:Key="S_Edit_FormatDeSortie">Output format</s:String>
+  <s:String x:Key="S_Edit_ModeDeProductionDes">PDF production mode</s:String>
+  <s:String x:Key="S_Edit_FormatDuFichierD">Information file format</s:String>
+  <s:String x:Key="S_Edit_XsltAppliqueUneFeuille">xslt applies a transformation sheet to the canonical XML: this is what produces the exact structure an ECM expects, without shipping code.</s:String>
+  <s:String x:Key="S_Edit_FeuilleDeTransformation">Transformation sheet</s:String>
+  <s:String x:Key="S_Edit_Parcourir">Browse</s:String>
+  <s:String x:Key="S_Edit_CheminSurLeServeur">Path on the SERVER. The button is only a typing aid and is relevant only when the interface runs on the server.</s:String>
+  <s:String x:Key="S_Edit_ExtensionDuFichierProduit">Produced file extension (no dot)</s:String>
+  <s:String x:Key="S_Edit_VideDonneXmlUne">Empty gives .xml. A sheet declaring method=text produces flat output: use txt, idx or csv depending on what the ECM expects.</s:String>
+  <s:String x:Key="S_Edit_MiseAuPointPasser">Development: set the format to xml, look at the output, write the sheet against it, then switch back to xslt. Both formats produce the same input XML.</s:String>
+  <s:String x:Key="S_Edit_GabaritDeNommage">Naming template</s:String>
+  <s:String x:Key="S_Edit_PolitiqueDeDepot">Delivery policy</s:String>
+  <s:String x:Key="S_Edit_EcritureAtomiqueFichierTemporaire">Atomic write (temporary file then rename)</s:String>
+  <s:String x:Key="S_Edit_SansElleLaGed">Without it, the ECM may read a PDF while it is being written.</s:String>
+  <s:String x:Key="S_Edit_ToutOuRienEntre">All or nothing across targets</s:String>
+  <s:String x:Key="S_Edit_UnEchecSurUne">A failure on one target rolls back deliveries already made to the others.</s:String>
+  <s:String x:Key="S_Edit_FichierTemoinEcritEn">Sentinel file written last (empty = none)</s:String>
+  <s:String x:Key="S_Edit_TentativesSurEchecTransitoire">Attempts on transient failure</s:String>
+  <s:String x:Key="S_Edit_DelaiAvantLaSeconde">Delay before the second attempt (seconds)</s:String>
+  <s:String x:Key="S_Edit_DoubleAChaqueNouvel">Doubles on each retry. Too short against a restarting ECM, all three attempts are spent before it answers.</s:String>
+  <s:String x:Key="S_Edit_Traitements">Processors</s:String>
+  <s:String x:Key="S_Edit_TraitementsMetierApportesPar">Business processors provided by the installed plugins. They run in the order shown, at the stages listed.</s:String>
+  <s:String x:Key="S_Edit_AucunTraitementMetierDisponible">No business processor available. Drop the DLLs into the plugin folder and restart the service.</s:String>
+  <s:String x:Key="S_Edit_PluginsRefuses">Rejected plugins</s:String>
+  <s:String x:Key="S_Edit_CesAssemblagesSontPresents">These assemblies are present but were not loaded: their processors are not offered.</s:String>
+  <s:String x:Key="S_Edit_Cibles">Targets</s:String>
+  <s:String x:Key="S_Edit_Ajouter">Add</s:String>
+  <s:String x:Key="S_Edit_Retirer">Remove</s:String>
+  <s:String x:Key="S_Edit_TypeDeTransport">Transport type</s:String>
+  <s:String x:Key="S_Edit_NomDeLaCible">Target name</s:String>
+  <s:String x:Key="S_Edit_ReprisDansLesJournaux">Repeated in the logs: without a name, errors are unreadable.</s:String>
+  <s:String x:Key="S_Edit_SystemeDeFichiers">File system</s:String>
+  <s:String x:Key="S_Edit_RepertoireDeDepotLocal">Delivery folder (local or UNC)</s:String>
+  <s:String x:Key="S_Edit_CreerLeRepertoireS">Create the folder if it does not exist</s:String>
+  <s:String x:Key="S_Edit_FtpFtps">FTP / FTPS</s:String>
+  <s:String x:Key="S_Edit_RepertoireDistant">Remote directory</s:String>
+  <s:String x:Key="S_Edit_Chiffrement">Encryption</s:String>
+  <s:String x:Key="S_Edit_AccepterToutCertificatServeur">Accept any server certificate</s:String>
+  <s:String x:Key="S_Edit_SupprimeTouteProtectionContre">Removes every protection against interception. Enable only against a known self-signed certificate, and document it.</s:String>
+  <s:String x:Key="S_Edit_S3OuCompatible">S3 or compatible</s:String>
+  <s:String x:Key="S_Edit_Bucket">Bucket</s:String>
+  <s:String x:Key="S_Edit_PrefixeDesCles">Key prefix</s:String>
+  <s:String x:Key="S_Edit_Region">Region</s:String>
+  <s:String x:Key="S_Edit_PointDAccesPersonnalise">Custom endpoint (MinIO, Garage, Ceph)</s:String>
+  <s:String x:Key="S_Edit_RenseigneLeStyleChemin">When filled in, path style and the compatible checksum mode are enabled automatically.</s:String>
+  <s:String x:Key="S_Edit_CleDAccesVide">Access key (empty = AWS resolution chain)</s:String>
+  <s:String x:Key="S_Edit_CleSecreteVideInchange">Secret key (empty = unchanged)</s:String>
+  <s:String x:Key="S_Edit_ChiffrementAuRepos">Server-side encryption</s:String>
+  <s:String x:Key="S_Edit_Aes256SurAwsLaisser">AES256 on AWS. Leave empty on MinIO or Garage with no server-side encryption configured, otherwise delivery is refused.</s:String>
+  <s:String x:Key="S_Edit_DllDExportCliente">Customer export DLL</s:String>
+  <s:String x:Key="S_Edit_Assemblage">Assembly</s:String>
+  <s:String x:Key="S_Edit_LesReglagesPropresAu">Plugin-specific settings are entered in the table below.</s:String>
+  <s:String x:Key="S_Edit_TousLesReglages">All settings</s:String>
+  <s:String x:Key="S_Edit_LesChampsCiDessus">The fields above write into this very table. Adding a row here allows a setting no dedicated field covers.</s:String>
+  <s:String x:Key="S_Edit_Reglage">Setting</s:String>
+  <s:String x:Key="S_Edit_Valeur">Value</s:String>
+  <s:String x:Key="S_Edit_Champs">Fields</s:String>
+  <s:String x:Key="S_Edit_LOrdreFaitFoi">Order matters: it is the CSV column order. Moving them changes the output format.</s:String>
+  <s:String x:Key="S_Edit_Monter">Move up</s:String>
+  <s:String x:Key="S_Edit_Descendre">Move down</s:String>
+  <s:String x:Key="S_Edit_NomDuChampEn">Output field name</s:String>
+  <s:String x:Key="S_Edit_OrigineDeLaValeur">Value source</s:String>
+  <s:String x:Key="S_Edit_FormatDeDateIgnore">Date format (ignored when the value is not a date)</s:String>
+  <s:String x:Key="S_Edit_ValeurParDefautSi">Default value when the result is empty</s:String>
+  <s:String x:Key="S_Edit_LongueurFixe0Libre">Fixed length (0 = free)</s:String>
+  <s:String x:Key="S_Edit_RemplirAGauche">Pad on the left</s:String>
+  <s:String x:Key="S_Edit_PourLesGedQui">For ECMs reading positional formats. A value that is too long is truncated: overflowing would shift every following column.</s:String>
+  <s:String x:Key="S_Edit_TraductionsDeValeur">Value translations</s:String>
+  <s:String x:Key="S_Edit_AppliqueesApresResolutionConvertit">Applied after resolution: turns a label into the code the ECM expects.</s:String>
+  <s:String x:Key="S_Edit_ValeurLue">Value read</s:String>
+  <s:String x:Key="S_Edit_ValeurEcrite">Value written</s:String>
+  <s:String x:Key="S_Edit_Json">JSON</s:String>
+  <s:String x:Key="S_Edit_RafraichirLApercu">Refresh preview</s:String>
+  <s:String x:Key="S_Edit_Fermer">Close</s:String>
+  <s:String x:Key="S_Edit_Enregistrer">Save</s:String>
 
   <!-- Connection settings -->
-  <s:String x:Key="S_ServiceAddress">Service address</s:String>
-  <s:String x:Key="S_Token">Control token</s:String>
-  <s:String x:Key="S_Theme">Theme</s:String>
-  <s:String x:Key="S_Language">Language</s:String>
-  <s:String x:Key="S_TestConnection">Test connection</s:String>
+  <s:String x:Key="S_Conn_ConnexionAuService">Service connection</s:String>
+  <s:String x:Key="S_Conn_AdresseDuService">Service address</s:String>
+  <s:String x:Key="S_Conn_JetonDePilotage">Control token</s:String>
+  <s:String x:Key="S_Conn_Theme">Theme</s:String>
+  <s:String x:Key="S_Conn_TesterLaConnexion">Test connection</s:String>
+  <s:String x:Key="S_Conn_Enregistrer">Save</s:String>
+  <s:String x:Key="S_Conn_Annuler">Cancel</s:String>
+  <s:String x:Key="S_Conn_VosReglages">Your settings:</s:String>
+  <s:String x:Key="S_Conn_ValeursDInstallation">Installation values:</s:String>
 
-  <!-- Tooltips -->
-  <s:String x:Key="H_Name">Unique identifier, used as the correlation key in logs and as the working directory name. Changing it creates a new configuration: the previous one remains until deleted.</s:String>
-  <s:String x:Key="H_Template">Name of a declared template. The configuration inherits every value from it and only overrides its own differences. Across dozens of mailboxes sharing one tenant, a configuration comes down to three lines.</s:String>
-  <s:String x:Key="H_InitialLookback">Applies to the very first cycle only, when nothing has been processed yet for this mailbox. Too low a value makes it look like nothing is arriving while the service works fine, and nothing reports it.</s:String>
-  <s:String x:Key="H_NotBefore">No message older than this date will ever be processed. Set it at go-live when history is not being imported: without it, the first run processes everything sitting in the mailbox.</s:String>
-  <s:String x:Key="H_Timeout">Once exceeded, the converter is KILLED rather than waited for. A LibreOffice instance stuck on a corrupt document never recovers: without this timeout, one document freezes a conversion slot for good.</s:String>
-  <s:String x:Key="H_OnFailure">Substitute produces a page carrying the file name and the reason, so the ECM sees something is missing. Skip drops the part silently. RejectMessage rejects the whole message.</s:String>
-  <s:String x:Key="H_Naming">Tokens: {date} {time} {received} {guid} {mailbox} {config} {subject} {from} {index} {name} {ext} {node}. A format may follow a colon. In PerAttachment mode, {index} is mandatory or files overwrite each other.</s:String>
-  <s:String x:Key="H_AtomicWrite">The file is written under a temporary extension, then renamed. Without it, an ECM watching the folder can pick up a PDF mid-write, and the error is undetectable on its side.</s:String>
-  <s:String x:Key="H_AllOrNothing">If one target fails, deliveries already made to the others are rolled back. An ECM holding a message that another one never received creates a reconciliation gap nobody notices before the audit.</s:String>
-  <s:String x:Key="H_AcceptAnyCertificate">Removes every protection against interception: a third party can sit between the service and the server undetected. Enable only against a known self-signed certificate, and document it.</s:String>
-  <s:String x:Key="H_HonorRetryAfter">Graph states how long to wait after throttling. Ignoring it makes things worse: the service resumes at once, gets throttled again, and the quota recovers more and more slowly.</s:String>
+  <!-- Service settings -->
+  <s:String x:Key="S_Svc_CesReglagesNeSont">These settings are not reloadable while running. Any change saved here only takes effect after a full service restart, and capture is interrupted meanwhile.</s:String>
+  <s:String x:Key="S_Svc_Service">Service</s:String>
+  <s:String x:Key="S_Svc_RepertoireDeTravail">Working directory</s:String>
+  <s:String x:Key="S_Svc_ContientLesUnitesDe">Holds the working units in progress, the processed-message log and the quarantine. Changing it LOSES the idempotence log: messages still in the mailboxes will be processed again, hence duplicates in the ECM.</s:String>
+  <s:String x:Key="S_Svc_TraitementsSimultanesToutesBoites">Concurrent processing, all mailboxes together</s:String>
+  <s:String x:Key="S_Svc_BorneLeTravailReel">Bounds actual work, not the worker count. A hundred mailboxes can listen with four concurrent jobs. Raising it beyond the LibreOffice profile count achieves nothing: conversion becomes the bottleneck.</s:String>
+  <s:String x:Key="S_Svc_RepertoireDesPlugins">Plugin folder</s:String>
+  <s:String x:Key="S_Svc_RetentionDuJournalDes">Processed-message log retention (days)</s:String>
+  <s:String x:Key="S_Svc_AuDelaUneEntree">Beyond this, an entry is purged. Too short, and an old message left in a mailbox would be processed again. The value must exceed the time a message can stay unprocessed.</s:String>
+  <s:String x:Key="S_Svc_Outils">Tools</s:String>
+  <s:String x:Key="S_Svc_LibreofficeSofficeExe">LibreOffice (soffice.exe)</s:String>
+  <s:String x:Key="S_Svc_Parcourir">Browse</s:String>
+  <s:String x:Key="S_Svc_SansLibreofficeAucunePiece">Without LibreOffice, no office document is converted: Word, Excel and PowerPoint come out as substitution pages. Apache OpenOffice will not do, its soffice does not support command-line conversion.</s:String>
+  <s:String x:Key="S_Svc_ProfilsLibreofficeSimultanes">Concurrent LibreOffice profiles</s:String>
+  <s:String x:Key="S_Svc_ChaqueConversionUtiliseUn">Each conversion uses an isolated profile. Two conversions sharing a profile block each other, which is why this number actually bounds parallel conversion.</s:String>
+  <s:String x:Key="S_Svc_Qpdf">qpdf</s:String>
+  <s:String x:Key="S_Svc_RepareLesPdfQue">Repairs PDFs the reader engine refuses. On a real invoice flow this is a few percent of documents, which would otherwise be delivered without being merged.</s:String>
+  <s:String x:Key="S_Svc_RepertoireDesPolices">Font folder</s:String>
+  <s:String x:Key="S_Svc_LesPolicesSontIncorporees">Fonts are embedded in the produced PDFs, which are archived for years. Depending on a system font makes rendering vary from one server to another.</s:String>
+  <s:String x:Key="S_Svc_Maintenance">Maintenance</s:String>
+  <s:String x:Key="S_Svc_PeriodeEntreDeuxPasses">Interval between passes (minutes)</s:String>
+  <s:String x:Key="S_Svc_MiseEnQuarantaineApres">Quarantine after (days)</s:String>
+  <s:String x:Key="S_Svc_UneUniteDeTravail">A working unit unfinished for longer is moved to quarantine rather than deleted: it carries the original MIME, the only way to replay the message after a fix.</s:String>
+  <s:String x:Key="S_Svc_SeuilDAlerteD">Disk space warning threshold (%)</s:String>
+  <s:String x:Key="S_Svc_EnDessousUneAlerte">Below this, a warning is logged and displayed. Capture does not stop by itself: it will fail at saturation, which is far more brutal.</s:String>
+  <s:String x:Key="S_Svc_Pilotage">Control</s:String>
+  <s:String x:Key="S_Svc_ActiverLApiDe">Enable the control API</s:String>
+  <s:String x:Key="S_Svc_LaDesactiverRendCette">Disabling it makes this interface unusable: it only talks to the service through that API. The setting would have to be re-enabled by hand in the configuration file.</s:String>
+  <s:String x:Key="S_Svc_PortDEcoute">Listening port</s:String>
+  <s:String x:Key="S_Svc_EcouteUniquementSurLa">Listens on the loopback interface only. After changing it, remember to fix the address in this interface's connection settings.</s:String>
+  <s:String x:Key="S_Svc_JetonDePilotageVide">Control token (empty = unchanged)</s:String>
+  <s:String x:Key="S_Svc_ChangerLeJetonInvalide">Changing the token invalidates EVERY operator workstation already configured, including this one. It must be carried over into each interface's connection settings.</s:String>
+  <s:String x:Key="S_Svc_BaseDeMetriquesVide">Metrics database (empty = unchanged)</s:String>
+  <s:String x:Key="S_Svc_ChaineDeConnexionSql">SQL Server connection string for long-term history. The dashboard works without it, over a twenty-four hour in-memory window.</s:String>
+  <s:String x:Key="S_Svc_Fermer">Close</s:String>
+  <s:String x:Key="S_Svc_Enregistrer">Save</s:String>
+
+  <!-- Dashboard -->
+  <s:String x:Key="S_Dash_RemettreAZero">Reset counters</s:String>
+  <s:String x:Key="S_Dash_Traitement">Processing</s:String>
+  <s:String x:Key="S_Dash_MessagesExportes">Messages delivered</s:String>
+  <s:String x:Key="S_Dash_EnEchec">Failed</s:String>
+  <s:String x:Key="S_Dash_TauxDeSucces">Success rate</s:String>
+  <s:String x:Key="S_Dash_RejetesParUnTraitement">Rejected by a business processor</s:String>
+  <s:String x:Key="S_Dash_Ecartes">Skipped</s:String>
+  <s:String x:Key="S_Dash_PerformanceEtSante">Performance and health</s:String>
+  <s:String x:Key="S_Dash_Ms">ms</s:String>
+  <s:String x:Key="S_Dash_DureeMoyenne">Average duration</s:String>
+  <s:String x:Key="S_Dash_95eCentileEcartImportant">95th percentile. A wide gap with the average means messages are saturating the slots.</s:String>
+  <s:String x:Key="S_Dash_LimitationsGraphNonNul">Graph throttling. Non-zero in steady state: lower the concurrency.</s:String>
+  <s:String x:Key="S_Dash_DisqueLibreASaturation">Free disk. At saturation, capture stops.</s:String>
+  <s:String x:Key="S_Dash_PiecesNonConverties">Unconverted parts</s:String>
+  <s:String x:Key="S_Dash_CyclesEnErreur">Failed cycles</s:String>
+  <s:String x:Key="S_Dash_VolumeParHeure">Volume per hour</s:String>
+  <s:String x:Key="S_Dash_ParConfiguration">Per configuration</s:String>
+  <s:String x:Key="S_Dash_Configuration">Configuration</s:String>
+  <s:String x:Key="S_Dash_Exportes">Delivered</s:String>
+  <s:String x:Key="S_Dash_Echecs">Failures</s:String>
+  <s:String x:Key="S_Dash_Rejets">Rejections</s:String>
+  <s:String x:Key="S_Dash_DureeMoy">Avg. duration</s:String>
+
+  <!-- Help -->
+  <s:String x:Key="S_Help_JetonsDeNommage">Naming tokens</s:String>
+  <s:String x:Key="S_Help_Assainissement">Sanitising</s:String>
+  <s:String x:Key="S_Help_TousLesCaracteresInterdits">Every character forbidden in a Windows file name is replaced, path separators included: a mail subject containing a slash cannot create a subfolder on the target. The final name is length-bounded, and an empty name becomes 'sans-nom'.</s:String>
+  <s:String x:Key="S_Help_StatutsDesPieces">Part statuses</s:String>
+  <s:String x:Key="S_Help_LeFichierDInformation">The information file carries a status per part. Telling them apart matters: three of them mean the ECM does NOT have the document.</s:String>
+  <s:String x:Key="S_Help_EnPratique">In practice</s:String>
+  <s:String x:Key="S_Help_UnLotOuFailedcount">A batch where FailedCount is above zero deserves a look: the Warnings field of the information file carries the reason for each failure.</s:String>
+  <s:String x:Key="S_Help_ChampsPersonnalises">Custom fields</s:String>
+  <s:String x:Key="S_Help_LesChampsAjoutesAu">Fields added to the information file are resolved in this order: source value, date format, translation table, default value when the result is empty, fixed length.</s:String>
+  <s:String x:Key="S_Help_Sources">Sources</s:String>
+  <s:String x:Key="S_Help_SortieSelonLeFormat">Output by format</s:String>
+  <s:String x:Key="S_Help_UnChampNonResolu">An unresolved field never fails the processing: it produces its default value and a warning. The document is what matters, not the completeness of its index.</s:String>
+  <s:String x:Key="S_Help_Diagnostic">Troubleshooting</s:String>
+  <s:String x:Key="S_Help_UnMessageRevientA">A message comes back every cycle</s:String>
+  <s:String x:Key="S_Help_LeMarquageNA">Marking is not happening, or the deduplication key is not stable. Check that delivery succeeds: marking only happens AFTER delivery is confirmed, deliberately. A duplicate can be spotted and corrected, a silent loss cannot.</s:String>
+  <s:String x:Key="S_Help_LePdfUnifieEst">The merged PDF is empty or incomplete</s:String>
+  <s:String x:Key="S_Help_RegarderLeStatutDe">Look at the status of each part in the information file. PassThroughUnverified means the document is delivered alongside but could not be merged. A missing LibreOffice explains every office document failing.</s:String>
+  <s:String x:Key="S_Help_LeDisqueSeRemplit">The disk fills up</s:String>
+  <s:String x:Key="S_Help_LeRepertoireDeTravail">The working directory is only cleaned up once delivery is confirmed. A build-up points to failed deliveries. The Maintenance button triggers an immediate pass: it quarantines unfinished units older than seven days and removes orphan directories.</s:String>
+  <s:String x:Key="S_Help_RejouerUnMessageLitigieux">Replaying a problematic message</s:String>
+  <s:String x:Key="S_Help_LeMimeBrutEst">The raw MIME is kept in the message working directory, under the name message.eml. Drop it into a folder, create a configuration using the folder protocol pointing at it, and the message is replayed identically.</s:String>
+  <s:String x:Key="S_Help_OuSontLesJournaux">Where the logs are</s:String>
+  <s:String x:Key="S_Help_LeNiveauSeChange">The level is changed without a restart through the ACPOLLER_LOGLEVEL environment variable.</s:String>
 </ResourceDictionary>

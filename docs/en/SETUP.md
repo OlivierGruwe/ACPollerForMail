@@ -1,4 +1,4 @@
-# ACPoller — Installation guide
+# ACPollerForMail — Installation guide
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ The account does not need to be a server administrator.
 
 ## Installation
 
-1. Run `ACPoller-x.y.z-setup.exe` as administrator
+1. Run `ACPollerForMail-x.y.z-setup.exe` as administrator
 2. Accept the licence, pick the components
 3. **Enter the service account** on the dedicated page
 4. Tick LibreOffice and qpdf if they are not already installed
@@ -53,7 +53,7 @@ frozen during that time, which is normal.
 
 The service is installed but does nothing: no mailbox is declared yet.
 
-1. Launch **ACPoller** from the Start menu
+1. Launch **ACPollerForMail** from the Start menu
 2. The interface connects on its own, the token having been left for it
 3. **New** button, fill in the source and at least one target
 4. **Test** button before saving
@@ -86,8 +86,8 @@ a copy of the original file as `appsettings.json.clear.*.bak`.
 place, then delete them:
 
 ```
-findstr /i "ENC:" "C:\Program Files\ACPoller\appsettings.json"
-del "C:\Program Files\ACPoller\appsettings.json.clear.*.bak"
+findstr /i "ENC:" "C:\Program Files\ACPollerForMail\appsettings.json"
+del "C:\Program Files\ACPollerForMail\appsettings.json.clear.*.bak"
 ```
 
 ---
@@ -110,14 +110,14 @@ the settings the new version added.
 
 The installer deliberately keeps:
 
-- `C:\Program Files\ACPoller\appsettings.json`, holding the secrets and the
+- `C:\Program Files\ACPollerForMail\appsettings.json`, holding the secrets and the
   configuration
-- `C:\ProgramData\ACPoller`, holding the processed-message log
+- `C:\ProgramData\ACPollerForMail`, holding the processed-message log
 
 **Deleting the processed-message log causes the entire history to be processed
 again at the next installation**, hence duplicates in the ECM.
 
-LibreOffice is not uninstalled: it may have been installed before ACPoller or
+LibreOffice is not uninstalled: it may have been installed before ACPollerForMail or
 serve something else on that server.
 
 ---
@@ -128,7 +128,7 @@ To be run on the customer server before declaring the service operational.
 
 | Check | How | Expected |
 |---|---|---|
-| Service started | `Get-Service ACPoller` | `Running` |
+| Service started | `Get-Service ACPollerForMail` | `Running` |
 | Active workers | Start-up log | `N started, 0 set aside` |
 | Source reachable | **Test** button | Every component green |
 | Targets reachable | **Test** button | Actual write confirmed |
@@ -137,7 +137,7 @@ To be run on the customer server before declaring the service operational.
 | Account network access | Test a UNC target | Delivery succeeds |
 | First message | Drop a test message | PDF and information file in the ECM |
 | Idempotence | Wait for a second cycle | The message is not processed again |
-| Restart | `Restart-Service ACPoller` | Resumes without duplicates |
+| Restart | `Restart-Service ACPollerForMail` | Resumes without duplicates |
 
 The **account network access** row is the one that fails most often, and it
 only fails against a real share: a local test does not cover it.
