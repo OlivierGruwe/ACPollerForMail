@@ -77,7 +77,7 @@ public static class Program
         var logger = app.Services.GetRequiredService<ILoggerFactory>().CreateLogger(LoggerCategory);
 
         logger.LogInformation(
-            "ACPoller demarre (mode {Mode}, version {Version})",
+            "ACPollerForMail demarre (mode {Mode}, version {Version})",
             runAsConsole ? "console" : "service",
             typeof(Program).Assembly.GetName().Version);
 
