@@ -21,6 +21,8 @@
 !include "LogicLib.nsh"
 !include "x64.nsh"
 !include "FileFunc.nsh"
+!include "WordFunc.nsh"
+!include "StrFunc.nsh"
 
 ; La version vient du Makefile (/DVERSION=...), avec un repli pour une
 ; compilation manuelle. Une seule source de verite : le fichier VERSION.
@@ -69,16 +71,24 @@ Page custom ServiceAccountPage ServiceAccountLeave
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
+; VersionCompare compare deux numeros de version : 0 identiques, 1 la
+; premiere est plus recente, 2 la seconde l'est.
+!insertmacro VersionCompare
+
+; StrFunc demande une declaration explicite de chaque fonction utilisee.
+${StrStr}
+
 !insertmacro MUI_LANGUAGE "French"
 
 Var ServiceAccount
 Var ServicePassword
 
 ; Vrai quand une installation precedente a ete trouvee. L'assistant se
-; comporte alors en mise a jour : le repertoire n'est plus demandÃ©, il est
+; comporte alors en mise a jour : le repertoire n'est plus demandé, il est
 ; impose.
 Var Existant
 Var AncienNom
+Var VersionInstallee
 Var Dialog
 Var AccountField
 Var PasswordField
@@ -108,6 +118,28 @@ Var PasswordField
 Function .onInit
   StrCpy $Existant "0"
   StrCpy $AncienNom "0"
+  StrCpy $VersionInstallee ""
+
+  ; Une seule instance de l'assistant a la fois. Deux installations
+  ; simultanees se disputeraient les memes fichiers et le meme service, avec
+  ; un resultat imprevisible selon celle qui gagne la course.
+  System::Call 'kernel32::CreateMutex(p 0, i 0, t "ACPollerForMailSetup") p .r1 ?e'
+  Pop $0
+
+  ${If} $0 <> 0
+    MessageBox MB_OK|MB_ICONEXCLAMATION \
+      "Une installation d'${PRODUCT} est deja en cours."
+    Abort
+  ${EndIf}
+
+  ; Ecran d'accueil, affiche pendant la decompression. Le chemin est passe SANS
+  ; extension : le plugin ajoute .bmp de lui-meme, et avec l'extension il
+  ; cherche splash.bmp.bmp, ne trouve rien, et n'affiche rien sans message.
+  InitPluginsDir
+  File /oname=$PLUGINSDIR\splash.bmp "splash.bmp"
+  advsplash::show 1500 400 0 -1 $PLUGINSDIR\splash
+  Pop $0
+  Delete $PLUGINSDIR\splash.bmp
 
   ; 1. Installation du meme produit
   ReadRegStr $0 HKLM "Software\${PRODUCT}" "InstallPath"
@@ -133,14 +165,74 @@ Function .onInit
 
   init_done:
 
-  ; Ecran d'accueil, affiche pendant la decompression. Sur un paquet embarquant
-  ; LibreOffice, ce delai atteint plusieurs secondes pendant lesquelles rien ne
-  ; se passe a l'ecran.
-  InitPluginsDir
-  File /oname=$PLUGINSDIR\splash.bmp "splash.bmp"
-  advsplash::show 2000 0 0 -1 $PLUGINSDIR\splash.bmp
-  Pop $0
-  Delete $PLUGINSDIR\splash.bmp
+  ; ----------------------------------------------------------------------------
+  ; Controle de l'existant
+  ;
+  ; Trois questions sont posees dans l'ordre ou elles comptent : le service
+  ; tourne-t-il, quelle version est en place, et l'exploitant veut-il vraiment
+  ; poursuivre. Installer par-dessus sans rien dire est le comportement qui
+  ; produit les incidents les plus difficiles a comprendre apres coup.
+  ; ----------------------------------------------------------------------------
+
+  ${If} $Existant == "1"
+    ReadRegStr $VersionInstallee HKLM "Software\${PRODUCT}" "Version"
+
+    ${If} $VersionInstallee == ""
+      ReadRegStr $VersionInstallee HKLM "Software\ACPoller" "Version"
+    ${EndIf}
+
+    ${If} $VersionInstallee == ""
+      StrCpy $VersionInstallee "inconnue"
+    ${EndIf}
+
+    ; Retour en arriere : le refuser serait excessif, un exploitant peut avoir
+    ; une bonne raison de revenir a une version precedente apres un incident.
+    ; Mais il doit le faire en connaissance de cause, car la configuration
+    ; ecrite par une version recente peut contenir des reglages que l'ancienne
+    ; ne comprend pas et ecartera.
+    ${VersionCompare} "${VERSION}" "$VersionInstallee" $0
+
+    ${If} $0 == 2
+      MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 \
+        "La version $VersionInstallee est installee dans $INSTDIR.$\r$\n$\r$\nVous allez installer la version ${VERSION}, PLUS ANCIENNE.$\r$\n$\r$\nLa configuration ecrite par la version en place peut contenir des reglages que celle-ci ne comprend pas : les configurations concernees seraient ecartees au demarrage.$\r$\n$\r$\nPoursuivre malgre tout ?" \
+        IDYES suite_version
+      Abort
+      suite_version:
+    ${ElseIf} $0 == 0
+      MessageBox MB_YESNO|MB_ICONQUESTION \
+        "La version ${VERSION} est deja installee dans $INSTDIR.$\r$\n$\r$\nReinstaller par-dessus ? Les binaires seront remplaces, la configuration, les secrets et le journal des messages traites sont conserves." \
+        IDYES suite_version2
+      Abort
+      suite_version2:
+    ${EndIf}
+
+    ; Le service en cours d'execution n'empeche pas l'installation : la section
+    ; principale l'arrete. Mais la capture s'interrompt, et ce n'est pas une
+    ; chose a decouvrir apres coup un jour de forte charge.
+    nsExec::ExecToStack 'sc.exe query ${SERVICE}'
+    Pop $0
+    Pop $1
+
+    ${If} $AncienNom == "1"
+      nsExec::ExecToStack 'sc.exe query ACPoller'
+      Pop $0
+      Pop $1
+    ${EndIf}
+
+    ; StrStr retourne la chaine a partir de la position trouvee, ou une chaine
+    ; vide si le motif est absent. La sortie de sc.exe contient "RUNNING" quand
+    ; le service tourne, "STOPPED" sinon.
+    ${StrStr} $2 $1 "RUNNING"
+
+    ${If} $2 != ""
+      MessageBox MB_YESNO|MB_ICONEXCLAMATION \
+        "Le service est en cours d'execution.$\r$\n$\r$\nIl sera arrete pendant l'installation : la capture des messages est interrompue, et les traitements en cours reprendront au redemarrage.$\r$\n$\r$\nPoursuivre ?" \
+        IDYES suite_service
+      Abort
+      suite_service:
+    ${EndIf}
+  ${EndIf}
+
 FunctionEnd
 
 ; Le choix du repertoire est saute sur une mise a jour : proposer de changer de
@@ -325,7 +417,7 @@ Section "-Configuration du service"
 
   DetailPrint "Creation des repertoires, des droits et du service..."
 
-  nsExec::ExecToLog 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\install-service.ps1" -InstallPath "$INSTDIR" -ServiceAccount "$ServiceAccount" -ServicePassword "$ServicePassword"'
+  nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\install-service.ps1" -InstallPath "$INSTDIR" -ServiceAccount "$ServiceAccount" -ServicePassword "$ServicePassword"'
   Pop $0
 
   ${If} $0 != 0
@@ -336,7 +428,7 @@ Section "-Configuration du service"
   ; l'exploitant doit les saisir a la main, et l'oubli ne se manifeste qu'a la
   ; premiere piece bureautique ou au premier PDF a reparer.
   DetailPrint "Detection des outils de conversion..."
-  nsExec::ExecToLog 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\configure-tools.ps1" -SettingsPath "$INSTDIR\appsettings.json"'
+  nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\configure-tools.ps1" -SettingsPath "$INSTDIR\appsettings.json"'
   Pop $0
 
   WriteUninstaller "$INSTDIR\uninstall.exe"
@@ -393,7 +485,7 @@ SectionEnd
 ; ------------------------------------------------------------------------------
 
 Section "Uninstall"
-  nsExec::ExecToLog 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\uninstall-service.ps1"'
+  nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -ExecutionPolicy Bypass -File "$INSTDIR\uninstall-service.ps1"'
   Pop $0
 
   Delete "$SMPROGRAMS\${PRODUCT}\${PRODUCT}.lnk"
